@@ -1,0 +1,100 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id       String    @id @default(cuid())
+  name     String
+  email    String    @unique
+  services Service[]
+  reviews  Review[]
+}
+
+model ServiceImage {
+  id        String  @id @default(cuid())
+  key       String
+  serviceId String
+  service   Service @relation(fields: [serviceId], references: [id])
+}
+
+model Service {
+  id          String         @id @default(cuid())
+  title       String
+  description String
+  images      ServiceImage[]
+  owner       User           @relation(fields: [ownerId], references: [id])
+  ownerId     String         @unique
+  reviews     Review[]
+  package     Package?
+}
+
+model Basic {
+  id          String  @id @default(cuid())
+  title       String
+  description String
+  price       Float
+  package     Package @relation(fields: [packageId], references: [id])
+  packageId   String  @unique
+}
+
+model Standard {
+  id          String  @id @default(cuid())
+  title       String
+  description String
+  price       Float
+  package     Package @relation(fields: [packageId], references: [id])
+  packageId   String  @unique
+}
+
+model Premium {
+  id          String  @id @default(cuid())
+  title       String
+  description String
+  price       Float
+  package     Package @relation(fields: [packageId], references: [id])
+  packageId   String  @unique
+}
+
+model Package {
+  id        String    @id @default(cuid())
+  basic     Basic?
+  standard  Standard?
+  premium   Premium?
+  service   Service   @relation(fields: [serviceId], references: [id])
+  serviceId String    @unique
+}
+
+model Review {
+  id         String  @id @default(cuid())
+  reviewer   User    @relation(fields: [reviewerId], references: [id])
+  reviewerId String
+  service    Service @relation(fields: [serviceId], references: [id])
+  serviceId  String
+  comments   String
+}
+
+model BannerImage {
+  id  String @id @default(cuid())
+  key String
+}
+
+model Banner {
+  id      String @id @default(cuid())
+  content String
+}
+
+model PortfolioImage {
+  id  String @id @default(cuid())
+  key String
+}

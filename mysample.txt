@@ -1,0 +1,28 @@
+NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY=pk_test_b2JsaWdpbmctbGVvcGFyZC0zNC5jbGVyay5hY2NvdW50cy5kZXYk
+CLERK_SECRET_KEY=sk_test_M36FFRXCB2uzhKsJpGKtYkvdHl1iTHKrPYetaBRAgz
+NEXT_PUBLIC_TINYMCE_API_KEY="9w73k4j4c1hlak2wscre2ef10frtpdx86txo6cujfdjmnlm8"
+
+# This was inserted by `prisma init`:
+# Environment variables declared in this file are NOT automatically loaded by Prisma.
+# Please add `import "dotenv/config";` to your `prisma.config.ts` file, or use the Prisma CLI with Bun
+# to load environment variables from .env files: https://pris.ly/prisma-config-env-vars.
+
+# Prisma supports the native connection string format for PostgreSQL, MySQL, SQLite, SQL Server, MongoDB and CockroachDB.
+# See the documentation for all the connection string options: https://pris.ly/d/connection-strings
+
+# The following `prisma+postgres` URL is similar to the URL produced by running a local Prisma Postgres
+# server with the `prisma dev` CLI command, when not choosing any non-default ports or settings. The API key, unlike the
+# one found in a remote Prisma Postgres URL, does not contain any sensitive information.
+
+# Database connection URL for Prisma Postgres
+DATABASE_URL='postgresql://neondb_owner:npg_1JB0xqQtSaWY@ep-cool-lab-a13n91ge-pooler.ap-southeast-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require'
+
+# AWS S3 Configuration
+AWS_ACCESS_KEY_ID=tid_dyAPavXlKwzHIGKovxzxqOYswONnAxcXqamOFRIrGZcstxinEV
+AWS_SECRET_ACCESS_KEY=tsec_ga-D+bmunsDW1tnvRsi42h_Z_so4_euLLiNs7VSlei1QAFPpE0MRwyjfZYY8Ljmnt8k+Pz
+AWS_ENDPOINT_URL_S3=https://t3.storage.dev
+AWS_ENDPOINT_URL_IAM=https://iam.storage.dev
+AWS_REGION=auto
+
+S3_BUCKET_NAME=fire-evacuation-plan-service-v1
+PUB_BUCKET_URL=https://fly.storage.tigris.dev/

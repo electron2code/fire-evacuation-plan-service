@@ -45,35 +45,20 @@ export { Prisma }
  */
 export type User = Prisma.UserModel
 /**
- * Model ServiceImage
- * 
- */
-export type ServiceImage = Prisma.ServiceImageModel
-/**
  * Model Service
  * 
  */
 export type Service = Prisma.ServiceModel
 /**
- * Model Basic
+ * Model ServiceImage
  * 
  */
-export type Basic = Prisma.BasicModel
+export type ServiceImage = Prisma.ServiceImageModel
 /**
- * Model Standard
+ * Model ServiceTier
  * 
  */
-export type Standard = Prisma.StandardModel
-/**
- * Model Premium
- * 
- */
-export type Premium = Prisma.PremiumModel
-/**
- * Model Package
- * 
- */
-export type Package = Prisma.PackageModel
+export type ServiceTier = Prisma.ServiceTierModel
 /**
  * Model Review
  * 
@@ -94,3 +79,8 @@ export type Banner = Prisma.BannerModel
  * 
  */
 export type PortfolioImage = Prisma.PortfolioImageModel
+/**
+ * Model ContactSubmission
+ * 
+ */
+export type ContactSubmission = Prisma.ContactSubmissionModel

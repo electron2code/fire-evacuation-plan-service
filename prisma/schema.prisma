@@ -13,75 +13,79 @@ datasource db {
   provider = "postgresql"
 }
 
+// 1. Enums make your pricing tiers strict but flexible
+enum TierType {
+  BASIC
+  STANDARD
+  PREMIUM
+}
+
 model User {
-  id       String    @id @default(cuid())
-  name     String
-  email    String    @unique
+  id       String  @id @default(cuid())
+  clerkId  String  @unique
+  name     String?
+  email    String  @unique
+  imageUrl String?
+
   services Service[]
   reviews  Review[]
+}
+
+model Service {
+  id          String @id @default(cuid())
+  title       String
+  language    String
+  description String
+
+  // Relations
+  images ServiceImage[]
+
+  // 2. Fixed Relationship: Removed @unique from ownerId
+  owner   User   @relation(fields: [ownerId], references: [clerkId])
+  ownerId String
+
+  reviews Review[]
+
+  // 3. Simplified Pricing: Direct relation to tiers
+  tiers     ServiceTier[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
 }
 
 model ServiceImage {
   id        String  @id @default(cuid())
   key       String
   serviceId String
-  service   Service @relation(fields: [serviceId], references: [id])
+  // 4. Added Cascade Delete: If Service is deleted, image goes too
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
 }
 
-model Service {
-  id          String         @id @default(cuid())
-  title       String
-  description String
-  images      ServiceImage[]
-  owner       User           @relation(fields: [ownerId], references: [id])
-  ownerId     String         @unique
-  reviews     Review[]
-  package     Package?
-}
-
-model Basic {
-  id          String  @id @default(cuid())
+// 5. Consolidated Model: Replaces Basic, Standard, Premium, and Package models
+model ServiceTier {
+  id          String   @id @default(cuid())
+  type        TierType // BASIC, STANDARD, or PREMIUM
   title       String
   description String
   price       Float
-  package     Package @relation(fields: [packageId], references: [id])
-  packageId   String  @unique
+
+  serviceId String
+  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
+
+  // Ensure a service cannot have two 'BASIC' tiers
+  @@unique([serviceId, type])
 }
 
-model Standard {
-  id          String  @id @default(cuid())
-  title       String
-  description String
-  price       Float
-  package     Package @relation(fields: [packageId], references: [id])
-  packageId   String  @unique
-}
-
-model Premium {
-  id          String  @id @default(cuid())
-  title       String
-  description String
-  price       Float
-  package     Package @relation(fields: [packageId], references: [id])
-  packageId   String  @unique
-}
-
-model Package {
-  id        String    @id @default(cuid())
-  basic     Basic?
-  standard  Standard?
-  premium   Premium?
-  service   Service   @relation(fields: [serviceId], references: [id])
-  serviceId String    @unique
-}
-
+// Placeholder for your Review model (implied)
 model Review {
-  id         String  @id @default(cuid())
-  reviewer   User    @relation(fields: [reviewerId], references: [id])
-  reviewerId String
-  service    Service @relation(fields: [serviceId], references: [id])
-  serviceId  String
-  comments   String
+  id        String   @id @default(cuid())
+  rating    Int
+  comment   String
+  serviceId String
+  service   Service  @relation(fields: [serviceId], references: [id])
+  userId    String
+  user      User     @relation(fields: [userId], references: [clerkId])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model BannerImage {
@@ -97,4 +101,17 @@ model Banner {
 model PortfolioImage {
   id  String @id @default(cuid())
   key String
+}
+
+model ContactSubmission {
+  id              String   @id @default(cuid())
+  fullName        String
+  phoneNumber     String
+  email           String
+  propertyAddress String?
+  serviceCategory String?
+  serviceType     String?
+  notes           String?
+  imageKey        String?
+  createdAt       DateTime @default(now())
 }

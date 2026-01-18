@@ -9,6 +9,11 @@ const nextConfig: NextConfig = {
         hostname: "fire-evacuation-plan-service-v1.t3.storage.dev",
         pathname: "/**",
       },
+      {
+        protocol: "https",
+        hostname: "img.clerk.com",
+        pathname: "/**",
+      },
     ],
   }
 };

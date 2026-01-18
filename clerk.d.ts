@@ -2,11 +2,11 @@
 import "next";
 
 declare global {
-  interface ClerkSessionClaims {
-    metadata?: {
+  interface CustomJwtSessionClaims {
+    metadata: {
       role?: "admin" | "user";
     };
   }
 }
 
-export {};
+export { };

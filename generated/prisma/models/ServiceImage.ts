@@ -245,6 +245,16 @@ export type ServiceImageUncheckedUpdateManyInput = {
   serviceId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
+export type ServiceImageListRelationFilter = {
+  every?: Prisma.ServiceImageWhereInput
+  some?: Prisma.ServiceImageWhereInput
+  none?: Prisma.ServiceImageWhereInput
+}
+
+export type ServiceImageOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
+}
+
 export type ServiceImageCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   key?: Prisma.SortOrder
@@ -261,16 +271,6 @@ export type ServiceImageMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   key?: Prisma.SortOrder
   serviceId?: Prisma.SortOrder
-}
-
-export type ServiceImageListRelationFilter = {
-  every?: Prisma.ServiceImageWhereInput
-  some?: Prisma.ServiceImageWhereInput
-  none?: Prisma.ServiceImageWhereInput
-}
-
-export type ServiceImageOrderByRelationAggregateInput = {
-  _count?: Prisma.SortOrder
 }
 
 export type ServiceImageCreateNestedManyWithoutServiceInput = {

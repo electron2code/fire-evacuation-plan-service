@@ -52,16 +52,14 @@ export const AnyNull = runtime.AnyNull
 
 export const ModelName = {
   User: 'User',
-  ServiceImage: 'ServiceImage',
   Service: 'Service',
-  Basic: 'Basic',
-  Standard: 'Standard',
-  Premium: 'Premium',
-  Package: 'Package',
+  ServiceImage: 'ServiceImage',
+  ServiceTier: 'ServiceTier',
   Review: 'Review',
   BannerImage: 'BannerImage',
   Banner: 'Banner',
-  PortfolioImage: 'PortfolioImage'
+  PortfolioImage: 'PortfolioImage',
+  ContactSubmission: 'ContactSubmission'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -82,11 +80,26 @@ export type TransactionIsolationLevel = (typeof TransactionIsolationLevel)[keyof
 
 export const UserScalarFieldEnum = {
   id: 'id',
+  clerkId: 'clerkId',
   name: 'name',
-  email: 'email'
+  email: 'email',
+  imageUrl: 'imageUrl'
 } as const
 
 export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
+
+
+export const ServiceScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  language: 'language',
+  description: 'description',
+  ownerId: 'ownerId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type ServiceScalarFieldEnum = (typeof ServiceScalarFieldEnum)[keyof typeof ServiceScalarFieldEnum]
 
 
 export const ServiceImageScalarFieldEnum = {
@@ -98,62 +111,26 @@ export const ServiceImageScalarFieldEnum = {
 export type ServiceImageScalarFieldEnum = (typeof ServiceImageScalarFieldEnum)[keyof typeof ServiceImageScalarFieldEnum]
 
 
-export const ServiceScalarFieldEnum = {
+export const ServiceTierScalarFieldEnum = {
   id: 'id',
-  title: 'title',
-  description: 'description',
-  ownerId: 'ownerId'
-} as const
-
-export type ServiceScalarFieldEnum = (typeof ServiceScalarFieldEnum)[keyof typeof ServiceScalarFieldEnum]
-
-
-export const BasicScalarFieldEnum = {
-  id: 'id',
+  type: 'type',
   title: 'title',
   description: 'description',
   price: 'price',
-  packageId: 'packageId'
-} as const
-
-export type BasicScalarFieldEnum = (typeof BasicScalarFieldEnum)[keyof typeof BasicScalarFieldEnum]
-
-
-export const StandardScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  description: 'description',
-  price: 'price',
-  packageId: 'packageId'
-} as const
-
-export type StandardScalarFieldEnum = (typeof StandardScalarFieldEnum)[keyof typeof StandardScalarFieldEnum]
-
-
-export const PremiumScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  description: 'description',
-  price: 'price',
-  packageId: 'packageId'
-} as const
-
-export type PremiumScalarFieldEnum = (typeof PremiumScalarFieldEnum)[keyof typeof PremiumScalarFieldEnum]
-
-
-export const PackageScalarFieldEnum = {
-  id: 'id',
   serviceId: 'serviceId'
 } as const
 
-export type PackageScalarFieldEnum = (typeof PackageScalarFieldEnum)[keyof typeof PackageScalarFieldEnum]
+export type ServiceTierScalarFieldEnum = (typeof ServiceTierScalarFieldEnum)[keyof typeof ServiceTierScalarFieldEnum]
 
 
 export const ReviewScalarFieldEnum = {
   id: 'id',
-  reviewerId: 'reviewerId',
+  rating: 'rating',
+  comment: 'comment',
   serviceId: 'serviceId',
-  comments: 'comments'
+  userId: 'userId',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
 } as const
 
 export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
@@ -183,6 +160,22 @@ export const PortfolioImageScalarFieldEnum = {
 export type PortfolioImageScalarFieldEnum = (typeof PortfolioImageScalarFieldEnum)[keyof typeof PortfolioImageScalarFieldEnum]
 
 
+export const ContactSubmissionScalarFieldEnum = {
+  id: 'id',
+  fullName: 'fullName',
+  phoneNumber: 'phoneNumber',
+  email: 'email',
+  propertyAddress: 'propertyAddress',
+  serviceCategory: 'serviceCategory',
+  serviceType: 'serviceType',
+  notes: 'notes',
+  imageKey: 'imageKey',
+  createdAt: 'createdAt'
+} as const
+
+export type ContactSubmissionScalarFieldEnum = (typeof ContactSubmissionScalarFieldEnum)[keyof typeof ContactSubmissionScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -197,4 +190,12 @@ export const QueryMode = {
 } as const
 
 export type QueryMode = (typeof QueryMode)[keyof typeof QueryMode]
+
+
+export const NullsOrder = {
+  first: 'first',
+  last: 'last'
+} as const
+
+export type NullsOrder = (typeof NullsOrder)[keyof typeof NullsOrder]
 

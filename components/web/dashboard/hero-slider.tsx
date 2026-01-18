@@ -34,16 +34,7 @@ interface BannerImage {
 }
 
 export function HeroSlider() {
-  const [dropFile, setDropFile] = React.useState<{
-    id: string;
-    file: File;
-    uploading: boolean;
-    progress: number;
-    key?: string;
-    isDeleting: boolean;
-    error: boolean;
-    objectUrl?: string;
-  } | null>(null);
+  const [dropFile, setDropFile] = React.useState<DropFile | null>(null);
   const [bannerImages, setBannerImages] = React.useState<Array<BannerImage>>([]);
   const [isDeleting, setIsDeleting] = React.useState(false);
 

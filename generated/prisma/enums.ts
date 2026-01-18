@@ -9,7 +9,10 @@
 * 🟢 You can import this file directly.
 */
 
+export const TierType = {
+  BASIC: 'BASIC',
+  STANDARD: 'STANDARD',
+  PREMIUM: 'PREMIUM'
+} as const
 
-
-// This file is empty because there are no enums in the schema.
-export {}
+export type TierType = (typeof TierType)[keyof typeof TierType]

@@ -20,7 +20,7 @@ const config: runtime.GetPrismaClientConfig = {
   "clientVersion": "7.2.0",
   "engineVersion": "0c8ef2ce45c83248ab3df073180d5eda9e8be7a3",
   "activeProvider": "postgresql",
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\nmodel User {\n  id       String    @id @default(cuid())\n  name     String\n  email    String    @unique\n  services Service[]\n  reviews  Review[]\n}\n\nmodel ServiceImage {\n  id        String  @id @default(cuid())\n  key       String\n  serviceId String\n  service   Service @relation(fields: [serviceId], references: [id])\n}\n\nmodel Service {\n  id          String         @id @default(cuid())\n  title       String\n  description String\n  images      ServiceImage[]\n  owner       User           @relation(fields: [ownerId], references: [id])\n  ownerId     String         @unique\n  reviews     Review[]\n  package     Package?\n}\n\nmodel Basic {\n  id          String  @id @default(cuid())\n  title       String\n  description String\n  price       Float\n  package     Package @relation(fields: [packageId], references: [id])\n  packageId   String  @unique\n}\n\nmodel Standard {\n  id          String  @id @default(cuid())\n  title       String\n  description String\n  price       Float\n  package     Package @relation(fields: [packageId], references: [id])\n  packageId   String  @unique\n}\n\nmodel Premium {\n  id          String  @id @default(cuid())\n  title       String\n  description String\n  price       Float\n  package     Package @relation(fields: [packageId], references: [id])\n  packageId   String  @unique\n}\n\nmodel Package {\n  id        String    @id @default(cuid())\n  basic     Basic?\n  standard  Standard?\n  premium   Premium?\n  service   Service   @relation(fields: [serviceId], references: [id])\n  serviceId String    @unique\n}\n\nmodel Review {\n  id         String  @id @default(cuid())\n  reviewer   User    @relation(fields: [reviewerId], references: [id])\n  reviewerId String\n  service    Service @relation(fields: [serviceId], references: [id])\n  serviceId  String\n  comments   String\n}\n\nmodel BannerImage {\n  id  String @id @default(cuid())\n  key String\n}\n\nmodel Banner {\n  id      String @id @default(cuid())\n  content String\n}\n\nmodel PortfolioImage {\n  id  String @id @default(cuid())\n  key String\n}\n",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n}\n\n// 1. Enums make your pricing tiers strict but flexible\nenum TierType {\n  BASIC\n  STANDARD\n  PREMIUM\n}\n\nmodel User {\n  id       String  @id @default(cuid())\n  clerkId  String  @unique\n  name     String?\n  email    String  @unique\n  imageUrl String?\n\n  services Service[]\n  reviews  Review[]\n}\n\nmodel Service {\n  id          String @id @default(cuid())\n  title       String\n  language    String\n  description String\n\n  // Relations\n  images ServiceImage[]\n\n  // 2. Fixed Relationship: Removed @unique from ownerId\n  owner   User   @relation(fields: [ownerId], references: [clerkId])\n  ownerId String\n\n  reviews Review[]\n\n  // 3. Simplified Pricing: Direct relation to tiers\n  tiers     ServiceTier[]\n  createdAt DateTime      @default(now())\n  updatedAt DateTime      @updatedAt\n}\n\nmodel ServiceImage {\n  id        String  @id @default(cuid())\n  key       String\n  serviceId String\n  // 4. Added Cascade Delete: If Service is deleted, image goes too\n  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)\n}\n\n// 5. Consolidated Model: Replaces Basic, Standard, Premium, and Package models\nmodel ServiceTier {\n  id          String   @id @default(cuid())\n  type        TierType // BASIC, STANDARD, or PREMIUM\n  title       String\n  description String\n  price       Float\n\n  serviceId String\n  service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)\n\n  // Ensure a service cannot have two 'BASIC' tiers\n  @@unique([serviceId, type])\n}\n\n// Placeholder for your Review model (implied)\nmodel Review {\n  id        String   @id @default(cuid())\n  rating    Int\n  comment   String\n  serviceId String\n  service   Service  @relation(fields: [serviceId], references: [id])\n  userId    String\n  user      User     @relation(fields: [userId], references: [clerkId])\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n}\n\nmodel BannerImage {\n  id  String @id @default(cuid())\n  key String\n}\n\nmodel Banner {\n  id      String @id @default(cuid())\n  content String\n}\n\nmodel PortfolioImage {\n  id  String @id @default(cuid())\n  key String\n}\n\nmodel ContactSubmission {\n  id              String   @id @default(cuid())\n  fullName        String\n  phoneNumber     String\n  email           String\n  propertyAddress String?\n  serviceCategory String?\n  serviceType     String?\n  notes           String?\n  imageKey        String?\n  createdAt       DateTime @default(now())\n}\n",
   "runtimeDataModel": {
     "models": {},
     "enums": {},
@@ -28,7 +28,7 @@ const config: runtime.GetPrismaClientConfig = {
   }
 }
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"services\",\"kind\":\"object\",\"type\":\"Service\",\"relationName\":\"ServiceToUser\"},{\"name\":\"reviews\",\"kind\":\"object\",\"type\":\"Review\",\"relationName\":\"ReviewToUser\"}],\"dbName\":null},\"ServiceImage\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"key\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"serviceId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"service\",\"kind\":\"object\",\"type\":\"Service\",\"relationName\":\"ServiceToServiceImage\"}],\"dbName\":null},\"Service\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"images\",\"kind\":\"object\",\"type\":\"ServiceImage\",\"relationName\":\"ServiceToServiceImage\"},{\"name\":\"owner\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ServiceToUser\"},{\"name\":\"ownerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reviews\",\"kind\":\"object\",\"type\":\"Review\",\"relationName\":\"ReviewToService\"},{\"name\":\"package\",\"kind\":\"object\",\"type\":\"Package\",\"relationName\":\"PackageToService\"}],\"dbName\":null},\"Basic\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"package\",\"kind\":\"object\",\"type\":\"Package\",\"relationName\":\"BasicToPackage\"},{\"name\":\"packageId\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Standard\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"package\",\"kind\":\"object\",\"type\":\"Package\",\"relationName\":\"PackageToStandard\"},{\"name\":\"packageId\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Premium\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"package\",\"kind\":\"object\",\"type\":\"Package\",\"relationName\":\"PackageToPremium\"},{\"name\":\"packageId\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Package\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"basic\",\"kind\":\"object\",\"type\":\"Basic\",\"relationName\":\"BasicToPackage\"},{\"name\":\"standard\",\"kind\":\"object\",\"type\":\"Standard\",\"relationName\":\"PackageToStandard\"},{\"name\":\"premium\",\"kind\":\"object\",\"type\":\"Premium\",\"relationName\":\"PackageToPremium\"},{\"name\":\"service\",\"kind\":\"object\",\"type\":\"Service\",\"relationName\":\"PackageToService\"},{\"name\":\"serviceId\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Review\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reviewer\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ReviewToUser\"},{\"name\":\"reviewerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"service\",\"kind\":\"object\",\"type\":\"Service\",\"relationName\":\"ReviewToService\"},{\"name\":\"serviceId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"comments\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"BannerImage\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"key\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Banner\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"PortfolioImage\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"key\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"clerkId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"imageUrl\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"services\",\"kind\":\"object\",\"type\":\"Service\",\"relationName\":\"ServiceToUser\"},{\"name\":\"reviews\",\"kind\":\"object\",\"type\":\"Review\",\"relationName\":\"ReviewToUser\"}],\"dbName\":null},\"Service\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"language\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"images\",\"kind\":\"object\",\"type\":\"ServiceImage\",\"relationName\":\"ServiceToServiceImage\"},{\"name\":\"owner\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ServiceToUser\"},{\"name\":\"ownerId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"reviews\",\"kind\":\"object\",\"type\":\"Review\",\"relationName\":\"ReviewToService\"},{\"name\":\"tiers\",\"kind\":\"object\",\"type\":\"ServiceTier\",\"relationName\":\"ServiceToServiceTier\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"ServiceImage\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"key\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"serviceId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"service\",\"kind\":\"object\",\"type\":\"Service\",\"relationName\":\"ServiceToServiceImage\"}],\"dbName\":null},\"ServiceTier\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"type\",\"kind\":\"enum\",\"type\":\"TierType\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Float\"},{\"name\":\"serviceId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"service\",\"kind\":\"object\",\"type\":\"Service\",\"relationName\":\"ServiceToServiceTier\"}],\"dbName\":null},\"Review\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"rating\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"comment\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"serviceId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"service\",\"kind\":\"object\",\"type\":\"Service\",\"relationName\":\"ReviewToService\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"ReviewToUser\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null},\"BannerImage\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"key\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"Banner\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"content\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"PortfolioImage\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"key\",\"kind\":\"scalar\",\"type\":\"String\"}],\"dbName\":null},\"ContactSubmission\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"fullName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phoneNumber\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"propertyAddress\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"serviceCategory\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"serviceType\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"notes\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"imageKey\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 
 async function decodeBase64AsWasm(wasmBase64: string): Promise<WebAssembly.Module> {
   const { Buffer } = await import('node:buffer')
@@ -185,16 +185,6 @@ export interface PrismaClient<
   get user(): Prisma.UserDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
-   * `prisma.serviceImage`: Exposes CRUD operations for the **ServiceImage** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more ServiceImages
-    * const serviceImages = await prisma.serviceImage.findMany()
-    * ```
-    */
-  get serviceImage(): Prisma.ServiceImageDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
    * `prisma.service`: Exposes CRUD operations for the **Service** model.
     * Example usage:
     * ```ts
@@ -205,44 +195,24 @@ export interface PrismaClient<
   get service(): Prisma.ServiceDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
-   * `prisma.basic`: Exposes CRUD operations for the **Basic** model.
+   * `prisma.serviceImage`: Exposes CRUD operations for the **ServiceImage** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Basics
-    * const basics = await prisma.basic.findMany()
+    * // Fetch zero or more ServiceImages
+    * const serviceImages = await prisma.serviceImage.findMany()
     * ```
     */
-  get basic(): Prisma.BasicDelegate<ExtArgs, { omit: OmitOpts }>;
+  get serviceImage(): Prisma.ServiceImageDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
-   * `prisma.standard`: Exposes CRUD operations for the **Standard** model.
+   * `prisma.serviceTier`: Exposes CRUD operations for the **ServiceTier** model.
     * Example usage:
     * ```ts
-    * // Fetch zero or more Standards
-    * const standards = await prisma.standard.findMany()
+    * // Fetch zero or more ServiceTiers
+    * const serviceTiers = await prisma.serviceTier.findMany()
     * ```
     */
-  get standard(): Prisma.StandardDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.premium`: Exposes CRUD operations for the **Premium** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Premiums
-    * const premiums = await prisma.premium.findMany()
-    * ```
-    */
-  get premium(): Prisma.PremiumDelegate<ExtArgs, { omit: OmitOpts }>;
-
-  /**
-   * `prisma.package`: Exposes CRUD operations for the **Package** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Packages
-    * const packages = await prisma.package.findMany()
-    * ```
-    */
-  get package(): Prisma.PackageDelegate<ExtArgs, { omit: OmitOpts }>;
+  get serviceTier(): Prisma.ServiceTierDelegate<ExtArgs, { omit: OmitOpts }>;
 
   /**
    * `prisma.review`: Exposes CRUD operations for the **Review** model.
@@ -283,6 +253,16 @@ export interface PrismaClient<
     * ```
     */
   get portfolioImage(): Prisma.PortfolioImageDelegate<ExtArgs, { omit: OmitOpts }>;
+
+  /**
+   * `prisma.contactSubmission`: Exposes CRUD operations for the **ContactSubmission** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more ContactSubmissions
+    * const contactSubmissions = await prisma.contactSubmission.findMany()
+    * ```
+    */
+  get contactSubmission(): Prisma.ContactSubmissionDelegate<ExtArgs, { omit: OmitOpts }>;
 }
 
 export function getPrismaClientClass(): PrismaClientConstructor {

@@ -58,7 +58,7 @@ export default function DropzoneComponent({ dropFile, setDropFile }: { dropFile:
               <Image src={dropFile.objectUrl!} alt="Uploaded Image" className="w-full h-full
                 object-contain" width={200} height={300} />
               <div className='absolute top-0 right-0'>
-                <Button disabled={dropFile.uploading} title='Cancel Upload' className='rounded-full cursor-pointer' variant="destructive" size="icon" onClick={(e) => {
+                <Button type="button" disabled={dropFile.uploading} title='Cancel Upload' className='rounded-full cursor-pointer' variant="destructive" size="icon" onClick={(e) => {
                   e.stopPropagation();
                   if (dropFile.objectUrl) {
                     URL.revokeObjectURL(dropFile.objectUrl);
@@ -81,7 +81,7 @@ export default function DropzoneComponent({ dropFile, setDropFile }: { dropFile:
           ) : (
             <div className='flex flex-col min-h-80 items-center justify-center gap-2'>
               <p className='mb-2 text-center text-gray-600'>Drag 'n' drop an image here, or click to select one maxium of 5MB</p>
-              <Button className='cursor-pointer' variant="outline">Browse Files</Button>
+              <Button type="button" className='cursor-pointer' variant="outline">Browse Files</Button>
             </div>
           )
       }

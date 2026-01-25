@@ -27,16 +27,19 @@ export type AggregateBanner = {
 export type BannerMinAggregateOutputType = {
   id: string | null
   content: string | null
+  creatorId: string | null
 }
 
 export type BannerMaxAggregateOutputType = {
   id: string | null
   content: string | null
+  creatorId: string | null
 }
 
 export type BannerCountAggregateOutputType = {
   id: number
   content: number
+  creatorId: number
   _all: number
 }
 
@@ -44,16 +47,19 @@ export type BannerCountAggregateOutputType = {
 export type BannerMinAggregateInputType = {
   id?: true
   content?: true
+  creatorId?: true
 }
 
 export type BannerMaxAggregateInputType = {
   id?: true
   content?: true
+  creatorId?: true
 }
 
 export type BannerCountAggregateInputType = {
   id?: true
   content?: true
+  creatorId?: true
   _all?: true
 }
 
@@ -132,6 +138,7 @@ export type BannerGroupByArgs<ExtArgs extends runtime.Types.Extensions.InternalA
 export type BannerGroupByOutputType = {
   id: string
   content: string
+  creatorId: string
   _count: BannerCountAggregateOutputType | null
   _min: BannerMinAggregateOutputType | null
   _max: BannerMaxAggregateOutputType | null
@@ -158,24 +165,31 @@ export type BannerWhereInput = {
   NOT?: Prisma.BannerWhereInput | Prisma.BannerWhereInput[]
   id?: Prisma.StringFilter<"Banner"> | string
   content?: Prisma.StringFilter<"Banner"> | string
+  creatorId?: Prisma.StringFilter<"Banner"> | string
+  creator?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
 }
 
 export type BannerOrderByWithRelationInput = {
   id?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  creatorId?: Prisma.SortOrder
+  creator?: Prisma.UserOrderByWithRelationInput
 }
 
 export type BannerWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  creatorId?: string
   AND?: Prisma.BannerWhereInput | Prisma.BannerWhereInput[]
   OR?: Prisma.BannerWhereInput[]
   NOT?: Prisma.BannerWhereInput | Prisma.BannerWhereInput[]
   content?: Prisma.StringFilter<"Banner"> | string
-}, "id">
+  creator?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+}, "id" | "creatorId">
 
 export type BannerOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  creatorId?: Prisma.SortOrder
   _count?: Prisma.BannerCountOrderByAggregateInput
   _max?: Prisma.BannerMaxOrderByAggregateInput
   _min?: Prisma.BannerMinOrderByAggregateInput
@@ -187,31 +201,37 @@ export type BannerScalarWhereWithAggregatesInput = {
   NOT?: Prisma.BannerScalarWhereWithAggregatesInput | Prisma.BannerScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"Banner"> | string
   content?: Prisma.StringWithAggregatesFilter<"Banner"> | string
+  creatorId?: Prisma.StringWithAggregatesFilter<"Banner"> | string
 }
 
 export type BannerCreateInput = {
   id?: string
   content: string
+  creator: Prisma.UserCreateNestedOneWithoutBannersInput
 }
 
 export type BannerUncheckedCreateInput = {
   id?: string
   content: string
+  creatorId: string
 }
 
 export type BannerUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  creator?: Prisma.UserUpdateOneRequiredWithoutBannersNestedInput
 }
 
 export type BannerUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  creatorId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type BannerCreateManyInput = {
   id?: string
   content: string
+  creatorId: string
 }
 
 export type BannerUpdateManyMutationInput = {
@@ -222,21 +242,98 @@ export type BannerUpdateManyMutationInput = {
 export type BannerUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
   content?: Prisma.StringFieldUpdateOperationsInput | string
+  creatorId?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type BannerNullableScalarRelationFilter = {
+  is?: Prisma.BannerWhereInput | null
+  isNot?: Prisma.BannerWhereInput | null
 }
 
 export type BannerCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  creatorId?: Prisma.SortOrder
 }
 
 export type BannerMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  creatorId?: Prisma.SortOrder
 }
 
 export type BannerMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
   content?: Prisma.SortOrder
+  creatorId?: Prisma.SortOrder
+}
+
+export type BannerCreateNestedOneWithoutCreatorInput = {
+  create?: Prisma.XOR<Prisma.BannerCreateWithoutCreatorInput, Prisma.BannerUncheckedCreateWithoutCreatorInput>
+  connectOrCreate?: Prisma.BannerCreateOrConnectWithoutCreatorInput
+  connect?: Prisma.BannerWhereUniqueInput
+}
+
+export type BannerUncheckedCreateNestedOneWithoutCreatorInput = {
+  create?: Prisma.XOR<Prisma.BannerCreateWithoutCreatorInput, Prisma.BannerUncheckedCreateWithoutCreatorInput>
+  connectOrCreate?: Prisma.BannerCreateOrConnectWithoutCreatorInput
+  connect?: Prisma.BannerWhereUniqueInput
+}
+
+export type BannerUpdateOneWithoutCreatorNestedInput = {
+  create?: Prisma.XOR<Prisma.BannerCreateWithoutCreatorInput, Prisma.BannerUncheckedCreateWithoutCreatorInput>
+  connectOrCreate?: Prisma.BannerCreateOrConnectWithoutCreatorInput
+  upsert?: Prisma.BannerUpsertWithoutCreatorInput
+  disconnect?: Prisma.BannerWhereInput | boolean
+  delete?: Prisma.BannerWhereInput | boolean
+  connect?: Prisma.BannerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BannerUpdateToOneWithWhereWithoutCreatorInput, Prisma.BannerUpdateWithoutCreatorInput>, Prisma.BannerUncheckedUpdateWithoutCreatorInput>
+}
+
+export type BannerUncheckedUpdateOneWithoutCreatorNestedInput = {
+  create?: Prisma.XOR<Prisma.BannerCreateWithoutCreatorInput, Prisma.BannerUncheckedCreateWithoutCreatorInput>
+  connectOrCreate?: Prisma.BannerCreateOrConnectWithoutCreatorInput
+  upsert?: Prisma.BannerUpsertWithoutCreatorInput
+  disconnect?: Prisma.BannerWhereInput | boolean
+  delete?: Prisma.BannerWhereInput | boolean
+  connect?: Prisma.BannerWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BannerUpdateToOneWithWhereWithoutCreatorInput, Prisma.BannerUpdateWithoutCreatorInput>, Prisma.BannerUncheckedUpdateWithoutCreatorInput>
+}
+
+export type BannerCreateWithoutCreatorInput = {
+  id?: string
+  content: string
+}
+
+export type BannerUncheckedCreateWithoutCreatorInput = {
+  id?: string
+  content: string
+}
+
+export type BannerCreateOrConnectWithoutCreatorInput = {
+  where: Prisma.BannerWhereUniqueInput
+  create: Prisma.XOR<Prisma.BannerCreateWithoutCreatorInput, Prisma.BannerUncheckedCreateWithoutCreatorInput>
+}
+
+export type BannerUpsertWithoutCreatorInput = {
+  update: Prisma.XOR<Prisma.BannerUpdateWithoutCreatorInput, Prisma.BannerUncheckedUpdateWithoutCreatorInput>
+  create: Prisma.XOR<Prisma.BannerCreateWithoutCreatorInput, Prisma.BannerUncheckedCreateWithoutCreatorInput>
+  where?: Prisma.BannerWhereInput
+}
+
+export type BannerUpdateToOneWithWhereWithoutCreatorInput = {
+  where?: Prisma.BannerWhereInput
+  data: Prisma.XOR<Prisma.BannerUpdateWithoutCreatorInput, Prisma.BannerUncheckedUpdateWithoutCreatorInput>
+}
+
+export type BannerUpdateWithoutCreatorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type BannerUncheckedUpdateWithoutCreatorInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  content?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -244,31 +341,50 @@ export type BannerMinOrderByAggregateInput = {
 export type BannerSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   content?: boolean
+  creatorId?: boolean
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["banner"]>
 
 export type BannerSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   content?: boolean
+  creatorId?: boolean
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["banner"]>
 
 export type BannerSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
   content?: boolean
+  creatorId?: boolean
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["banner"]>
 
 export type BannerSelectScalar = {
   id?: boolean
   content?: boolean
+  creatorId?: boolean
 }
 
-export type BannerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "content", ExtArgs["result"]["banner"]>
+export type BannerOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "content" | "creatorId", ExtArgs["result"]["banner"]>
+export type BannerInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type BannerIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type BannerIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  creator?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
 
 export type $BannerPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "Banner"
-  objects: {}
+  objects: {
+    creator: Prisma.$UserPayload<ExtArgs>
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
     content: string
+    creatorId: string
   }, ExtArgs["result"]["banner"]>
   composites: {}
 }
@@ -663,6 +779,7 @@ readonly fields: BannerFieldRefs;
  */
 export interface Prisma__BannerClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  creator<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -694,6 +811,7 @@ export interface Prisma__BannerClient<T, Null = never, ExtArgs extends runtime.T
 export interface BannerFieldRefs {
   readonly id: Prisma.FieldRef<"Banner", 'String'>
   readonly content: Prisma.FieldRef<"Banner", 'String'>
+  readonly creatorId: Prisma.FieldRef<"Banner", 'String'>
 }
     
 
@@ -710,6 +828,10 @@ export type BannerFindUniqueArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Omit specific fields from the Banner
    */
   omit?: Prisma.BannerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BannerInclude<ExtArgs> | null
   /**
    * Filter, which Banner to fetch.
    */
@@ -729,6 +851,10 @@ export type BannerFindUniqueOrThrowArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.BannerOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BannerInclude<ExtArgs> | null
+  /**
    * Filter, which Banner to fetch.
    */
   where: Prisma.BannerWhereUniqueInput
@@ -746,6 +872,10 @@ export type BannerFindFirstArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Omit specific fields from the Banner
    */
   omit?: Prisma.BannerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BannerInclude<ExtArgs> | null
   /**
    * Filter, which Banner to fetch.
    */
@@ -795,6 +925,10 @@ export type BannerFindFirstOrThrowArgs<ExtArgs extends runtime.Types.Extensions.
    */
   omit?: Prisma.BannerOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BannerInclude<ExtArgs> | null
+  /**
    * Filter, which Banner to fetch.
    */
   where?: Prisma.BannerWhereInput
@@ -843,6 +977,10 @@ export type BannerFindManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    */
   omit?: Prisma.BannerOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BannerInclude<ExtArgs> | null
+  /**
    * Filter, which Banners to fetch.
    */
   where?: Prisma.BannerWhereInput
@@ -886,6 +1024,10 @@ export type BannerCreateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   omit?: Prisma.BannerOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BannerInclude<ExtArgs> | null
+  /**
    * The data needed to create a Banner.
    */
   data: Prisma.XOR<Prisma.BannerCreateInput, Prisma.BannerUncheckedCreateInput>
@@ -919,6 +1061,10 @@ export type BannerCreateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    */
   data: Prisma.BannerCreateManyInput | Prisma.BannerCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BannerIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -933,6 +1079,10 @@ export type BannerUpdateArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Banner
    */
   omit?: Prisma.BannerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BannerInclude<ExtArgs> | null
   /**
    * The data needed to update a Banner.
    */
@@ -985,6 +1135,10 @@ export type BannerUpdateManyAndReturnArgs<ExtArgs extends runtime.Types.Extensio
    * Limit how many Banners to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BannerIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -999,6 +1153,10 @@ export type BannerUpsertArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Banner
    */
   omit?: Prisma.BannerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BannerInclude<ExtArgs> | null
   /**
    * The filter to search for the Banner to update in case it exists.
    */
@@ -1025,6 +1183,10 @@ export type BannerDeleteArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    * Omit specific fields from the Banner
    */
   omit?: Prisma.BannerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BannerInclude<ExtArgs> | null
   /**
    * Filter which Banner to delete.
    */
@@ -1057,4 +1219,8 @@ export type BannerDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalA
    * Omit specific fields from the Banner
    */
   omit?: Prisma.BannerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BannerInclude<ExtArgs> | null
 }

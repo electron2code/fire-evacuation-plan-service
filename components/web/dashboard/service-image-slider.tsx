@@ -13,6 +13,7 @@ import DropzoneComponent from "./dropzone-component"
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import Image from "next/image";
+import { Trash } from "lucide-react";
 
 export interface DropFile {
     id: string;
@@ -138,6 +139,31 @@ export default function ServiceImageSlider({ setServicImagesKeys, initialImages 
             }
         }
     }
+
+    async function deleteServiceImage(imageKey: string) {
+        try {
+            const response = await fetch("/api/v1/service/images", {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ key: imageKey }),
+            });
+
+            if (!response.ok) {
+                throw new Error("Something went wrong");
+            }
+
+            const deletedRes = await response.json();
+
+            toast.success("Deleted successfully");
+            const withoutDeletedImage = serviceImages.filter((img) => img.key !== imageKey);
+            setServiceImages(withoutDeletedImage);
+            setServicImagesKeys(withoutDeletedImage.map(img => img.key));
+        } catch (error: any) {
+            toast.error(error.message);
+        }
+    }
     return (
         <div>
             <Carousel className="w-full min-w-sm px-10">
@@ -152,7 +178,11 @@ export default function ServiceImageSlider({ setServicImagesKeys, initialImages 
                     {serviceImages.map((image, index) => (
                         <CarouselItem key={index}>
                             <div className="p-1 w-full">
-                                <Card className="w-full h-100">
+                                <Card className="w-full h-100 relative">
+                                    <Button onClick={(e) => {
+                                        e.stopPropagation();
+                                        deleteServiceImage(image.key)
+                                    }} type="button" title="Delete" className="absolute top-4 right-4 bg-red-500 hover:bg-red-600 text-white size-10 flex items-center justify-center rounded-full text-center"><Trash className="size-6" /></Button>
                                     <Image className="w-full h-full object-contain" src={image.key ? `${process.env.NEXT_PUBLIC_BUCKET_URL}/${image.key}` : image.objectUrl ? image.key : " "} width={1000} height={700} alt="" />
                                 </Card>
                             </div>

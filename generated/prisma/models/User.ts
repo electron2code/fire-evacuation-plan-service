@@ -184,6 +184,7 @@ export type UserWhereInput = {
   imageUrl?: Prisma.StringNullableFilter<"User"> | string | null
   services?: Prisma.ServiceListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
+  banners?: Prisma.XOR<Prisma.BannerNullableScalarRelationFilter, Prisma.BannerWhereInput> | null
 }
 
 export type UserOrderByWithRelationInput = {
@@ -194,6 +195,7 @@ export type UserOrderByWithRelationInput = {
   imageUrl?: Prisma.SortOrderInput | Prisma.SortOrder
   services?: Prisma.ServiceOrderByRelationAggregateInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
+  banners?: Prisma.BannerOrderByWithRelationInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -207,6 +209,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   imageUrl?: Prisma.StringNullableFilter<"User"> | string | null
   services?: Prisma.ServiceListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
+  banners?: Prisma.XOR<Prisma.BannerNullableScalarRelationFilter, Prisma.BannerWhereInput> | null
 }, "id" | "clerkId" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -239,6 +242,7 @@ export type UserCreateInput = {
   imageUrl?: string | null
   services?: Prisma.ServiceCreateNestedManyWithoutOwnerInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  banners?: Prisma.BannerCreateNestedOneWithoutCreatorInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -249,6 +253,7 @@ export type UserUncheckedCreateInput = {
   imageUrl?: string | null
   services?: Prisma.ServiceUncheckedCreateNestedManyWithoutOwnerInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  banners?: Prisma.BannerUncheckedCreateNestedOneWithoutCreatorInput
 }
 
 export type UserUpdateInput = {
@@ -259,6 +264,7 @@ export type UserUpdateInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceUpdateManyWithoutOwnerNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  banners?: Prisma.BannerUpdateOneWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -269,6 +275,7 @@ export type UserUncheckedUpdateInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceUncheckedUpdateManyWithoutOwnerNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  banners?: Prisma.BannerUncheckedUpdateOneWithoutCreatorNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -360,6 +367,20 @@ export type UserUpdateOneRequiredWithoutReviewsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutReviewsInput, Prisma.UserUpdateWithoutReviewsInput>, Prisma.UserUncheckedUpdateWithoutReviewsInput>
 }
 
+export type UserCreateNestedOneWithoutBannersInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBannersInput, Prisma.UserUncheckedCreateWithoutBannersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBannersInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutBannersNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutBannersInput, Prisma.UserUncheckedCreateWithoutBannersInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutBannersInput
+  upsert?: Prisma.UserUpsertWithoutBannersInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBannersInput, Prisma.UserUpdateWithoutBannersInput>, Prisma.UserUncheckedUpdateWithoutBannersInput>
+}
+
 export type UserCreateWithoutServicesInput = {
   id?: string
   clerkId: string
@@ -367,6 +388,7 @@ export type UserCreateWithoutServicesInput = {
   email: string
   imageUrl?: string | null
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  banners?: Prisma.BannerCreateNestedOneWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutServicesInput = {
@@ -376,6 +398,7 @@ export type UserUncheckedCreateWithoutServicesInput = {
   email: string
   imageUrl?: string | null
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  banners?: Prisma.BannerUncheckedCreateNestedOneWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutServicesInput = {
@@ -401,6 +424,7 @@ export type UserUpdateWithoutServicesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  banners?: Prisma.BannerUpdateOneWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutServicesInput = {
@@ -410,6 +434,7 @@ export type UserUncheckedUpdateWithoutServicesInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  banners?: Prisma.BannerUncheckedUpdateOneWithoutCreatorNestedInput
 }
 
 export type UserCreateWithoutReviewsInput = {
@@ -419,6 +444,7 @@ export type UserCreateWithoutReviewsInput = {
   email: string
   imageUrl?: string | null
   services?: Prisma.ServiceCreateNestedManyWithoutOwnerInput
+  banners?: Prisma.BannerCreateNestedOneWithoutCreatorInput
 }
 
 export type UserUncheckedCreateWithoutReviewsInput = {
@@ -428,6 +454,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   email: string
   imageUrl?: string | null
   services?: Prisma.ServiceUncheckedCreateNestedManyWithoutOwnerInput
+  banners?: Prisma.BannerUncheckedCreateNestedOneWithoutCreatorInput
 }
 
 export type UserCreateOrConnectWithoutReviewsInput = {
@@ -453,6 +480,7 @@ export type UserUpdateWithoutReviewsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceUpdateManyWithoutOwnerNestedInput
+  banners?: Prisma.BannerUpdateOneWithoutCreatorNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -462,6 +490,63 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   email?: Prisma.StringFieldUpdateOperationsInput | string
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceUncheckedUpdateManyWithoutOwnerNestedInput
+  banners?: Prisma.BannerUncheckedUpdateOneWithoutCreatorNestedInput
+}
+
+export type UserCreateWithoutBannersInput = {
+  id?: string
+  clerkId: string
+  name?: string | null
+  email: string
+  imageUrl?: string | null
+  services?: Prisma.ServiceCreateNestedManyWithoutOwnerInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutBannersInput = {
+  id?: string
+  clerkId: string
+  name?: string | null
+  email: string
+  imageUrl?: string | null
+  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutOwnerInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutBannersInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutBannersInput, Prisma.UserUncheckedCreateWithoutBannersInput>
+}
+
+export type UserUpsertWithoutBannersInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutBannersInput, Prisma.UserUncheckedUpdateWithoutBannersInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutBannersInput, Prisma.UserUncheckedCreateWithoutBannersInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutBannersInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutBannersInput, Prisma.UserUncheckedUpdateWithoutBannersInput>
+}
+
+export type UserUpdateWithoutBannersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  services?: Prisma.ServiceUpdateManyWithoutOwnerNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutBannersInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  services?: Prisma.ServiceUncheckedUpdateManyWithoutOwnerNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -512,6 +597,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   imageUrl?: boolean
   services?: boolean | Prisma.User$servicesArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
+  banners?: boolean | Prisma.User$bannersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -543,6 +629,7 @@ export type UserOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = run
 export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   services?: boolean | Prisma.User$servicesArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
+  banners?: boolean | Prisma.User$bannersArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -553,6 +640,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
   objects: {
     services: Prisma.$ServicePayload<ExtArgs>[]
     reviews: Prisma.$ReviewPayload<ExtArgs>[]
+    banners: Prisma.$BannerPayload<ExtArgs> | null
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -956,6 +1044,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   readonly [Symbol.toStringTag]: "PrismaPromise"
   services<T extends Prisma.User$servicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$servicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviews<T extends Prisma.User$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  banners<T extends Prisma.User$bannersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bannersArgs<ExtArgs>>): Prisma.Prisma__BannerClient<runtime.Types.Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1423,6 +1512,25 @@ export type User$reviewsArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
   take?: number
   skip?: number
   distinct?: Prisma.ReviewScalarFieldEnum | Prisma.ReviewScalarFieldEnum[]
+}
+
+/**
+ * User.banners
+ */
+export type User$bannersArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Banner
+   */
+  select?: Prisma.BannerSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Banner
+   */
+  omit?: Prisma.BannerOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.BannerInclude<ExtArgs> | null
+  where?: Prisma.BannerWhereInput
 }
 
 /**

@@ -1,6 +1,6 @@
 import { currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { DeleteObjectCommand, PutObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { z } from "zod";
 import { v4 as uuidv4 } from "uuid";
@@ -49,6 +49,40 @@ export async function POST(request: Request) {
             key: uniqueKey,
         };
         return NextResponse.json(response, { status: 200 });
+    } catch (error) {
+        return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
+    }
+}
+
+
+const DeleteSchema = z.object({
+    key: z.string(),
+})
+export async function DELETE(request: Request) {
+    try {
+        const user = await currentUser();
+        const role = user?.publicMetadata.role;
+
+        if (role !== 'admin') {
+            return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
+        }
+
+        const body = await request.json();
+        const validation = DeleteSchema.safeParse(body);
+
+        if (!validation.success) {
+            return NextResponse.json({ message: "Bad request" }, { status: 400 });
+        }
+
+        const { key } = validation.data;
+
+        const command = new DeleteObjectCommand({
+            Bucket: process.env.S3_BUCKET_NAME,
+            Key: key,
+        });
+
+        await S3.send(command);
+        return NextResponse.json({ message: "Deleted Successfully" }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
     }

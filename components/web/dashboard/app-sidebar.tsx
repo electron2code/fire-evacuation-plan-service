@@ -29,16 +29,6 @@ const items = [
     url: "/dashboard/portfolio",
     icon: Grid,
   },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
-  },
 ]
 
 export default function AppSidebar() {

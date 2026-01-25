@@ -4,8 +4,9 @@ import { useEffect, useRef, useState } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import type { Editor as TinyMCEEditor } from 'tinymce';
 import { Button } from './button';
+import { setBannerContent } from '@/actions/banner';
 
-export default function TextEditor() {
+export default function TextEditor({ heroContent }: { heroContent: string }) {
   const [isMounted, setIsMounted] = useState(false);
   const [updating, setUpdating] = useState(false);
   const editorRef = useRef<TinyMCEEditor | null>(null);
@@ -14,9 +15,7 @@ export default function TextEditor() {
     try {
       if (editorRef.current) {
         const content = editorRef.current.getContent();
-        if (content) {
-          console.log(content);
-        }
+        await setBannerContent(content);
       }
     } catch (error) {
 
@@ -38,7 +37,7 @@ export default function TextEditor() {
       <Editor
         apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
         onInit={(_evt, editor: TinyMCEEditor) => editorRef.current = editor}
-        initialValue="<h1 class='text-xl md:text-2xl lg:text-3xl font-bold'>Please Edit Your webpage Hero Content</h1>"
+        initialValue={heroContent || "Please Update your hero content"}
         init={{
           height: 500,
           menubar: false,

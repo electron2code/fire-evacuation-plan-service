@@ -1185,7 +1185,8 @@ export type BannerImageScalarFieldEnum = (typeof BannerImageScalarFieldEnum)[key
 
 export const BannerScalarFieldEnum = {
   id: 'id',
-  content: 'content'
+  content: 'content',
+  creatorId: 'creatorId'
 } as const
 
 export type BannerScalarFieldEnum = (typeof BannerScalarFieldEnum)[keyof typeof BannerScalarFieldEnum]

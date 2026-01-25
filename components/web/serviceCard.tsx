@@ -32,10 +32,9 @@ export function ServiceCard({
                     {children}
                 </div>
                 <div className={`max-w-xl shirnk-1 wrap-break-word flex-1 flex flex-col gap-4 p-4 ${index && ((index + 1) % 2 !== 0) ? "order-2" : "order-1"}`}>
-                    <h3 className='text-2xl md:text-3xl font-bold text-slate-900'>{title}</h3>
-                    <p className='text-slate-500 leading-relaxed wrap-break-word'>{description}</p>
-                    {oddOrEven}
-                    <Link className="flex items-center gap-2 text-[#f25f29] font-bold text-sm hover:text-[#d64d1c] transition-colors" href={`/services${id ? `/${id}` : ""}`}>Learn More
+                    <h3 className='text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900'>{title}</h3>
+                    <p className='text-slate-500 leading-relaxed wrap-break-word mt-4'>{description}</p>
+                    <Link className="flex mt-5 items-center gap-2 text-[#f25f29] font-bold text-sm hover:text-[#d64d1c] transition-colors" href={`/services${id ? `/${id}` : ""}`}>Learn More
                         <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                     </Link>
                 </div>

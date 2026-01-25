@@ -16,6 +16,8 @@ import { toast } from "sonner";
 import Image from "next/image";
 
 import { createContactSubmission, deleteContactImage } from "@/actions/contact";
+import Link from "next/link";
+import ContactCards from "@/components/web/contact-cards";
 
 export default function ContactPage() {
     const [formData, setFormData] = useState({
@@ -184,7 +186,7 @@ export default function ContactPage() {
                     {/* Left Column: Contact Form */}
                     <div className="bg-white rounded-2xl shadow-sm border border-gray-200 p-6 md:p-8">
                         <div className="mb-8">
-                            <h2 className="text-2xl font-bold text-[#f25f29] mb-2">Request Free Service Report</h2>
+                            <h2 className="text-2xl font-bold text-[#f25f29] mb-2">To begin your work, I will need the following information:</h2>
                             <p className="text-gray-600 text-sm">Fill out the form below and we'll contact you within 24 hours</p>
                         </div>
 
@@ -228,7 +230,7 @@ export default function ContactPage() {
                             </div>
 
                             <div className="space-y-1">
-                                <label className="text-xs font-bold text-gray-700">Property Address</label>
+                                <label className="text-xs font-bold text-gray-700">Give your project address.</label>
                                 <Input
                                     name="propertyAddress"
                                     value={formData.propertyAddress}
@@ -274,12 +276,17 @@ export default function ContactPage() {
                                     value={formData.notes}
                                     onChange={handleChange}
                                     placeholder="Tell us more about your project..."
-                                    className="bg-gray-50 border-gray-200 min-h-[120px]"
+                                    className="bg-gray-50 border-gray-200 min-h-30"
                                 />
                             </div>
 
                             <div className="space-y-2">
                                 <label className="text-xs font-bold text-gray-700">Upload Photos (Optional)</label>
+                                <p className="text-sm text-gray-500"> Updated floor plan (If available) Or, a picture of a hand sketch floor
+                                    plan Or send me the complete video of your project. While making the
+                                    video, try to make it step by step starting from the front door. And
+                                    through the video, you should be able to understand where each thing
+                                    in the project like doors, windows, furniture etc. is located.</p>
                                 <div className="flex items-center gap-3">
                                     {uploadedImageUrl && <Image src={uploadedImageUrl} className="object-cover w-24 h-24 rounded-md" alt="Upload" width={100} height={100} />}
                                     <input
@@ -326,18 +333,26 @@ export default function ContactPage() {
                     <div className="space-y-8">
                         {/* Why Choose Us */}
                         <div>
-                            <h3 className="text-xl font-bold text-gray-900 mb-4">Why Choose Fire Evacuation Designer?</h3>
+                            <h3 className="text-xl font-bold text-gray-900 mb-4">Why Choose Evacuation Plan Service?</h3>
                             <ul className="space-y-3">
                                 {[
-                                    "Expert, verified evacuation planning services",
-                                    "Same-day emergency consultation available",
-                                    "Licensed and certified safety professionals",
-                                    "Direct compliance assistance",
-                                    "Lifetime support on select packages",
-                                    "A+ rating with hundreds of 5-star reviews"
+                                    "15+ Years of Professional Expertise",
+                                    "With over 15 years of hands-on experience in fire evacuation planning, we deliver solutions you can trust.",
+                                    "Fast & Deadline-Focused Delivery",
+                                    "We complete every project quickly and efficiently, always meeting your deadlines.",
+                                    "Commitment to Excellence",
+                                    "Dedicated to providing outstanding service and building long-term customer satisfaction.",
+                                    "Unlimited Revisions",
+                                    "Your satisfaction comes first — we offer unlimited revisions until the plan is exactly right.",
+                                    "Rapid Turnaround",
+                                    "Swift response times without compromising safety, accuracy, or quality.",
+                                    "Exceptional Quality Standards",
+                                    "Premium-quality evacuation plans developed with precision, care, and industry best practices.",
+                                    "Free Future Updates After Project Completion",
+                                    "Even after the project is completed, any future changes or updates will be provided free of charge whenever needed."
                                 ].map((item, i) => (
-                                    <li key={i} className="flex items-start gap-2 text-sm text-gray-700">
-                                        <div className="mt-1 w-1.5 h-1.5 rounded-full bg-[#f25f29] shrink-0" />
+                                    <li key={i} className="flex items-start gap-2 text-sm text-gray-700 odd:text-base odd:font-bold">
+                                        {(i + 1) % 2 !== 0 && <div className="mt-1 w-1.5 h-1.5 rounded-full bg-[#f25f29] shrink-0" />}
                                         {item}
                                     </li>
                                 ))}
@@ -353,8 +368,7 @@ export default function ContactPage() {
                                 <div className="space-y-1">
                                     <h4 className="font-bold text-gray-900">Business Hours</h4>
                                     <div className="text-sm text-gray-600 space-y-0.5">
-                                        <p>Monday - Saturday: 9:00 AM - 7:00 PM</p>
-                                        <p>Sunday: Closed</p>
+                                        <p>All day 06:00 AM to 10:00 PM</p>
                                         <p className="text-[#f25f29] font-medium pt-1">Emergency Service: 24/7</p>
                                     </div>
                                 </div>
@@ -363,57 +377,27 @@ export default function ContactPage() {
 
                         {/* What to Expect Card */}
                         <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
-                            <h4 className="text-[#f25f29] font-bold mb-4">What to Expect</h4>
-                            <div className="space-y-4">
+                            <h4 className="text-[#f25f29] font-bold mb-4">What You Will Receive After Project Completion</h4>
+                            <ul className="space-y-4">
                                 {[
-                                    "Submit your request through our form or call us directly",
-                                    "We will contact you within 24 hours to schedule your consultation",
-                                    "Our expert will conduct a thorough safety assessment",
-                                    "Receive a detailed report and transparent pricing",
-                                    "Approve the plan and we will finalize your evacuation strategy"
+                                    "Complete Emergency Evacuation Plan",
+                                    "A fully developed, accurate, and ready-to-use emergency evacuation plan tailored to your requirements.",
+                                    "Editable Source Files",
+                                    "All original editable files will be provided, including PDF, SVG, AI, EPS, and other required formats for future updates.",
+                                    "Print-Ready High-Resolution Files",
+                                    "High-quality, print-ready JPG files with high resolution, suitable for large-format printing and display."
                                 ].map((step, i) => (
-                                    <div key={i} className="flex gap-3">
-                                        <div className="w-6 h-6 rounded-full bg-[#f25f29] text-white flex items-center justify-center text-xs font-bold shrink-0">
-                                            {i + 1}
-                                        </div>
+                                    <li key={i} className="flex gap-3">
+                                        {(i + 1) % 2 !== 0 && <div className="w-6 h-6 rounded-full bg-[#f25f29] text-white flex items-center justify-center text-xs font-bold shrink-0">
+                                            {(i === 0) && 1}
+                                            {(i === 2) && 2}
+                                            {(i === 4) && 3}
+                                        </div>}
                                         <p className="text-sm text-gray-600 pt-0.5">{step}</p>
-                                    </div>
+                                    </li>
                                 ))}
-                            </div>
+                            </ul>
                         </div>
-                    </div>
-                </div>
-
-                {/* Bottom Section: Contact Cards */}
-                <div className="grid md:grid-cols-3 gap-6">
-                    {/* Main Office */}
-                    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 flex flex-col items-center text-center hover:border-gray-200 transition-colors">
-                        <div className="w-12 h-12 bg-[#fff1f0] rounded-full flex items-center justify-center mb-4 text-[#f25f29]">
-                            <Phone className="w-5 h-5" />
-                        </div>
-                        <h3 className="font-bold text-gray-900 mb-1">Main Office</h3>
-                        <p className="text-[#f25f29] font-bold text-lg mb-1">(817) 771-2550</p>
-                        <p className="text-xs text-gray-500">Mon-Sat: 9am-7pm</p>
-                    </div>
-
-                    {/* Emergency */}
-                    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 flex flex-col items-center text-center hover:border-gray-200 transition-colors">
-                        <div className="w-12 h-12 bg-[#fff1f0] rounded-full flex items-center justify-center mb-4 text-[#f25f29]">
-                            <Clock className="w-5 h-5" />
-                        </div>
-                        <h3 className="font-bold text-gray-900 mb-1">24/7 Emergency</h3>
-                        <p className="text-[#f25f29] font-bold text-lg mb-1">(817) 771-2550</p>
-                        <p className="text-xs text-gray-500">Available anytime</p>
-                    </div>
-
-                    {/* Email */}
-                    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-8 flex flex-col items-center text-center hover:border-gray-200 transition-colors">
-                        <div className="w-12 h-12 bg-[#fff1f0] rounded-full flex items-center justify-center mb-4 text-[#f25f29]">
-                            <Mail className="w-5 h-5" />
-                        </div>
-                        <h3 className="font-bold text-gray-900 mb-1">Email Us</h3>
-                        <p className="text-[#f25f29] font-bold mb-1 break-all text-sm">contact@fireevac.com</p>
-                        <p className="text-xs text-gray-500">We respond within 24 hours</p>
                     </div>
                 </div>
             </div>

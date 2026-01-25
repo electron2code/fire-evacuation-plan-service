@@ -29,6 +29,7 @@ model User {
 
   services Service[]
   reviews  Review[]
+  banners  Banner?
 }
 
 model Service {
@@ -94,8 +95,10 @@ model BannerImage {
 }
 
 model Banner {
-  id      String @id @default(cuid())
-  content String
+  id        String @id @default(cuid())
+  content   String
+  creator   User   @relation(fields: [creatorId], references: [clerkId])
+  creatorId String @unique
 }
 
 model PortfolioImage {

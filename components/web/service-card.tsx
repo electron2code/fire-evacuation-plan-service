@@ -18,14 +18,13 @@ interface Service {
 }
 
 export default function ServiceCard({ service, setServices }: { service: Service, setServices: React.Dispatch<React.SetStateAction<Array<Service>>> }) {
-    // Find the lowest price to show "Starting at"
-    // const startingPrice = Math.min(...service.tiers.map((t) => t.price));
     const startingPrice = service.tiers[0].price;
     const [deleting, setDeleting] = useState(false);
 
 
     // Logic for average rating (placeholder logic)
-    const avgRating = 4.9;
+    const totalRating = service.reviews?.reduce((accum, { rating }) => accum + rating, 0);
+    const avgRating = totalRating ? totalRating / (service.reviews?.length as number) : 0;
     const totalReviews = service.reviews?.length || 0;
     console.log(service.images);
 
@@ -106,6 +105,10 @@ export default function ServiceCard({ service, setServices }: { service: Service
                 <div className="flex items-center gap-1 text-xs text-zinc-500">
                     <Languages size={14} />
                     <span>{service.language}</span>
+                </div>
+                <div className="flex items-center gap-1 text-xs text-zinc-500">
+                    Started from
+                    <span>${startingPrice}</span>
                 </div>
             </CardContent>
             <hr className="border-zinc-300/50" />

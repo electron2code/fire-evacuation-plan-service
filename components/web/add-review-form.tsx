@@ -55,8 +55,8 @@ export default function AddReviewForm({ serviceId }: AddReviewFormProps) {
                             >
                                 <Star
                                     className={`w-8 h-8 ${star <= (hoverRating || rating)
-                                            ? "text-yellow-400 fill-yellow-400"
-                                            : "text-gray-300"
+                                        ? "text-yellow-400 fill-yellow-400"
+                                        : "text-gray-300"
                                         }`}
                                 />
                             </button>
@@ -72,7 +72,7 @@ export default function AddReviewForm({ serviceId }: AddReviewFormProps) {
                         id="comment"
                         name="comment"
                         rows={4}
-                        className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all resize-none bg-gray-50"
+                        className="w-full px-4 py-3 text-gray-700 rounded-lg border border-gray-300 focus:ring-2 focus:ring-amber-500 focus:border-amber-500 outline-none transition-all resize-none bg-gray-50"
                         placeholder="Share your experience with this service..."
                         required
                         minLength={5}

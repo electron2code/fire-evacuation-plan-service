@@ -26,82 +26,52 @@ export type AggregateContactSubmission = {
 
 export type ContactSubmissionMinAggregateOutputType = {
   id: string | null
-  fullName: string | null
-  phoneNumber: string | null
-  email: string | null
-  propertyAddress: string | null
-  serviceCategory: string | null
-  serviceType: string | null
-  notes: string | null
-  imageKey: string | null
-  createdAt: Date | null
+  userId: string | null
+  projectAddress: string | null
+  emergencyNumber: string | null
+  googleMapLink: string | null
 }
 
 export type ContactSubmissionMaxAggregateOutputType = {
   id: string | null
-  fullName: string | null
-  phoneNumber: string | null
-  email: string | null
-  propertyAddress: string | null
-  serviceCategory: string | null
-  serviceType: string | null
-  notes: string | null
-  imageKey: string | null
-  createdAt: Date | null
+  userId: string | null
+  projectAddress: string | null
+  emergencyNumber: string | null
+  googleMapLink: string | null
 }
 
 export type ContactSubmissionCountAggregateOutputType = {
   id: number
-  fullName: number
-  phoneNumber: number
-  email: number
-  propertyAddress: number
-  serviceCategory: number
-  serviceType: number
-  notes: number
-  imageKey: number
-  createdAt: number
+  userId: number
+  projectAddress: number
+  emergencyNumber: number
+  googleMapLink: number
   _all: number
 }
 
 
 export type ContactSubmissionMinAggregateInputType = {
   id?: true
-  fullName?: true
-  phoneNumber?: true
-  email?: true
-  propertyAddress?: true
-  serviceCategory?: true
-  serviceType?: true
-  notes?: true
-  imageKey?: true
-  createdAt?: true
+  userId?: true
+  projectAddress?: true
+  emergencyNumber?: true
+  googleMapLink?: true
 }
 
 export type ContactSubmissionMaxAggregateInputType = {
   id?: true
-  fullName?: true
-  phoneNumber?: true
-  email?: true
-  propertyAddress?: true
-  serviceCategory?: true
-  serviceType?: true
-  notes?: true
-  imageKey?: true
-  createdAt?: true
+  userId?: true
+  projectAddress?: true
+  emergencyNumber?: true
+  googleMapLink?: true
 }
 
 export type ContactSubmissionCountAggregateInputType = {
   id?: true
-  fullName?: true
-  phoneNumber?: true
-  email?: true
-  propertyAddress?: true
-  serviceCategory?: true
-  serviceType?: true
-  notes?: true
-  imageKey?: true
-  createdAt?: true
+  userId?: true
+  projectAddress?: true
+  emergencyNumber?: true
+  googleMapLink?: true
   _all?: true
 }
 
@@ -179,15 +149,10 @@ export type ContactSubmissionGroupByArgs<ExtArgs extends runtime.Types.Extension
 
 export type ContactSubmissionGroupByOutputType = {
   id: string
-  fullName: string
-  phoneNumber: string
-  email: string
-  propertyAddress: string | null
-  serviceCategory: string | null
-  serviceType: string | null
-  notes: string | null
-  imageKey: string | null
-  createdAt: Date
+  userId: string
+  projectAddress: string
+  emergencyNumber: string
+  googleMapLink: string
   _count: ContactSubmissionCountAggregateOutputType | null
   _min: ContactSubmissionMinAggregateOutputType | null
   _max: ContactSubmissionMaxAggregateOutputType | null
@@ -213,28 +178,26 @@ export type ContactSubmissionWhereInput = {
   OR?: Prisma.ContactSubmissionWhereInput[]
   NOT?: Prisma.ContactSubmissionWhereInput | Prisma.ContactSubmissionWhereInput[]
   id?: Prisma.StringFilter<"ContactSubmission"> | string
-  fullName?: Prisma.StringFilter<"ContactSubmission"> | string
-  phoneNumber?: Prisma.StringFilter<"ContactSubmission"> | string
-  email?: Prisma.StringFilter<"ContactSubmission"> | string
-  propertyAddress?: Prisma.StringNullableFilter<"ContactSubmission"> | string | null
-  serviceCategory?: Prisma.StringNullableFilter<"ContactSubmission"> | string | null
-  serviceType?: Prisma.StringNullableFilter<"ContactSubmission"> | string | null
-  notes?: Prisma.StringNullableFilter<"ContactSubmission"> | string | null
-  imageKey?: Prisma.StringNullableFilter<"ContactSubmission"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"ContactSubmission"> | Date | string
+  userId?: Prisma.StringFilter<"ContactSubmission"> | string
+  projectAddress?: Prisma.StringFilter<"ContactSubmission"> | string
+  emergencyNumber?: Prisma.StringFilter<"ContactSubmission"> | string
+  googleMapLink?: Prisma.StringFilter<"ContactSubmission"> | string
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  companyLogo?: Prisma.XOR<Prisma.CompanyLogoNullableScalarRelationFilter, Prisma.CompanyLogoWhereInput> | null
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaListRelationFilter
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaListRelationFilter
 }
 
 export type ContactSubmissionOrderByWithRelationInput = {
   id?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
-  phoneNumber?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  propertyAddress?: Prisma.SortOrderInput | Prisma.SortOrder
-  serviceCategory?: Prisma.SortOrderInput | Prisma.SortOrder
-  serviceType?: Prisma.SortOrderInput | Prisma.SortOrder
-  notes?: Prisma.SortOrderInput | Prisma.SortOrder
-  imageKey?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  projectAddress?: Prisma.SortOrder
+  emergencyNumber?: Prisma.SortOrder
+  googleMapLink?: Prisma.SortOrder
+  user?: Prisma.UserOrderByWithRelationInput
+  companyLogo?: Prisma.CompanyLogoOrderByWithRelationInput
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaOrderByRelationAggregateInput
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaOrderByRelationAggregateInput
 }
 
 export type ContactSubmissionWhereUniqueInput = Prisma.AtLeast<{
@@ -242,28 +205,22 @@ export type ContactSubmissionWhereUniqueInput = Prisma.AtLeast<{
   AND?: Prisma.ContactSubmissionWhereInput | Prisma.ContactSubmissionWhereInput[]
   OR?: Prisma.ContactSubmissionWhereInput[]
   NOT?: Prisma.ContactSubmissionWhereInput | Prisma.ContactSubmissionWhereInput[]
-  fullName?: Prisma.StringFilter<"ContactSubmission"> | string
-  phoneNumber?: Prisma.StringFilter<"ContactSubmission"> | string
-  email?: Prisma.StringFilter<"ContactSubmission"> | string
-  propertyAddress?: Prisma.StringNullableFilter<"ContactSubmission"> | string | null
-  serviceCategory?: Prisma.StringNullableFilter<"ContactSubmission"> | string | null
-  serviceType?: Prisma.StringNullableFilter<"ContactSubmission"> | string | null
-  notes?: Prisma.StringNullableFilter<"ContactSubmission"> | string | null
-  imageKey?: Prisma.StringNullableFilter<"ContactSubmission"> | string | null
-  createdAt?: Prisma.DateTimeFilter<"ContactSubmission"> | Date | string
+  userId?: Prisma.StringFilter<"ContactSubmission"> | string
+  projectAddress?: Prisma.StringFilter<"ContactSubmission"> | string
+  emergencyNumber?: Prisma.StringFilter<"ContactSubmission"> | string
+  googleMapLink?: Prisma.StringFilter<"ContactSubmission"> | string
+  user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
+  companyLogo?: Prisma.XOR<Prisma.CompanyLogoNullableScalarRelationFilter, Prisma.CompanyLogoWhereInput> | null
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaListRelationFilter
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaListRelationFilter
 }, "id">
 
 export type ContactSubmissionOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
-  phoneNumber?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  propertyAddress?: Prisma.SortOrderInput | Prisma.SortOrder
-  serviceCategory?: Prisma.SortOrderInput | Prisma.SortOrder
-  serviceType?: Prisma.SortOrderInput | Prisma.SortOrder
-  notes?: Prisma.SortOrderInput | Prisma.SortOrder
-  imageKey?: Prisma.SortOrderInput | Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  projectAddress?: Prisma.SortOrder
+  emergencyNumber?: Prisma.SortOrder
+  googleMapLink?: Prisma.SortOrder
   _count?: Prisma.ContactSubmissionCountOrderByAggregateInput
   _max?: Prisma.ContactSubmissionMaxOrderByAggregateInput
   _min?: Prisma.ContactSubmissionMinOrderByAggregateInput
@@ -274,217 +231,569 @@ export type ContactSubmissionScalarWhereWithAggregatesInput = {
   OR?: Prisma.ContactSubmissionScalarWhereWithAggregatesInput[]
   NOT?: Prisma.ContactSubmissionScalarWhereWithAggregatesInput | Prisma.ContactSubmissionScalarWhereWithAggregatesInput[]
   id?: Prisma.StringWithAggregatesFilter<"ContactSubmission"> | string
-  fullName?: Prisma.StringWithAggregatesFilter<"ContactSubmission"> | string
-  phoneNumber?: Prisma.StringWithAggregatesFilter<"ContactSubmission"> | string
-  email?: Prisma.StringWithAggregatesFilter<"ContactSubmission"> | string
-  propertyAddress?: Prisma.StringNullableWithAggregatesFilter<"ContactSubmission"> | string | null
-  serviceCategory?: Prisma.StringNullableWithAggregatesFilter<"ContactSubmission"> | string | null
-  serviceType?: Prisma.StringNullableWithAggregatesFilter<"ContactSubmission"> | string | null
-  notes?: Prisma.StringNullableWithAggregatesFilter<"ContactSubmission"> | string | null
-  imageKey?: Prisma.StringNullableWithAggregatesFilter<"ContactSubmission"> | string | null
-  createdAt?: Prisma.DateTimeWithAggregatesFilter<"ContactSubmission"> | Date | string
+  userId?: Prisma.StringWithAggregatesFilter<"ContactSubmission"> | string
+  projectAddress?: Prisma.StringWithAggregatesFilter<"ContactSubmission"> | string
+  emergencyNumber?: Prisma.StringWithAggregatesFilter<"ContactSubmission"> | string
+  googleMapLink?: Prisma.StringWithAggregatesFilter<"ContactSubmission"> | string
 }
 
 export type ContactSubmissionCreateInput = {
   id?: string
-  fullName: string
-  phoneNumber: string
-  email: string
-  propertyAddress?: string | null
-  serviceCategory?: string | null
-  serviceType?: string | null
-  notes?: string | null
-  imageKey?: string | null
-  createdAt?: Date | string
+  projectAddress: string
+  emergencyNumber: string
+  googleMapLink: string
+  user: Prisma.UserCreateNestedOneWithoutContactSubmissionInput
+  companyLogo?: Prisma.CompanyLogoCreateNestedOneWithoutContactSubmissionInput
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaCreateNestedManyWithoutContactSubmissionInput
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaCreateNestedManyWithoutContactSubmissionInput
 }
 
 export type ContactSubmissionUncheckedCreateInput = {
   id?: string
-  fullName: string
-  phoneNumber: string
-  email: string
-  propertyAddress?: string | null
-  serviceCategory?: string | null
-  serviceType?: string | null
-  notes?: string | null
-  imageKey?: string | null
-  createdAt?: Date | string
+  userId: string
+  projectAddress: string
+  emergencyNumber: string
+  googleMapLink: string
+  companyLogo?: Prisma.CompanyLogoUncheckedCreateNestedOneWithoutContactSubmissionInput
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaUncheckedCreateNestedManyWithoutContactSubmissionInput
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaUncheckedCreateNestedManyWithoutContactSubmissionInput
 }
 
 export type ContactSubmissionUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  serviceCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  serviceType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projectAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  emergencyNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  googleMapLink?: Prisma.StringFieldUpdateOperationsInput | string
+  user?: Prisma.UserUpdateOneRequiredWithoutContactSubmissionNestedInput
+  companyLogo?: Prisma.CompanyLogoUpdateOneWithoutContactSubmissionNestedInput
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaUpdateManyWithoutContactSubmissionNestedInput
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaUpdateManyWithoutContactSubmissionNestedInput
 }
 
 export type ContactSubmissionUncheckedUpdateInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  serviceCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  serviceType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  projectAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  emergencyNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  googleMapLink?: Prisma.StringFieldUpdateOperationsInput | string
+  companyLogo?: Prisma.CompanyLogoUncheckedUpdateOneWithoutContactSubmissionNestedInput
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaUncheckedUpdateManyWithoutContactSubmissionNestedInput
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaUncheckedUpdateManyWithoutContactSubmissionNestedInput
 }
 
 export type ContactSubmissionCreateManyInput = {
   id?: string
-  fullName: string
-  phoneNumber: string
-  email: string
-  propertyAddress?: string | null
-  serviceCategory?: string | null
-  serviceType?: string | null
-  notes?: string | null
-  imageKey?: string | null
-  createdAt?: Date | string
+  userId: string
+  projectAddress: string
+  emergencyNumber: string
+  googleMapLink: string
 }
 
 export type ContactSubmissionUpdateManyMutationInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  serviceCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  serviceType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  projectAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  emergencyNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  googleMapLink?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ContactSubmissionUncheckedUpdateManyInput = {
   id?: Prisma.StringFieldUpdateOperationsInput | string
-  fullName?: Prisma.StringFieldUpdateOperationsInput | string
-  phoneNumber?: Prisma.StringFieldUpdateOperationsInput | string
-  email?: Prisma.StringFieldUpdateOperationsInput | string
-  propertyAddress?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  serviceCategory?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  serviceType?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  notes?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  imageKey?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  projectAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  emergencyNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  googleMapLink?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+export type ContactSubmissionListRelationFilter = {
+  every?: Prisma.ContactSubmissionWhereInput
+  some?: Prisma.ContactSubmissionWhereInput
+  none?: Prisma.ContactSubmissionWhereInput
+}
+
+export type ContactSubmissionOrderByRelationAggregateInput = {
+  _count?: Prisma.SortOrder
 }
 
 export type ContactSubmissionCountOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
-  phoneNumber?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  propertyAddress?: Prisma.SortOrder
-  serviceCategory?: Prisma.SortOrder
-  serviceType?: Prisma.SortOrder
-  notes?: Prisma.SortOrder
-  imageKey?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  projectAddress?: Prisma.SortOrder
+  emergencyNumber?: Prisma.SortOrder
+  googleMapLink?: Prisma.SortOrder
 }
 
 export type ContactSubmissionMaxOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
-  phoneNumber?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  propertyAddress?: Prisma.SortOrder
-  serviceCategory?: Prisma.SortOrder
-  serviceType?: Prisma.SortOrder
-  notes?: Prisma.SortOrder
-  imageKey?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  projectAddress?: Prisma.SortOrder
+  emergencyNumber?: Prisma.SortOrder
+  googleMapLink?: Prisma.SortOrder
 }
 
 export type ContactSubmissionMinOrderByAggregateInput = {
   id?: Prisma.SortOrder
-  fullName?: Prisma.SortOrder
-  phoneNumber?: Prisma.SortOrder
-  email?: Prisma.SortOrder
-  propertyAddress?: Prisma.SortOrder
-  serviceCategory?: Prisma.SortOrder
-  serviceType?: Prisma.SortOrder
-  notes?: Prisma.SortOrder
-  imageKey?: Prisma.SortOrder
-  createdAt?: Prisma.SortOrder
+  userId?: Prisma.SortOrder
+  projectAddress?: Prisma.SortOrder
+  emergencyNumber?: Prisma.SortOrder
+  googleMapLink?: Prisma.SortOrder
 }
 
+export type ContactSubmissionScalarRelationFilter = {
+  is?: Prisma.ContactSubmissionWhereInput
+  isNot?: Prisma.ContactSubmissionWhereInput
+}
+
+export type ContactSubmissionCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutUserInput, Prisma.ContactSubmissionUncheckedCreateWithoutUserInput> | Prisma.ContactSubmissionCreateWithoutUserInput[] | Prisma.ContactSubmissionUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ContactSubmissionCreateOrConnectWithoutUserInput | Prisma.ContactSubmissionCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.ContactSubmissionCreateManyUserInputEnvelope
+  connect?: Prisma.ContactSubmissionWhereUniqueInput | Prisma.ContactSubmissionWhereUniqueInput[]
+}
+
+export type ContactSubmissionUncheckedCreateNestedManyWithoutUserInput = {
+  create?: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutUserInput, Prisma.ContactSubmissionUncheckedCreateWithoutUserInput> | Prisma.ContactSubmissionCreateWithoutUserInput[] | Prisma.ContactSubmissionUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ContactSubmissionCreateOrConnectWithoutUserInput | Prisma.ContactSubmissionCreateOrConnectWithoutUserInput[]
+  createMany?: Prisma.ContactSubmissionCreateManyUserInputEnvelope
+  connect?: Prisma.ContactSubmissionWhereUniqueInput | Prisma.ContactSubmissionWhereUniqueInput[]
+}
+
+export type ContactSubmissionUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutUserInput, Prisma.ContactSubmissionUncheckedCreateWithoutUserInput> | Prisma.ContactSubmissionCreateWithoutUserInput[] | Prisma.ContactSubmissionUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ContactSubmissionCreateOrConnectWithoutUserInput | Prisma.ContactSubmissionCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.ContactSubmissionUpsertWithWhereUniqueWithoutUserInput | Prisma.ContactSubmissionUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.ContactSubmissionCreateManyUserInputEnvelope
+  set?: Prisma.ContactSubmissionWhereUniqueInput | Prisma.ContactSubmissionWhereUniqueInput[]
+  disconnect?: Prisma.ContactSubmissionWhereUniqueInput | Prisma.ContactSubmissionWhereUniqueInput[]
+  delete?: Prisma.ContactSubmissionWhereUniqueInput | Prisma.ContactSubmissionWhereUniqueInput[]
+  connect?: Prisma.ContactSubmissionWhereUniqueInput | Prisma.ContactSubmissionWhereUniqueInput[]
+  update?: Prisma.ContactSubmissionUpdateWithWhereUniqueWithoutUserInput | Prisma.ContactSubmissionUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.ContactSubmissionUpdateManyWithWhereWithoutUserInput | Prisma.ContactSubmissionUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.ContactSubmissionScalarWhereInput | Prisma.ContactSubmissionScalarWhereInput[]
+}
+
+export type ContactSubmissionUncheckedUpdateManyWithoutUserNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutUserInput, Prisma.ContactSubmissionUncheckedCreateWithoutUserInput> | Prisma.ContactSubmissionCreateWithoutUserInput[] | Prisma.ContactSubmissionUncheckedCreateWithoutUserInput[]
+  connectOrCreate?: Prisma.ContactSubmissionCreateOrConnectWithoutUserInput | Prisma.ContactSubmissionCreateOrConnectWithoutUserInput[]
+  upsert?: Prisma.ContactSubmissionUpsertWithWhereUniqueWithoutUserInput | Prisma.ContactSubmissionUpsertWithWhereUniqueWithoutUserInput[]
+  createMany?: Prisma.ContactSubmissionCreateManyUserInputEnvelope
+  set?: Prisma.ContactSubmissionWhereUniqueInput | Prisma.ContactSubmissionWhereUniqueInput[]
+  disconnect?: Prisma.ContactSubmissionWhereUniqueInput | Prisma.ContactSubmissionWhereUniqueInput[]
+  delete?: Prisma.ContactSubmissionWhereUniqueInput | Prisma.ContactSubmissionWhereUniqueInput[]
+  connect?: Prisma.ContactSubmissionWhereUniqueInput | Prisma.ContactSubmissionWhereUniqueInput[]
+  update?: Prisma.ContactSubmissionUpdateWithWhereUniqueWithoutUserInput | Prisma.ContactSubmissionUpdateWithWhereUniqueWithoutUserInput[]
+  updateMany?: Prisma.ContactSubmissionUpdateManyWithWhereWithoutUserInput | Prisma.ContactSubmissionUpdateManyWithWhereWithoutUserInput[]
+  deleteMany?: Prisma.ContactSubmissionScalarWhereInput | Prisma.ContactSubmissionScalarWhereInput[]
+}
+
+export type ContactSubmissionCreateNestedOneWithoutCompanyLogoInput = {
+  create?: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutCompanyLogoInput, Prisma.ContactSubmissionUncheckedCreateWithoutCompanyLogoInput>
+  connectOrCreate?: Prisma.ContactSubmissionCreateOrConnectWithoutCompanyLogoInput
+  connect?: Prisma.ContactSubmissionWhereUniqueInput
+}
+
+export type ContactSubmissionUpdateOneRequiredWithoutCompanyLogoNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutCompanyLogoInput, Prisma.ContactSubmissionUncheckedCreateWithoutCompanyLogoInput>
+  connectOrCreate?: Prisma.ContactSubmissionCreateOrConnectWithoutCompanyLogoInput
+  upsert?: Prisma.ContactSubmissionUpsertWithoutCompanyLogoInput
+  connect?: Prisma.ContactSubmissionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContactSubmissionUpdateToOneWithWhereWithoutCompanyLogoInput, Prisma.ContactSubmissionUpdateWithoutCompanyLogoInput>, Prisma.ContactSubmissionUncheckedUpdateWithoutCompanyLogoInput>
+}
+
+export type ContactSubmissionCreateNestedOneWithoutProjectVisualsMediaInput = {
+  create?: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutProjectVisualsMediaInput, Prisma.ContactSubmissionUncheckedCreateWithoutProjectVisualsMediaInput>
+  connectOrCreate?: Prisma.ContactSubmissionCreateOrConnectWithoutProjectVisualsMediaInput
+  connect?: Prisma.ContactSubmissionWhereUniqueInput
+}
+
+export type ContactSubmissionUpdateOneRequiredWithoutProjectVisualsMediaNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutProjectVisualsMediaInput, Prisma.ContactSubmissionUncheckedCreateWithoutProjectVisualsMediaInput>
+  connectOrCreate?: Prisma.ContactSubmissionCreateOrConnectWithoutProjectVisualsMediaInput
+  upsert?: Prisma.ContactSubmissionUpsertWithoutProjectVisualsMediaInput
+  connect?: Prisma.ContactSubmissionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContactSubmissionUpdateToOneWithWhereWithoutProjectVisualsMediaInput, Prisma.ContactSubmissionUpdateWithoutProjectVisualsMediaInput>, Prisma.ContactSubmissionUncheckedUpdateWithoutProjectVisualsMediaInput>
+}
+
+export type ContactSubmissionCreateNestedOneWithoutSafetyEquipmentMediaInput = {
+  create?: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutSafetyEquipmentMediaInput, Prisma.ContactSubmissionUncheckedCreateWithoutSafetyEquipmentMediaInput>
+  connectOrCreate?: Prisma.ContactSubmissionCreateOrConnectWithoutSafetyEquipmentMediaInput
+  connect?: Prisma.ContactSubmissionWhereUniqueInput
+}
+
+export type ContactSubmissionUpdateOneRequiredWithoutSafetyEquipmentMediaNestedInput = {
+  create?: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutSafetyEquipmentMediaInput, Prisma.ContactSubmissionUncheckedCreateWithoutSafetyEquipmentMediaInput>
+  connectOrCreate?: Prisma.ContactSubmissionCreateOrConnectWithoutSafetyEquipmentMediaInput
+  upsert?: Prisma.ContactSubmissionUpsertWithoutSafetyEquipmentMediaInput
+  connect?: Prisma.ContactSubmissionWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.ContactSubmissionUpdateToOneWithWhereWithoutSafetyEquipmentMediaInput, Prisma.ContactSubmissionUpdateWithoutSafetyEquipmentMediaInput>, Prisma.ContactSubmissionUncheckedUpdateWithoutSafetyEquipmentMediaInput>
+}
+
+export type ContactSubmissionCreateWithoutUserInput = {
+  id?: string
+  projectAddress: string
+  emergencyNumber: string
+  googleMapLink: string
+  companyLogo?: Prisma.CompanyLogoCreateNestedOneWithoutContactSubmissionInput
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaCreateNestedManyWithoutContactSubmissionInput
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaCreateNestedManyWithoutContactSubmissionInput
+}
+
+export type ContactSubmissionUncheckedCreateWithoutUserInput = {
+  id?: string
+  projectAddress: string
+  emergencyNumber: string
+  googleMapLink: string
+  companyLogo?: Prisma.CompanyLogoUncheckedCreateNestedOneWithoutContactSubmissionInput
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaUncheckedCreateNestedManyWithoutContactSubmissionInput
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaUncheckedCreateNestedManyWithoutContactSubmissionInput
+}
+
+export type ContactSubmissionCreateOrConnectWithoutUserInput = {
+  where: Prisma.ContactSubmissionWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutUserInput, Prisma.ContactSubmissionUncheckedCreateWithoutUserInput>
+}
+
+export type ContactSubmissionCreateManyUserInputEnvelope = {
+  data: Prisma.ContactSubmissionCreateManyUserInput | Prisma.ContactSubmissionCreateManyUserInput[]
+  skipDuplicates?: boolean
+}
+
+export type ContactSubmissionUpsertWithWhereUniqueWithoutUserInput = {
+  where: Prisma.ContactSubmissionWhereUniqueInput
+  update: Prisma.XOR<Prisma.ContactSubmissionUpdateWithoutUserInput, Prisma.ContactSubmissionUncheckedUpdateWithoutUserInput>
+  create: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutUserInput, Prisma.ContactSubmissionUncheckedCreateWithoutUserInput>
+}
+
+export type ContactSubmissionUpdateWithWhereUniqueWithoutUserInput = {
+  where: Prisma.ContactSubmissionWhereUniqueInput
+  data: Prisma.XOR<Prisma.ContactSubmissionUpdateWithoutUserInput, Prisma.ContactSubmissionUncheckedUpdateWithoutUserInput>
+}
+
+export type ContactSubmissionUpdateManyWithWhereWithoutUserInput = {
+  where: Prisma.ContactSubmissionScalarWhereInput
+  data: Prisma.XOR<Prisma.ContactSubmissionUpdateManyMutationInput, Prisma.ContactSubmissionUncheckedUpdateManyWithoutUserInput>
+}
+
+export type ContactSubmissionScalarWhereInput = {
+  AND?: Prisma.ContactSubmissionScalarWhereInput | Prisma.ContactSubmissionScalarWhereInput[]
+  OR?: Prisma.ContactSubmissionScalarWhereInput[]
+  NOT?: Prisma.ContactSubmissionScalarWhereInput | Prisma.ContactSubmissionScalarWhereInput[]
+  id?: Prisma.StringFilter<"ContactSubmission"> | string
+  userId?: Prisma.StringFilter<"ContactSubmission"> | string
+  projectAddress?: Prisma.StringFilter<"ContactSubmission"> | string
+  emergencyNumber?: Prisma.StringFilter<"ContactSubmission"> | string
+  googleMapLink?: Prisma.StringFilter<"ContactSubmission"> | string
+}
+
+export type ContactSubmissionCreateWithoutCompanyLogoInput = {
+  id?: string
+  projectAddress: string
+  emergencyNumber: string
+  googleMapLink: string
+  user: Prisma.UserCreateNestedOneWithoutContactSubmissionInput
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaCreateNestedManyWithoutContactSubmissionInput
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaCreateNestedManyWithoutContactSubmissionInput
+}
+
+export type ContactSubmissionUncheckedCreateWithoutCompanyLogoInput = {
+  id?: string
+  userId: string
+  projectAddress: string
+  emergencyNumber: string
+  googleMapLink: string
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaUncheckedCreateNestedManyWithoutContactSubmissionInput
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaUncheckedCreateNestedManyWithoutContactSubmissionInput
+}
+
+export type ContactSubmissionCreateOrConnectWithoutCompanyLogoInput = {
+  where: Prisma.ContactSubmissionWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutCompanyLogoInput, Prisma.ContactSubmissionUncheckedCreateWithoutCompanyLogoInput>
+}
+
+export type ContactSubmissionUpsertWithoutCompanyLogoInput = {
+  update: Prisma.XOR<Prisma.ContactSubmissionUpdateWithoutCompanyLogoInput, Prisma.ContactSubmissionUncheckedUpdateWithoutCompanyLogoInput>
+  create: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutCompanyLogoInput, Prisma.ContactSubmissionUncheckedCreateWithoutCompanyLogoInput>
+  where?: Prisma.ContactSubmissionWhereInput
+}
+
+export type ContactSubmissionUpdateToOneWithWhereWithoutCompanyLogoInput = {
+  where?: Prisma.ContactSubmissionWhereInput
+  data: Prisma.XOR<Prisma.ContactSubmissionUpdateWithoutCompanyLogoInput, Prisma.ContactSubmissionUncheckedUpdateWithoutCompanyLogoInput>
+}
+
+export type ContactSubmissionUpdateWithoutCompanyLogoInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  emergencyNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  googleMapLink?: Prisma.StringFieldUpdateOperationsInput | string
+  user?: Prisma.UserUpdateOneRequiredWithoutContactSubmissionNestedInput
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaUpdateManyWithoutContactSubmissionNestedInput
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaUpdateManyWithoutContactSubmissionNestedInput
+}
+
+export type ContactSubmissionUncheckedUpdateWithoutCompanyLogoInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  projectAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  emergencyNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  googleMapLink?: Prisma.StringFieldUpdateOperationsInput | string
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaUncheckedUpdateManyWithoutContactSubmissionNestedInput
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaUncheckedUpdateManyWithoutContactSubmissionNestedInput
+}
+
+export type ContactSubmissionCreateWithoutProjectVisualsMediaInput = {
+  id?: string
+  projectAddress: string
+  emergencyNumber: string
+  googleMapLink: string
+  user: Prisma.UserCreateNestedOneWithoutContactSubmissionInput
+  companyLogo?: Prisma.CompanyLogoCreateNestedOneWithoutContactSubmissionInput
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaCreateNestedManyWithoutContactSubmissionInput
+}
+
+export type ContactSubmissionUncheckedCreateWithoutProjectVisualsMediaInput = {
+  id?: string
+  userId: string
+  projectAddress: string
+  emergencyNumber: string
+  googleMapLink: string
+  companyLogo?: Prisma.CompanyLogoUncheckedCreateNestedOneWithoutContactSubmissionInput
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaUncheckedCreateNestedManyWithoutContactSubmissionInput
+}
+
+export type ContactSubmissionCreateOrConnectWithoutProjectVisualsMediaInput = {
+  where: Prisma.ContactSubmissionWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutProjectVisualsMediaInput, Prisma.ContactSubmissionUncheckedCreateWithoutProjectVisualsMediaInput>
+}
+
+export type ContactSubmissionUpsertWithoutProjectVisualsMediaInput = {
+  update: Prisma.XOR<Prisma.ContactSubmissionUpdateWithoutProjectVisualsMediaInput, Prisma.ContactSubmissionUncheckedUpdateWithoutProjectVisualsMediaInput>
+  create: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutProjectVisualsMediaInput, Prisma.ContactSubmissionUncheckedCreateWithoutProjectVisualsMediaInput>
+  where?: Prisma.ContactSubmissionWhereInput
+}
+
+export type ContactSubmissionUpdateToOneWithWhereWithoutProjectVisualsMediaInput = {
+  where?: Prisma.ContactSubmissionWhereInput
+  data: Prisma.XOR<Prisma.ContactSubmissionUpdateWithoutProjectVisualsMediaInput, Prisma.ContactSubmissionUncheckedUpdateWithoutProjectVisualsMediaInput>
+}
+
+export type ContactSubmissionUpdateWithoutProjectVisualsMediaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  emergencyNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  googleMapLink?: Prisma.StringFieldUpdateOperationsInput | string
+  user?: Prisma.UserUpdateOneRequiredWithoutContactSubmissionNestedInput
+  companyLogo?: Prisma.CompanyLogoUpdateOneWithoutContactSubmissionNestedInput
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaUpdateManyWithoutContactSubmissionNestedInput
+}
+
+export type ContactSubmissionUncheckedUpdateWithoutProjectVisualsMediaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  projectAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  emergencyNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  googleMapLink?: Prisma.StringFieldUpdateOperationsInput | string
+  companyLogo?: Prisma.CompanyLogoUncheckedUpdateOneWithoutContactSubmissionNestedInput
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaUncheckedUpdateManyWithoutContactSubmissionNestedInput
+}
+
+export type ContactSubmissionCreateWithoutSafetyEquipmentMediaInput = {
+  id?: string
+  projectAddress: string
+  emergencyNumber: string
+  googleMapLink: string
+  user: Prisma.UserCreateNestedOneWithoutContactSubmissionInput
+  companyLogo?: Prisma.CompanyLogoCreateNestedOneWithoutContactSubmissionInput
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaCreateNestedManyWithoutContactSubmissionInput
+}
+
+export type ContactSubmissionUncheckedCreateWithoutSafetyEquipmentMediaInput = {
+  id?: string
+  userId: string
+  projectAddress: string
+  emergencyNumber: string
+  googleMapLink: string
+  companyLogo?: Prisma.CompanyLogoUncheckedCreateNestedOneWithoutContactSubmissionInput
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaUncheckedCreateNestedManyWithoutContactSubmissionInput
+}
+
+export type ContactSubmissionCreateOrConnectWithoutSafetyEquipmentMediaInput = {
+  where: Prisma.ContactSubmissionWhereUniqueInput
+  create: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutSafetyEquipmentMediaInput, Prisma.ContactSubmissionUncheckedCreateWithoutSafetyEquipmentMediaInput>
+}
+
+export type ContactSubmissionUpsertWithoutSafetyEquipmentMediaInput = {
+  update: Prisma.XOR<Prisma.ContactSubmissionUpdateWithoutSafetyEquipmentMediaInput, Prisma.ContactSubmissionUncheckedUpdateWithoutSafetyEquipmentMediaInput>
+  create: Prisma.XOR<Prisma.ContactSubmissionCreateWithoutSafetyEquipmentMediaInput, Prisma.ContactSubmissionUncheckedCreateWithoutSafetyEquipmentMediaInput>
+  where?: Prisma.ContactSubmissionWhereInput
+}
+
+export type ContactSubmissionUpdateToOneWithWhereWithoutSafetyEquipmentMediaInput = {
+  where?: Prisma.ContactSubmissionWhereInput
+  data: Prisma.XOR<Prisma.ContactSubmissionUpdateWithoutSafetyEquipmentMediaInput, Prisma.ContactSubmissionUncheckedUpdateWithoutSafetyEquipmentMediaInput>
+}
+
+export type ContactSubmissionUpdateWithoutSafetyEquipmentMediaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  emergencyNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  googleMapLink?: Prisma.StringFieldUpdateOperationsInput | string
+  user?: Prisma.UserUpdateOneRequiredWithoutContactSubmissionNestedInput
+  companyLogo?: Prisma.CompanyLogoUpdateOneWithoutContactSubmissionNestedInput
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaUpdateManyWithoutContactSubmissionNestedInput
+}
+
+export type ContactSubmissionUncheckedUpdateWithoutSafetyEquipmentMediaInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  projectAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  emergencyNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  googleMapLink?: Prisma.StringFieldUpdateOperationsInput | string
+  companyLogo?: Prisma.CompanyLogoUncheckedUpdateOneWithoutContactSubmissionNestedInput
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaUncheckedUpdateManyWithoutContactSubmissionNestedInput
+}
+
+export type ContactSubmissionCreateManyUserInput = {
+  id?: string
+  projectAddress: string
+  emergencyNumber: string
+  googleMapLink: string
+}
+
+export type ContactSubmissionUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  emergencyNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  googleMapLink?: Prisma.StringFieldUpdateOperationsInput | string
+  companyLogo?: Prisma.CompanyLogoUpdateOneWithoutContactSubmissionNestedInput
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaUpdateManyWithoutContactSubmissionNestedInput
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaUpdateManyWithoutContactSubmissionNestedInput
+}
+
+export type ContactSubmissionUncheckedUpdateWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  emergencyNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  googleMapLink?: Prisma.StringFieldUpdateOperationsInput | string
+  companyLogo?: Prisma.CompanyLogoUncheckedUpdateOneWithoutContactSubmissionNestedInput
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaUncheckedUpdateManyWithoutContactSubmissionNestedInput
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaUncheckedUpdateManyWithoutContactSubmissionNestedInput
+}
+
+export type ContactSubmissionUncheckedUpdateManyWithoutUserInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  projectAddress?: Prisma.StringFieldUpdateOperationsInput | string
+  emergencyNumber?: Prisma.StringFieldUpdateOperationsInput | string
+  googleMapLink?: Prisma.StringFieldUpdateOperationsInput | string
+}
+
+
+/**
+ * Count Type ContactSubmissionCountOutputType
+ */
+
+export type ContactSubmissionCountOutputType = {
+  safetyEquipmentMedia: number
+  projectVisualsMedia: number
+}
+
+export type ContactSubmissionCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  safetyEquipmentMedia?: boolean | ContactSubmissionCountOutputTypeCountSafetyEquipmentMediaArgs
+  projectVisualsMedia?: boolean | ContactSubmissionCountOutputTypeCountProjectVisualsMediaArgs
+}
+
+/**
+ * ContactSubmissionCountOutputType without action
+ */
+export type ContactSubmissionCountOutputTypeDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ContactSubmissionCountOutputType
+   */
+  select?: Prisma.ContactSubmissionCountOutputTypeSelect<ExtArgs> | null
+}
+
+/**
+ * ContactSubmissionCountOutputType without action
+ */
+export type ContactSubmissionCountOutputTypeCountSafetyEquipmentMediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.SafetyEquipmentMediaWhereInput
+}
+
+/**
+ * ContactSubmissionCountOutputType without action
+ */
+export type ContactSubmissionCountOutputTypeCountProjectVisualsMediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ProjectVisualsMediaWhereInput
+}
 
 
 export type ContactSubmissionSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  fullName?: boolean
-  phoneNumber?: boolean
-  email?: boolean
-  propertyAddress?: boolean
-  serviceCategory?: boolean
-  serviceType?: boolean
-  notes?: boolean
-  imageKey?: boolean
-  createdAt?: boolean
+  userId?: boolean
+  projectAddress?: boolean
+  emergencyNumber?: boolean
+  googleMapLink?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  companyLogo?: boolean | Prisma.ContactSubmission$companyLogoArgs<ExtArgs>
+  safetyEquipmentMedia?: boolean | Prisma.ContactSubmission$safetyEquipmentMediaArgs<ExtArgs>
+  projectVisualsMedia?: boolean | Prisma.ContactSubmission$projectVisualsMediaArgs<ExtArgs>
+  _count?: boolean | Prisma.ContactSubmissionCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["contactSubmission"]>
 
 export type ContactSubmissionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  fullName?: boolean
-  phoneNumber?: boolean
-  email?: boolean
-  propertyAddress?: boolean
-  serviceCategory?: boolean
-  serviceType?: boolean
-  notes?: boolean
-  imageKey?: boolean
-  createdAt?: boolean
+  userId?: boolean
+  projectAddress?: boolean
+  emergencyNumber?: boolean
+  googleMapLink?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["contactSubmission"]>
 
 export type ContactSubmissionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
-  fullName?: boolean
-  phoneNumber?: boolean
-  email?: boolean
-  propertyAddress?: boolean
-  serviceCategory?: boolean
-  serviceType?: boolean
-  notes?: boolean
-  imageKey?: boolean
-  createdAt?: boolean
+  userId?: boolean
+  projectAddress?: boolean
+  emergencyNumber?: boolean
+  googleMapLink?: boolean
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["contactSubmission"]>
 
 export type ContactSubmissionSelectScalar = {
   id?: boolean
-  fullName?: boolean
-  phoneNumber?: boolean
-  email?: boolean
-  propertyAddress?: boolean
-  serviceCategory?: boolean
-  serviceType?: boolean
-  notes?: boolean
-  imageKey?: boolean
-  createdAt?: boolean
+  userId?: boolean
+  projectAddress?: boolean
+  emergencyNumber?: boolean
+  googleMapLink?: boolean
 }
 
-export type ContactSubmissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "fullName" | "phoneNumber" | "email" | "propertyAddress" | "serviceCategory" | "serviceType" | "notes" | "imageKey" | "createdAt", ExtArgs["result"]["contactSubmission"]>
+export type ContactSubmissionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "userId" | "projectAddress" | "emergencyNumber" | "googleMapLink", ExtArgs["result"]["contactSubmission"]>
+export type ContactSubmissionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+  companyLogo?: boolean | Prisma.ContactSubmission$companyLogoArgs<ExtArgs>
+  safetyEquipmentMedia?: boolean | Prisma.ContactSubmission$safetyEquipmentMediaArgs<ExtArgs>
+  projectVisualsMedia?: boolean | Prisma.ContactSubmission$projectVisualsMediaArgs<ExtArgs>
+  _count?: boolean | Prisma.ContactSubmissionCountOutputTypeDefaultArgs<ExtArgs>
+}
+export type ContactSubmissionIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
+export type ContactSubmissionIncludeUpdateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
+}
 
 export type $ContactSubmissionPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   name: "ContactSubmission"
-  objects: {}
+  objects: {
+    user: Prisma.$UserPayload<ExtArgs>
+    companyLogo: Prisma.$CompanyLogoPayload<ExtArgs> | null
+    safetyEquipmentMedia: Prisma.$SafetyEquipmentMediaPayload<ExtArgs>[]
+    projectVisualsMedia: Prisma.$ProjectVisualsMediaPayload<ExtArgs>[]
+  }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
-    fullName: string
-    phoneNumber: string
-    email: string
-    propertyAddress: string | null
-    serviceCategory: string | null
-    serviceType: string | null
-    notes: string | null
-    imageKey: string | null
-    createdAt: Date
+    userId: string
+    projectAddress: string
+    emergencyNumber: string
+    googleMapLink: string
   }, ExtArgs["result"]["contactSubmission"]>
   composites: {}
 }
@@ -879,6 +1188,10 @@ readonly fields: ContactSubmissionFieldRefs;
  */
 export interface Prisma__ContactSubmissionClient<T, Null = never, ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
   readonly [Symbol.toStringTag]: "PrismaPromise"
+  user<T extends Prisma.UserDefaultArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.UserDefaultArgs<ExtArgs>>): Prisma.Prisma__UserClient<runtime.Types.Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+  companyLogo<T extends Prisma.ContactSubmission$companyLogoArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContactSubmission$companyLogoArgs<ExtArgs>>): Prisma.Prisma__CompanyLogoClient<runtime.Types.Result.GetResult<Prisma.$CompanyLogoPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  safetyEquipmentMedia<T extends Prisma.ContactSubmission$safetyEquipmentMediaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContactSubmission$safetyEquipmentMediaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$SafetyEquipmentMediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  projectVisualsMedia<T extends Prisma.ContactSubmission$projectVisualsMediaArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.ContactSubmission$projectVisualsMediaArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ProjectVisualsMediaPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -909,15 +1222,10 @@ export interface Prisma__ContactSubmissionClient<T, Null = never, ExtArgs extend
  */
 export interface ContactSubmissionFieldRefs {
   readonly id: Prisma.FieldRef<"ContactSubmission", 'String'>
-  readonly fullName: Prisma.FieldRef<"ContactSubmission", 'String'>
-  readonly phoneNumber: Prisma.FieldRef<"ContactSubmission", 'String'>
-  readonly email: Prisma.FieldRef<"ContactSubmission", 'String'>
-  readonly propertyAddress: Prisma.FieldRef<"ContactSubmission", 'String'>
-  readonly serviceCategory: Prisma.FieldRef<"ContactSubmission", 'String'>
-  readonly serviceType: Prisma.FieldRef<"ContactSubmission", 'String'>
-  readonly notes: Prisma.FieldRef<"ContactSubmission", 'String'>
-  readonly imageKey: Prisma.FieldRef<"ContactSubmission", 'String'>
-  readonly createdAt: Prisma.FieldRef<"ContactSubmission", 'DateTime'>
+  readonly userId: Prisma.FieldRef<"ContactSubmission", 'String'>
+  readonly projectAddress: Prisma.FieldRef<"ContactSubmission", 'String'>
+  readonly emergencyNumber: Prisma.FieldRef<"ContactSubmission", 'String'>
+  readonly googleMapLink: Prisma.FieldRef<"ContactSubmission", 'String'>
 }
     
 
@@ -934,6 +1242,10 @@ export type ContactSubmissionFindUniqueArgs<ExtArgs extends runtime.Types.Extens
    * Omit specific fields from the ContactSubmission
    */
   omit?: Prisma.ContactSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactSubmissionInclude<ExtArgs> | null
   /**
    * Filter, which ContactSubmission to fetch.
    */
@@ -953,6 +1265,10 @@ export type ContactSubmissionFindUniqueOrThrowArgs<ExtArgs extends runtime.Types
    */
   omit?: Prisma.ContactSubmissionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactSubmissionInclude<ExtArgs> | null
+  /**
    * Filter, which ContactSubmission to fetch.
    */
   where: Prisma.ContactSubmissionWhereUniqueInput
@@ -970,6 +1286,10 @@ export type ContactSubmissionFindFirstArgs<ExtArgs extends runtime.Types.Extensi
    * Omit specific fields from the ContactSubmission
    */
   omit?: Prisma.ContactSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactSubmissionInclude<ExtArgs> | null
   /**
    * Filter, which ContactSubmission to fetch.
    */
@@ -1019,6 +1339,10 @@ export type ContactSubmissionFindFirstOrThrowArgs<ExtArgs extends runtime.Types.
    */
   omit?: Prisma.ContactSubmissionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactSubmissionInclude<ExtArgs> | null
+  /**
    * Filter, which ContactSubmission to fetch.
    */
   where?: Prisma.ContactSubmissionWhereInput
@@ -1067,6 +1391,10 @@ export type ContactSubmissionFindManyArgs<ExtArgs extends runtime.Types.Extensio
    */
   omit?: Prisma.ContactSubmissionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactSubmissionInclude<ExtArgs> | null
+  /**
    * Filter, which ContactSubmissions to fetch.
    */
   where?: Prisma.ContactSubmissionWhereInput
@@ -1110,6 +1438,10 @@ export type ContactSubmissionCreateArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.ContactSubmissionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactSubmissionInclude<ExtArgs> | null
+  /**
    * The data needed to create a ContactSubmission.
    */
   data: Prisma.XOR<Prisma.ContactSubmissionCreateInput, Prisma.ContactSubmissionUncheckedCreateInput>
@@ -1143,6 +1475,10 @@ export type ContactSubmissionCreateManyAndReturnArgs<ExtArgs extends runtime.Typ
    */
   data: Prisma.ContactSubmissionCreateManyInput | Prisma.ContactSubmissionCreateManyInput[]
   skipDuplicates?: boolean
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactSubmissionIncludeCreateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1157,6 +1493,10 @@ export type ContactSubmissionUpdateArgs<ExtArgs extends runtime.Types.Extensions
    * Omit specific fields from the ContactSubmission
    */
   omit?: Prisma.ContactSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactSubmissionInclude<ExtArgs> | null
   /**
    * The data needed to update a ContactSubmission.
    */
@@ -1209,6 +1549,10 @@ export type ContactSubmissionUpdateManyAndReturnArgs<ExtArgs extends runtime.Typ
    * Limit how many ContactSubmissions to update.
    */
   limit?: number
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactSubmissionIncludeUpdateManyAndReturn<ExtArgs> | null
 }
 
 /**
@@ -1223,6 +1567,10 @@ export type ContactSubmissionUpsertArgs<ExtArgs extends runtime.Types.Extensions
    * Omit specific fields from the ContactSubmission
    */
   omit?: Prisma.ContactSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactSubmissionInclude<ExtArgs> | null
   /**
    * The filter to search for the ContactSubmission to update in case it exists.
    */
@@ -1250,6 +1598,10 @@ export type ContactSubmissionDeleteArgs<ExtArgs extends runtime.Types.Extensions
    */
   omit?: Prisma.ContactSubmissionOmit<ExtArgs> | null
   /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactSubmissionInclude<ExtArgs> | null
+  /**
    * Filter which ContactSubmission to delete.
    */
   where: Prisma.ContactSubmissionWhereUniqueInput
@@ -1270,6 +1622,73 @@ export type ContactSubmissionDeleteManyArgs<ExtArgs extends runtime.Types.Extens
 }
 
 /**
+ * ContactSubmission.companyLogo
+ */
+export type ContactSubmission$companyLogoArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the CompanyLogo
+   */
+  select?: Prisma.CompanyLogoSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the CompanyLogo
+   */
+  omit?: Prisma.CompanyLogoOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.CompanyLogoInclude<ExtArgs> | null
+  where?: Prisma.CompanyLogoWhereInput
+}
+
+/**
+ * ContactSubmission.safetyEquipmentMedia
+ */
+export type ContactSubmission$safetyEquipmentMediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the SafetyEquipmentMedia
+   */
+  select?: Prisma.SafetyEquipmentMediaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the SafetyEquipmentMedia
+   */
+  omit?: Prisma.SafetyEquipmentMediaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.SafetyEquipmentMediaInclude<ExtArgs> | null
+  where?: Prisma.SafetyEquipmentMediaWhereInput
+  orderBy?: Prisma.SafetyEquipmentMediaOrderByWithRelationInput | Prisma.SafetyEquipmentMediaOrderByWithRelationInput[]
+  cursor?: Prisma.SafetyEquipmentMediaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.SafetyEquipmentMediaScalarFieldEnum | Prisma.SafetyEquipmentMediaScalarFieldEnum[]
+}
+
+/**
+ * ContactSubmission.projectVisualsMedia
+ */
+export type ContactSubmission$projectVisualsMediaArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ProjectVisualsMedia
+   */
+  select?: Prisma.ProjectVisualsMediaSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ProjectVisualsMedia
+   */
+  omit?: Prisma.ProjectVisualsMediaOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ProjectVisualsMediaInclude<ExtArgs> | null
+  where?: Prisma.ProjectVisualsMediaWhereInput
+  orderBy?: Prisma.ProjectVisualsMediaOrderByWithRelationInput | Prisma.ProjectVisualsMediaOrderByWithRelationInput[]
+  cursor?: Prisma.ProjectVisualsMediaWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ProjectVisualsMediaScalarFieldEnum | Prisma.ProjectVisualsMediaScalarFieldEnum[]
+}
+
+/**
  * ContactSubmission without action
  */
 export type ContactSubmissionDefaultArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1281,4 +1700,8 @@ export type ContactSubmissionDefaultArgs<ExtArgs extends runtime.Types.Extension
    * Omit specific fields from the ContactSubmission
    */
   omit?: Prisma.ContactSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactSubmissionInclude<ExtArgs> | null
 }

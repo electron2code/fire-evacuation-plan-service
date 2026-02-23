@@ -392,7 +392,10 @@ export const ModelName = {
   BannerImage: 'BannerImage',
   Banner: 'Banner',
   PortfolioImage: 'PortfolioImage',
-  ContactSubmission: 'ContactSubmission'
+  ContactSubmission: 'ContactSubmission',
+  CompanyLogo: 'CompanyLogo',
+  ProjectVisualsMedia: 'ProjectVisualsMedia',
+  SafetyEquipmentMedia: 'SafetyEquipmentMedia'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -408,7 +411,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "service" | "serviceImage" | "serviceTier" | "review" | "bannerImage" | "banner" | "portfolioImage" | "contactSubmission"
+    modelProps: "user" | "service" | "serviceImage" | "serviceTier" | "review" | "bannerImage" | "banner" | "portfolioImage" | "contactSubmission" | "companyLogo" | "projectVisualsMedia" | "safetyEquipmentMedia"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1078,6 +1081,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    CompanyLogo: {
+      payload: Prisma.$CompanyLogoPayload<ExtArgs>
+      fields: Prisma.CompanyLogoFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.CompanyLogoFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyLogoPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.CompanyLogoFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyLogoPayload>
+        }
+        findFirst: {
+          args: Prisma.CompanyLogoFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyLogoPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.CompanyLogoFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyLogoPayload>
+        }
+        findMany: {
+          args: Prisma.CompanyLogoFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyLogoPayload>[]
+        }
+        create: {
+          args: Prisma.CompanyLogoCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyLogoPayload>
+        }
+        createMany: {
+          args: Prisma.CompanyLogoCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.CompanyLogoCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyLogoPayload>[]
+        }
+        delete: {
+          args: Prisma.CompanyLogoDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyLogoPayload>
+        }
+        update: {
+          args: Prisma.CompanyLogoUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyLogoPayload>
+        }
+        deleteMany: {
+          args: Prisma.CompanyLogoDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.CompanyLogoUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.CompanyLogoUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyLogoPayload>[]
+        }
+        upsert: {
+          args: Prisma.CompanyLogoUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$CompanyLogoPayload>
+        }
+        aggregate: {
+          args: Prisma.CompanyLogoAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateCompanyLogo>
+        }
+        groupBy: {
+          args: Prisma.CompanyLogoGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompanyLogoGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.CompanyLogoCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.CompanyLogoCountAggregateOutputType> | number
+        }
+      }
+    }
+    ProjectVisualsMedia: {
+      payload: Prisma.$ProjectVisualsMediaPayload<ExtArgs>
+      fields: Prisma.ProjectVisualsMediaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ProjectVisualsMediaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectVisualsMediaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ProjectVisualsMediaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectVisualsMediaPayload>
+        }
+        findFirst: {
+          args: Prisma.ProjectVisualsMediaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectVisualsMediaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ProjectVisualsMediaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectVisualsMediaPayload>
+        }
+        findMany: {
+          args: Prisma.ProjectVisualsMediaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectVisualsMediaPayload>[]
+        }
+        create: {
+          args: Prisma.ProjectVisualsMediaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectVisualsMediaPayload>
+        }
+        createMany: {
+          args: Prisma.ProjectVisualsMediaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ProjectVisualsMediaCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectVisualsMediaPayload>[]
+        }
+        delete: {
+          args: Prisma.ProjectVisualsMediaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectVisualsMediaPayload>
+        }
+        update: {
+          args: Prisma.ProjectVisualsMediaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectVisualsMediaPayload>
+        }
+        deleteMany: {
+          args: Prisma.ProjectVisualsMediaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ProjectVisualsMediaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ProjectVisualsMediaUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectVisualsMediaPayload>[]
+        }
+        upsert: {
+          args: Prisma.ProjectVisualsMediaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ProjectVisualsMediaPayload>
+        }
+        aggregate: {
+          args: Prisma.ProjectVisualsMediaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateProjectVisualsMedia>
+        }
+        groupBy: {
+          args: Prisma.ProjectVisualsMediaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectVisualsMediaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ProjectVisualsMediaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ProjectVisualsMediaCountAggregateOutputType> | number
+        }
+      }
+    }
+    SafetyEquipmentMedia: {
+      payload: Prisma.$SafetyEquipmentMediaPayload<ExtArgs>
+      fields: Prisma.SafetyEquipmentMediaFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.SafetyEquipmentMediaFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SafetyEquipmentMediaPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.SafetyEquipmentMediaFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SafetyEquipmentMediaPayload>
+        }
+        findFirst: {
+          args: Prisma.SafetyEquipmentMediaFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SafetyEquipmentMediaPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.SafetyEquipmentMediaFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SafetyEquipmentMediaPayload>
+        }
+        findMany: {
+          args: Prisma.SafetyEquipmentMediaFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SafetyEquipmentMediaPayload>[]
+        }
+        create: {
+          args: Prisma.SafetyEquipmentMediaCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SafetyEquipmentMediaPayload>
+        }
+        createMany: {
+          args: Prisma.SafetyEquipmentMediaCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.SafetyEquipmentMediaCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SafetyEquipmentMediaPayload>[]
+        }
+        delete: {
+          args: Prisma.SafetyEquipmentMediaDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SafetyEquipmentMediaPayload>
+        }
+        update: {
+          args: Prisma.SafetyEquipmentMediaUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SafetyEquipmentMediaPayload>
+        }
+        deleteMany: {
+          args: Prisma.SafetyEquipmentMediaDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.SafetyEquipmentMediaUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.SafetyEquipmentMediaUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SafetyEquipmentMediaPayload>[]
+        }
+        upsert: {
+          args: Prisma.SafetyEquipmentMediaUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$SafetyEquipmentMediaPayload>
+        }
+        aggregate: {
+          args: Prisma.SafetyEquipmentMediaAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateSafetyEquipmentMedia>
+        }
+        groupBy: {
+          args: Prisma.SafetyEquipmentMediaGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SafetyEquipmentMediaGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.SafetyEquipmentMediaCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.SafetyEquipmentMediaCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1202,18 +1427,45 @@ export type PortfolioImageScalarFieldEnum = (typeof PortfolioImageScalarFieldEnu
 
 export const ContactSubmissionScalarFieldEnum = {
   id: 'id',
-  fullName: 'fullName',
-  phoneNumber: 'phoneNumber',
-  email: 'email',
-  propertyAddress: 'propertyAddress',
-  serviceCategory: 'serviceCategory',
-  serviceType: 'serviceType',
-  notes: 'notes',
-  imageKey: 'imageKey',
-  createdAt: 'createdAt'
+  userId: 'userId',
+  projectAddress: 'projectAddress',
+  emergencyNumber: 'emergencyNumber',
+  googleMapLink: 'googleMapLink'
 } as const
 
 export type ContactSubmissionScalarFieldEnum = (typeof ContactSubmissionScalarFieldEnum)[keyof typeof ContactSubmissionScalarFieldEnum]
+
+
+export const CompanyLogoScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  url: 'url',
+  contactSubmissionId: 'contactSubmissionId'
+} as const
+
+export type CompanyLogoScalarFieldEnum = (typeof CompanyLogoScalarFieldEnum)[keyof typeof CompanyLogoScalarFieldEnum]
+
+
+export const ProjectVisualsMediaScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  url: 'url',
+  type: 'type',
+  contactSubmissionId: 'contactSubmissionId'
+} as const
+
+export type ProjectVisualsMediaScalarFieldEnum = (typeof ProjectVisualsMediaScalarFieldEnum)[keyof typeof ProjectVisualsMediaScalarFieldEnum]
+
+
+export const SafetyEquipmentMediaScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  url: 'url',
+  type: 'type',
+  contactSubmissionId: 'contactSubmissionId'
+} as const
+
+export type SafetyEquipmentMediaScalarFieldEnum = (typeof SafetyEquipmentMediaScalarFieldEnum)[keyof typeof SafetyEquipmentMediaScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1419,6 +1671,9 @@ export type GlobalOmitConfig = {
   banner?: Prisma.BannerOmit
   portfolioImage?: Prisma.PortfolioImageOmit
   contactSubmission?: Prisma.ContactSubmissionOmit
+  companyLogo?: Prisma.CompanyLogoOmit
+  projectVisualsMedia?: Prisma.ProjectVisualsMediaOmit
+  safetyEquipmentMedia?: Prisma.SafetyEquipmentMediaOmit
 }
 
 /* Types for Logging */

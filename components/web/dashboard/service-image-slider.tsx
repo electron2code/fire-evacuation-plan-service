@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 
-import { Card, CardContent } from "@/components/ui/card"
+import { Card } from "@/components/ui/card"
 import {
     Carousel,
     CarouselContent,
@@ -35,6 +35,7 @@ export default function ServiceImageSlider({ setServicImagesKeys, initialImages 
             // setServicImagesKeys(initialImages.map(img => img.key));
         } else {
             setServiceImages(getServiceImagesFromLocalStorage());
+            clearServiceImagesFromLocalhost();
         }
     }, [initialImages])
 

@@ -1,9 +1,6 @@
 "use client";
-
-import { buttonVariants } from "@/components/ui/button";
 import ServiceImageSlider from "@/components/web/dashboard/service-image-slider";
 import ServiceUploadForm from "@/components/web/dashboard/service-upload-form";
-import clsx from "clsx";
 import Link from "next/link";
 import { useState } from "react";
 

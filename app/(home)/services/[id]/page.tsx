@@ -2,53 +2,105 @@ import ServiceCardCarousel from "@/components/web/service-card-carousel";
 import ServicePackages from "@/components/web/service-packages";
 import ReviewList from "@/components/web/review-list";
 import AddReviewForm from "@/components/web/add-review-form";
-import prisma from "@/lib/prisma";
 import { auth } from "@clerk/nextjs/server";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { MessageSquarePlus } from "lucide-react";
+import Image from "next/image";
+import { Metadata, ResolvingMetadata } from "next";
+import SignInAction from "@/components/web/SignInAction";
+import { getService } from "@/lib/data";
 
 interface ServiceDetailsProps {
     params: Promise<{ id: string }>
 }
 
+
+export async function generateMetadata(
+    { params }: ServiceDetailsProps,
+    parent: ResolvingMetadata
+): Promise<Metadata> {
+    const id = (await params).id
+    const service = await getService(id);
+
+    return {
+        title: service?.title,
+        description: service?.description, generator: 'Next.js',
+        applicationName: 'Evacuation plan service portal',
+        referrer: 'origin-when-cross-origin',
+        keywords: [
+            'evacuation plan',
+            'safety plan',
+            'fire exit plan',
+            'exit plan',
+            'escape plan',
+            'fire emergency evacuation plans',
+            'fire safety planning',
+            'california fire plan',
+            'fire plan',
+            'dillinger escape plan',
+            'safety plan for suicidal ideation evac plans',
+            'fire escape plan',
+            'fire evacuation plan',
+            'emergency evacuation plan',
+            'fire emergency evacuation plan',
+            'fire and evacuation plan',
+            'fire evac plan',
+            'emergency and evacuation plan',
+            'emergency evac plan',
+            'fire and emergency evacuation plan',
+            'plan of evacuation',
+            'fire drill procedure',
+            'home fire escape plan',
+            'home emergency escape plan',
+            'emergency evacuation procedure',
+            'evacuation plan example',
+            'evacuation route signage',
+            'emergency evacuation plan example',
+            'emergency and evacuation procedures',
+            'example of an emergency evacuation plan',
+            'emergency exit plan',
+            'evacuation procedures',
+            'emergency evacuation procedures in the workplace',
+            'evacuation plan drawing',
+            'emergency evacuation plan template',
+            'free editable fire evacuation plan template',
+            'family evacuation plan',
+            'how to create an evacuation plan',
+            'safety plan template',
+            'fire safety plan',
+        ],
+        authors: [{ name: 'Md. Sabbir Hossain' }, { name: 'Md. Sabbir Hossain', url: 'https://www.evacuationplanservice.com/about' }],
+        creator: 'Electron2Code',
+        publisher: 'Israfil Mallick',
+        formatDetection: {
+            email: true,
+            address: true,
+            telephone: true,
+        },
+        openGraph: {
+            title: service?.title,
+            description: service?.description,
+            url: `https://www.evacuationplanservice.com/services/${service?.id}`,
+            siteName: 'Evacuation Plan Service',
+            images: service?.images.map((image) => ({
+                url: `${process.env.NEXT_PUBLIC_BUCKET_URL}/${image.key}`,
+                width: 1800,
+                height: 1600,
+            })),
+            locale: 'en_US',
+            type: 'website',
+        },
+    }
+}
+
 export default async function ServiceDetails({ params }: ServiceDetailsProps) {
     const { id } = await params;
     const user = await auth();
-    const service = await prisma.service.findUnique({
-        where: { id },
-        include: {
-            images: true,
-            owner: {
-                select: {
-                    id: false,
-                    clerkId: false,
-                    name: true,
-                    email: true,
-                    imageUrl: true,
-                    services: false,
-                    reviews: false,
-                }
-            },
-            tiers: true,
-            reviews: {
-                include: {
-                    user: {
-                        select: {
-                            name: true,
-                            imageUrl: true,
-                        }
-                    }
-                },
-                orderBy: {
-                    createdAt: 'desc'
-                }
-            },
-        },
-    });
-
+    const service = await getService(id);
     if (!service) {
-        return <div>Service not found</div>;
+        return <div
+            className="w-full min-h-screen flex flex-col items-center justify-center"
+        >
+            <h1 className="text-2xl text-gray-400 font-bold">Service Not Found :)</h1>
+        </div>;
     }
 
     return (
@@ -58,20 +110,24 @@ export default async function ServiceDetails({ params }: ServiceDetailsProps) {
                 <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
                     <div className="flex-1 min-w-0">
                         <ServiceCardCarousel images={service?.images.length ? service.images : []} />
-                        <div className="mt-8 bg-white p-8 rounded-2xl shadow-sm border border-gray-200">
+                        <div className="mt-14 bg-white p-8 rounded shadow-sm border border-gray-200">
                             <h1 className="text-3xl font-bold text-gray-900 mb-4">{service.title}</h1>
-                            <p className="text-gray-600 leading-relaxed whitespace-pre-wrap">{service.description}</p>
+                            <p className="text-gray-600 leading-relaxed whitespace-pre-wrap wrap-anywhere">{service.description}</p>
                         </div>
                     </div>
-                    <div className="w-full lg:w-[500px] shrink-0">
-                        <ServicePackages tiers={service?.tiers.length ? service.tiers : []} />
+                    <div className="w-full lg:w-125 shrink-0 flex flex-col">
+                        <div className="order-2 md:order-1">
+                            <ServicePackages serviceTitle={service.title} serviceImageUrl={service.images[0]?.key || ""} serviceDescription={service.description} tiers={service?.tiers.length ? service.tiers : []} />
+                        </div>
 
                         {/* Host Info */}
-                        <div className="mt-6 bg-white p-6 rounded-xl border border-gray-200 shadow-sm flex items-center gap-4">
-                            <img
+                        <div className="mt-6 bg-white p-6 order-1 md:order-2 rounded-xl border border-gray-200 shadow-sm flex items-center gap-4">
+                            <Image
                                 src={service.owner.imageUrl || ""}
                                 alt={service.owner.name || "Owner"}
                                 className="w-14 h-14 rounded-full object-cover border border-gray-100"
+                                width={60}
+                                height={60}
                             />
                             <div>
                                 <p className="text-sm text-gray-500">Service provided by</p>
@@ -104,16 +160,7 @@ export default async function ServiceDetails({ params }: ServiceDetailsProps) {
                                     <AddReviewForm serviceId={service.id} />
                                 </div>
                             ) : (
-                                <div className="bg-amber-50 rounded-xl p-8 text-center border border-amber-100 sticky top-8">
-                                    <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                                        <MessageSquarePlus className="w-8 h-8 text-amber-600" />
-                                    </div>
-                                    <h3 className="text-lg font-semibold text-gray-900 mb-2">Have you used this service?</h3>
-                                    <p className="text-gray-600 mb-6">Log in to share your experience with the community.</p>
-                                    <Button asChild className="w-full bg-amber-600 hover:bg-amber-700">
-                                        <Link href="/sign-in">Sign In to Review</Link>
-                                    </Button>
-                                </div>
+                                <SignInAction />
                             )}
                         </div>
                     </div>

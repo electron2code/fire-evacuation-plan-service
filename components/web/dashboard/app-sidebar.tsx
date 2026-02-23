@@ -1,4 +1,4 @@
-import { Grid, Home, HandPlatter, Search, Settings } from "lucide-react"
+import { Grid, Home, HandPlatter, Search, Settings, Contact } from "lucide-react"
 
 import {
   Sidebar,
@@ -28,6 +28,11 @@ const items = [
     title: "Portfolio",
     url: "/dashboard/portfolio",
     icon: Grid,
+  },
+  {
+    title: "Contact",
+    url: "/dashboard/contact",
+    icon: Contact,
   },
 ]
 

@@ -25,7 +25,10 @@ export default function AllServicesPage() {
     async function fetchServices() {
         setLoading(true);
         try {
-            const response = await fetch("/api/v1/service/all");
+            const response = await fetch("/api/v1/service/all", {
+                method: "GET",
+                credentials: "include",
+            });
             if (!response.ok) {
                 toast.error("Error fetching services");
                 setLoading(false);

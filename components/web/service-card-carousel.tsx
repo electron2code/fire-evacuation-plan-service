@@ -1,5 +1,3 @@
-"use client";
-import * as React from "react"
 import { Card } from "@/components/ui/card"
 import {
     Carousel,
@@ -17,16 +15,17 @@ interface ServiceCardProps {
         key: string
         serviceId: string
     }[];
+    className?: string;
 }
 
-export default function ServiceCardCarousel({ images }: ServiceCardProps) {
+export default function ServiceCardCarousel({ images, className = "h-[438.87px]" }: ServiceCardProps) {
     return (
-        <Carousel className="w-full m-0">
-            <CarouselContent>
+        <Carousel className={`w-full m-0 ${className}`}>
+            <CarouselContent className="h-full">
                 {images.map((image, index) => (
-                    <CarouselItem key={index}>
+                    <CarouselItem key={index} className="w-full h-full">
                         <div className="p-1 w-full h-full">
-                            <Card className="bg-gray-100 h-100">
+                            <Card className="bg-gray-100 h-full p-0 rounded-xl overflow-hidden">
                                 <Image src={`${process.env.NEXT_PUBLIC_BUCKET_URL}/${image.key}`} className="w-full h-full object-cover object-center" alt={image.key} width={320} height={400} />
                             </Card>
                         </div>

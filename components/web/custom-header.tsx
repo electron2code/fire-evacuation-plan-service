@@ -19,7 +19,7 @@ export default async function CustomHeader() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
                     <div className="flex items-center space-x-3">
-                        <Image src="/logo.png" className="" width={200} height={50} alt="Evacuation Plan Service Logo" />
+                        <Image src="/emergency-evacuation-plan-service-main-logo.png" className="" width={300} height={80} alt="Evacuation Plan Service Logo" />
                     </div>
 
                     <div className="flex">
@@ -27,20 +27,14 @@ export default async function CustomHeader() {
                     </div>
 
                     <div className="flex items-center space-x-4">
-                        <Link href="https://wa.me/+8801601770053" target="_blank" className="hidden lg:flex items-center space-x-2 text-gray-700">
-                            <Phone className="w-4 h-4 text-red-600" />
+                        <Link href="https://wa.me/+8801601770053" target="_blank" className="hidden lg:flex gap-0.5 items-center text-gray-700 hover:bg-[#eb6635] rounded border border-black/50 px-3 py-2 transition group">
+                            <Phone className="w-4 h-4 text-red-600 group-hover:text-white" />
                             <div>
-                                <p className="text-xs text-gray-500">Call Us Now</p>
-                                <p className="text-sm font-semibold">+880 1601-770053</p>
+                                <p className="text-xs text-gray-700 group-hover:text-white">Whatsapp Us Now</p>
                             </div>
                         </Link>
                         {
-                            isAdmin ? <Link className={buttonVariants({ variant: "outline", className: "bg-transparent text-black/50 hover:text-black/70 border border-black/50" })} href="/dashboard">Go Dashboard</Link> : (
-                                <button className="bg-red-600 hover:bg-red-700 text-white px-6 py-2.5 rounded-md font-medium transition flex items-center space-x-2 shadow-lg">
-                                    <span>Free Inspection</span>
-                                    <ArrowRight className="w-4 h-4" />
-                                </button>
-                            )
+                            isAdmin && <Link className={buttonVariants({ variant: "outline", className: "text-gray-700 hover:text-gray-800 bg-transparent hover:bg-[#eb6635] group rounded border border-black/50" })} href="/dashboard">Go Dashboard</Link>
                         }
                         <AuthAction />
                     </div>

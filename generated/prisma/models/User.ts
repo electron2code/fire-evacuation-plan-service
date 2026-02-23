@@ -185,6 +185,7 @@ export type UserWhereInput = {
   services?: Prisma.ServiceListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   banners?: Prisma.XOR<Prisma.BannerNullableScalarRelationFilter, Prisma.BannerWhereInput> | null
+  contactSubmission?: Prisma.ContactSubmissionListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -196,6 +197,7 @@ export type UserOrderByWithRelationInput = {
   services?: Prisma.ServiceOrderByRelationAggregateInput
   reviews?: Prisma.ReviewOrderByRelationAggregateInput
   banners?: Prisma.BannerOrderByWithRelationInput
+  contactSubmission?: Prisma.ContactSubmissionOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -210,6 +212,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   services?: Prisma.ServiceListRelationFilter
   reviews?: Prisma.ReviewListRelationFilter
   banners?: Prisma.XOR<Prisma.BannerNullableScalarRelationFilter, Prisma.BannerWhereInput> | null
+  contactSubmission?: Prisma.ContactSubmissionListRelationFilter
 }, "id" | "clerkId" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -243,6 +246,7 @@ export type UserCreateInput = {
   services?: Prisma.ServiceCreateNestedManyWithoutOwnerInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   banners?: Prisma.BannerCreateNestedOneWithoutCreatorInput
+  contactSubmission?: Prisma.ContactSubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -254,6 +258,7 @@ export type UserUncheckedCreateInput = {
   services?: Prisma.ServiceUncheckedCreateNestedManyWithoutOwnerInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   banners?: Prisma.BannerUncheckedCreateNestedOneWithoutCreatorInput
+  contactSubmission?: Prisma.ContactSubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -265,6 +270,7 @@ export type UserUpdateInput = {
   services?: Prisma.ServiceUpdateManyWithoutOwnerNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   banners?: Prisma.BannerUpdateOneWithoutCreatorNestedInput
+  contactSubmission?: Prisma.ContactSubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -276,6 +282,7 @@ export type UserUncheckedUpdateInput = {
   services?: Prisma.ServiceUncheckedUpdateManyWithoutOwnerNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   banners?: Prisma.BannerUncheckedUpdateOneWithoutCreatorNestedInput
+  contactSubmission?: Prisma.ContactSubmissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -381,6 +388,20 @@ export type UserUpdateOneRequiredWithoutBannersNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutBannersInput, Prisma.UserUpdateWithoutBannersInput>, Prisma.UserUncheckedUpdateWithoutBannersInput>
 }
 
+export type UserCreateNestedOneWithoutContactSubmissionInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutContactSubmissionInput, Prisma.UserUncheckedCreateWithoutContactSubmissionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutContactSubmissionInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutContactSubmissionNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutContactSubmissionInput, Prisma.UserUncheckedCreateWithoutContactSubmissionInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutContactSubmissionInput
+  upsert?: Prisma.UserUpsertWithoutContactSubmissionInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutContactSubmissionInput, Prisma.UserUpdateWithoutContactSubmissionInput>, Prisma.UserUncheckedUpdateWithoutContactSubmissionInput>
+}
+
 export type UserCreateWithoutServicesInput = {
   id?: string
   clerkId: string
@@ -389,6 +410,7 @@ export type UserCreateWithoutServicesInput = {
   imageUrl?: string | null
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
   banners?: Prisma.BannerCreateNestedOneWithoutCreatorInput
+  contactSubmission?: Prisma.ContactSubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutServicesInput = {
@@ -399,6 +421,7 @@ export type UserUncheckedCreateWithoutServicesInput = {
   imageUrl?: string | null
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
   banners?: Prisma.BannerUncheckedCreateNestedOneWithoutCreatorInput
+  contactSubmission?: Prisma.ContactSubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutServicesInput = {
@@ -425,6 +448,7 @@ export type UserUpdateWithoutServicesInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
   banners?: Prisma.BannerUpdateOneWithoutCreatorNestedInput
+  contactSubmission?: Prisma.ContactSubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutServicesInput = {
@@ -435,6 +459,7 @@ export type UserUncheckedUpdateWithoutServicesInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
   banners?: Prisma.BannerUncheckedUpdateOneWithoutCreatorNestedInput
+  contactSubmission?: Prisma.ContactSubmissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutReviewsInput = {
@@ -445,6 +470,7 @@ export type UserCreateWithoutReviewsInput = {
   imageUrl?: string | null
   services?: Prisma.ServiceCreateNestedManyWithoutOwnerInput
   banners?: Prisma.BannerCreateNestedOneWithoutCreatorInput
+  contactSubmission?: Prisma.ContactSubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutReviewsInput = {
@@ -455,6 +481,7 @@ export type UserUncheckedCreateWithoutReviewsInput = {
   imageUrl?: string | null
   services?: Prisma.ServiceUncheckedCreateNestedManyWithoutOwnerInput
   banners?: Prisma.BannerUncheckedCreateNestedOneWithoutCreatorInput
+  contactSubmission?: Prisma.ContactSubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutReviewsInput = {
@@ -481,6 +508,7 @@ export type UserUpdateWithoutReviewsInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceUpdateManyWithoutOwnerNestedInput
   banners?: Prisma.BannerUpdateOneWithoutCreatorNestedInput
+  contactSubmission?: Prisma.ContactSubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutReviewsInput = {
@@ -491,6 +519,7 @@ export type UserUncheckedUpdateWithoutReviewsInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceUncheckedUpdateManyWithoutOwnerNestedInput
   banners?: Prisma.BannerUncheckedUpdateOneWithoutCreatorNestedInput
+  contactSubmission?: Prisma.ContactSubmissionUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBannersInput = {
@@ -501,6 +530,7 @@ export type UserCreateWithoutBannersInput = {
   imageUrl?: string | null
   services?: Prisma.ServiceCreateNestedManyWithoutOwnerInput
   reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  contactSubmission?: Prisma.ContactSubmissionCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBannersInput = {
@@ -511,6 +541,7 @@ export type UserUncheckedCreateWithoutBannersInput = {
   imageUrl?: string | null
   services?: Prisma.ServiceUncheckedCreateNestedManyWithoutOwnerInput
   reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  contactSubmission?: Prisma.ContactSubmissionUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBannersInput = {
@@ -537,6 +568,7 @@ export type UserUpdateWithoutBannersInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceUpdateManyWithoutOwnerNestedInput
   reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  contactSubmission?: Prisma.ContactSubmissionUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBannersInput = {
@@ -547,6 +579,67 @@ export type UserUncheckedUpdateWithoutBannersInput = {
   imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   services?: Prisma.ServiceUncheckedUpdateManyWithoutOwnerNestedInput
   reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  contactSubmission?: Prisma.ContactSubmissionUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutContactSubmissionInput = {
+  id?: string
+  clerkId: string
+  name?: string | null
+  email: string
+  imageUrl?: string | null
+  services?: Prisma.ServiceCreateNestedManyWithoutOwnerInput
+  reviews?: Prisma.ReviewCreateNestedManyWithoutUserInput
+  banners?: Prisma.BannerCreateNestedOneWithoutCreatorInput
+}
+
+export type UserUncheckedCreateWithoutContactSubmissionInput = {
+  id?: string
+  clerkId: string
+  name?: string | null
+  email: string
+  imageUrl?: string | null
+  services?: Prisma.ServiceUncheckedCreateNestedManyWithoutOwnerInput
+  reviews?: Prisma.ReviewUncheckedCreateNestedManyWithoutUserInput
+  banners?: Prisma.BannerUncheckedCreateNestedOneWithoutCreatorInput
+}
+
+export type UserCreateOrConnectWithoutContactSubmissionInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutContactSubmissionInput, Prisma.UserUncheckedCreateWithoutContactSubmissionInput>
+}
+
+export type UserUpsertWithoutContactSubmissionInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutContactSubmissionInput, Prisma.UserUncheckedUpdateWithoutContactSubmissionInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutContactSubmissionInput, Prisma.UserUncheckedCreateWithoutContactSubmissionInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutContactSubmissionInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutContactSubmissionInput, Prisma.UserUncheckedUpdateWithoutContactSubmissionInput>
+}
+
+export type UserUpdateWithoutContactSubmissionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  services?: Prisma.ServiceUpdateManyWithoutOwnerNestedInput
+  reviews?: Prisma.ReviewUpdateManyWithoutUserNestedInput
+  banners?: Prisma.BannerUpdateOneWithoutCreatorNestedInput
+}
+
+export type UserUncheckedUpdateWithoutContactSubmissionInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  clerkId?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.StringFieldUpdateOperationsInput | string
+  imageUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  services?: Prisma.ServiceUncheckedUpdateManyWithoutOwnerNestedInput
+  reviews?: Prisma.ReviewUncheckedUpdateManyWithoutUserNestedInput
+  banners?: Prisma.BannerUncheckedUpdateOneWithoutCreatorNestedInput
 }
 
 
@@ -557,11 +650,13 @@ export type UserUncheckedUpdateWithoutBannersInput = {
 export type UserCountOutputType = {
   services: number
   reviews: number
+  contactSubmission: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   services?: boolean | UserCountOutputTypeCountServicesArgs
   reviews?: boolean | UserCountOutputTypeCountReviewsArgs
+  contactSubmission?: boolean | UserCountOutputTypeCountContactSubmissionArgs
 }
 
 /**
@@ -588,6 +683,13 @@ export type UserCountOutputTypeCountReviewsArgs<ExtArgs extends runtime.Types.Ex
   where?: Prisma.ReviewWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountContactSubmissionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ContactSubmissionWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -598,6 +700,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   services?: boolean | Prisma.User$servicesArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   banners?: boolean | Prisma.User$bannersArgs<ExtArgs>
+  contactSubmission?: boolean | Prisma.User$contactSubmissionArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -630,6 +733,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   services?: boolean | Prisma.User$servicesArgs<ExtArgs>
   reviews?: boolean | Prisma.User$reviewsArgs<ExtArgs>
   banners?: boolean | Prisma.User$bannersArgs<ExtArgs>
+  contactSubmission?: boolean | Prisma.User$contactSubmissionArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -641,6 +745,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     services: Prisma.$ServicePayload<ExtArgs>[]
     reviews: Prisma.$ReviewPayload<ExtArgs>[]
     banners: Prisma.$BannerPayload<ExtArgs> | null
+    contactSubmission: Prisma.$ContactSubmissionPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1045,6 +1150,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   services<T extends Prisma.User$servicesArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$servicesArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ServicePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   reviews<T extends Prisma.User$reviewsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$reviewsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ReviewPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   banners<T extends Prisma.User$bannersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bannersArgs<ExtArgs>>): Prisma.Prisma__BannerClient<runtime.Types.Result.GetResult<Prisma.$BannerPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+  contactSubmission<T extends Prisma.User$contactSubmissionArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$contactSubmissionArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ContactSubmissionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1531,6 +1637,30 @@ export type User$bannersArgs<ExtArgs extends runtime.Types.Extensions.InternalAr
    */
   include?: Prisma.BannerInclude<ExtArgs> | null
   where?: Prisma.BannerWhereInput
+}
+
+/**
+ * User.contactSubmission
+ */
+export type User$contactSubmissionArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ContactSubmission
+   */
+  select?: Prisma.ContactSubmissionSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ContactSubmission
+   */
+  omit?: Prisma.ContactSubmissionOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ContactSubmissionInclude<ExtArgs> | null
+  where?: Prisma.ContactSubmissionWhereInput
+  orderBy?: Prisma.ContactSubmissionOrderByWithRelationInput | Prisma.ContactSubmissionOrderByWithRelationInput[]
+  cursor?: Prisma.ContactSubmissionWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ContactSubmissionScalarFieldEnum | Prisma.ContactSubmissionScalarFieldEnum[]
 }
 
 /**

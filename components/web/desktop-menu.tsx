@@ -32,7 +32,10 @@ export default function DesktopMenu() {
         <nav className="hidden md:flex items-center space-x-8">
             {
                 links.map((link) => (
-                    <Link key={link.name} href={link.href} className={pathname === link.href ? `text-red-600 font-medium hover:text-red-700 transition` : `text-gray-800 hover:text-gray-700`}>{link.name}</Link>
+                    <div key={link.name} className="flex flex-col group link-container">
+                        <Link href={link.href} className={pathname === link.href ? `text-red-600 font-medium hover:text-red-700 transition` : `text-gray-800 hover:text-gray-700`}>{link.name}</Link>
+                        <div className="link-bar" />
+                    </div>
                 ))
             }
         </nav>

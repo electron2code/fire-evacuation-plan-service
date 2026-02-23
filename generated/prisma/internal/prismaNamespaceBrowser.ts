@@ -59,7 +59,10 @@ export const ModelName = {
   BannerImage: 'BannerImage',
   Banner: 'Banner',
   PortfolioImage: 'PortfolioImage',
-  ContactSubmission: 'ContactSubmission'
+  ContactSubmission: 'ContactSubmission',
+  CompanyLogo: 'CompanyLogo',
+  ProjectVisualsMedia: 'ProjectVisualsMedia',
+  SafetyEquipmentMedia: 'SafetyEquipmentMedia'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -163,18 +166,45 @@ export type PortfolioImageScalarFieldEnum = (typeof PortfolioImageScalarFieldEnu
 
 export const ContactSubmissionScalarFieldEnum = {
   id: 'id',
-  fullName: 'fullName',
-  phoneNumber: 'phoneNumber',
-  email: 'email',
-  propertyAddress: 'propertyAddress',
-  serviceCategory: 'serviceCategory',
-  serviceType: 'serviceType',
-  notes: 'notes',
-  imageKey: 'imageKey',
-  createdAt: 'createdAt'
+  userId: 'userId',
+  projectAddress: 'projectAddress',
+  emergencyNumber: 'emergencyNumber',
+  googleMapLink: 'googleMapLink'
 } as const
 
 export type ContactSubmissionScalarFieldEnum = (typeof ContactSubmissionScalarFieldEnum)[keyof typeof ContactSubmissionScalarFieldEnum]
+
+
+export const CompanyLogoScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  url: 'url',
+  contactSubmissionId: 'contactSubmissionId'
+} as const
+
+export type CompanyLogoScalarFieldEnum = (typeof CompanyLogoScalarFieldEnum)[keyof typeof CompanyLogoScalarFieldEnum]
+
+
+export const ProjectVisualsMediaScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  url: 'url',
+  type: 'type',
+  contactSubmissionId: 'contactSubmissionId'
+} as const
+
+export type ProjectVisualsMediaScalarFieldEnum = (typeof ProjectVisualsMediaScalarFieldEnum)[keyof typeof ProjectVisualsMediaScalarFieldEnum]
+
+
+export const SafetyEquipmentMediaScalarFieldEnum = {
+  id: 'id',
+  key: 'key',
+  url: 'url',
+  type: 'type',
+  contactSubmissionId: 'contactSubmissionId'
+} as const
+
+export type SafetyEquipmentMediaScalarFieldEnum = (typeof SafetyEquipmentMediaScalarFieldEnum)[keyof typeof SafetyEquipmentMediaScalarFieldEnum]
 
 
 export const SortOrder = {

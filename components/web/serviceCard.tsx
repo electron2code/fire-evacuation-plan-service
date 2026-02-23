@@ -27,35 +27,34 @@ export function ServiceCard({
 
         const oddOrEven = index + 1 ? (index + 1) % 2 : 0
         return (
-            <Card className={`flex justify-between flex-col md:flex-row bg-gray-200 hover:border-orange-400 mt-10`}>
-                <div className={`flex-1 shrink-0 min-w-sm md:min-w-md lg:min-w-lg ${oddOrEven ? "order-1 pl-8" : "order-2 pr-8"}`}>
+            <Card className={`flex p-0 justify-between border border-gray-100/70 flex-col md:flex-row hover:border-orange-400 my-16 shadow-lg transition-transform duration-300 hover:-translate-y-1 max-w-5xl mx-auto backdrop-filter backdrop-blur-md bg-linear-to-r from-gray-100 to-gray-200`}>
+                <div className={`flex-1 p-8 shrink-0 min-w-sm md:min-w-md lg:min-w-lg ${oddOrEven ? "order-1" : "order-2"}`}>
                     {children}
                 </div>
-                <div className={`max-w-xl shirnk-1 wrap-break-word flex-1 flex flex-col gap-4 p-4 ${index && ((index + 1) % 2 !== 0) ? "order-2" : "order-1"}`}>
-                    <h3 className='text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900'>{title}</h3>
-                    <p className='text-slate-500 leading-relaxed wrap-break-word mt-4'>{description}</p>
-                    <Link className="flex mt-5 items-center gap-2 text-[#f25f29] font-bold text-sm hover:text-[#d64d1c] transition-colors" href={`/services${id ? `/${id}` : ""}`}>Learn More
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-                    </Link>
+                <div className={`max-w-xl shrink wrap-break-word flex-1 flex flex-col gap-4 p-7 ${index && ((index + 1) % 2 !== 0) ? "order-2" : "order-1"}`}>
+                    <div className='flex-1'>
+                        <h3 className='text-2xl md:text-3xl mb-10 font-bold text-slate-700'>{title}</h3>
+                        <p className='text-slate-500 leading-relaxed wrap-anywhere mt-4'>{description}</p>
+                    </div>
+                    <div className='flex'>
+                        <Link className="group flex rounded-full border border-white hover:border-orange-500 items-center gap-1 py-2 px-3 text-white font-bold text-sm bg-linear-to-r from-[#9dc94b] to-[#ff6a00] transition-all hover:scale-105" href={`/services${id ? `/${id}` : ""}`}>Learn More
+                            <div className='border-r-2 border-white h-5' />
+                            <ArrowRight className='size-3 text-white font-bold group-hover:translate-x-1' />
+                        </Link>
+                    </div>
                 </div>
             </Card>
         )
     } else {
         return (
-            <Card className="w-full max-w-5xl mx-auto flex flex-row shadow-lg transition-transform duration-300 hover:-translate-y-1 hover:border-orange-500 bg-gray-100">
+            <Card className="w-full p-0 border px-2 border-gray-300/80 max-w-5xl overflow-hidden mx-auto flex flex-col items-center md:flex-row shadow-[0_10px_12px_rgba(0,0,0,0.35)] transition-transform duration-300 hover:-translate-y-1 hover:border-orange-500 bg-gray-100">
                 {/* Left Column: Content */}
-                <div className="flex h-full flex-col items-start flex-1 shrink p-4">
-
-                    {/* Icon Box */}
-                    <div className="bg-[#7a2e12] p-3 rounded-xl flex items-center justify-center mb-8">
-                        <BrickWallFire className="text-white w-7 h-7 stroke-2" />
-                    </div>
-
-                    <div className="space-y-3 mb-8">
+                <div className="flex-1 order-2 md:order-1 h-full w-full md:w-1/2 flex flex-col items-start shrink py-4 px-3">
+                    <div className="space-y-3 mb-8 flex-1">
                         <h3 className="text-2xl font-bold text-slate-900">
                             {title}
                         </h3>
-                        <p className="text-slate-500 leading-relaxed wrap-anywhere line-clamp-5">
+                        <p className="text-slate-700 leading-relaxed wrap-anywhere line-clamp-3">
                             {description}
                         </p>
                     </div>
@@ -63,21 +62,22 @@ export function ServiceCard({
                     {/* Link with hover effect */}
                     <Link
                         href="/services"
-                        className="group flex items-center gap-2 text-[#f25f29] font-bold text-sm hover:text-[#d64d1c] transition-colors"
+                        className="group flex rounded-full border border-white hover:border-orange-500 items-center gap-1 py-2 px-3 text-white font-bold text-sm bg-linear-to-r from-[#9dc94b] to-[#ff6a00] transition-all hover:scale-105"
                     >
                         Learn More
-                        <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
+                        <div className='border-r-2 border-white h-5' />
+                        <ArrowRight className='size-3 text-white font-bold group-hover:translate-x-1' />
                     </Link>
                 </div>
 
                 {/* Right Column: Image */}
-                <div className="shrink-0 flex-1 h-full">
+                <div className="shrink-0 order-1 md:order-2 flex-1 flex items-center justify-center h-full w-full md:w-1/2 overflow-hidden bg-gray-400">
                     <Image
                         src={`${process.env.NEXT_PUBLIC_BUCKET_URL}/${images[0].key}`}
                         alt={images[0].key}
-                        className="w-full min-w-50 h-full object-center object-cover"
-                        width={300}
-                        height={120}
+                        className="w-full min-w-50 h-full object-center object-contain"
+                        width={1000}
+                        height={720}
                     />
                 </div>
             </Card>

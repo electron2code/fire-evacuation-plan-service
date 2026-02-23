@@ -84,3 +84,18 @@ export type PortfolioImage = Prisma.PortfolioImageModel
  * 
  */
 export type ContactSubmission = Prisma.ContactSubmissionModel
+/**
+ * Model CompanyLogo
+ * 
+ */
+export type CompanyLogo = Prisma.CompanyLogoModel
+/**
+ * Model ProjectVisualsMedia
+ * 
+ */
+export type ProjectVisualsMedia = Prisma.ProjectVisualsMediaModel
+/**
+ * Model SafetyEquipmentMedia
+ * 
+ */
+export type SafetyEquipmentMedia = Prisma.SafetyEquipmentMediaModel

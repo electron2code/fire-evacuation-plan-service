@@ -1,7 +1,4 @@
-"use client"
-
-import * as React from "react"
-import { Menu } from "lucide-react"
+import { BookUser, Boxes, FolderCode, Home, Menu, Phone, Users } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -18,22 +15,27 @@ import Link from "next/link"
 
 const links = [
     {
+        icon: <Home className="w-4 h-4 text-red-600 group-hover:text-white" />,
         name: "Home",
         href: "/",
     },
     {
+        icon: <Boxes className="w-4 h-4 text-red-600 group-hover:text-white" />,
         name: "Services",
         href: "/services",
     },
     {
+        icon: <FolderCode className="w-4 h-4 text-red-600 group-hover:text-white" />,
         name: "Portfolio",
         href: "/portfolio",
     },
     {
+        icon: <Users className="w-4 h-4 text-red-600 group-hover:text-white" />,
         name: "About Us",
         href: "/about",
     },
     {
+        icon: <BookUser className="w-4 h-4 text-red-600 group-hover:text-white" />,
         name: "Contact",
         href: "/contact",
     },
@@ -56,10 +58,23 @@ export function MobileMenu() {
                             {
                                 links.map((link) => (
                                     <DrawerClose asChild key={link.name}>
-                                        <Link href={link.href}>{link.name}</Link>
+                                        <Link href={link.href} className="flex justify-center gap-2 items-center text-gray-700 hover:bg-black/90 rounded border border-black/50 px-3 py-2 transition group">
+                                            {link.icon}
+                                            <div>
+                                                <p className="text-xs text-gray-700 group-hover:text-white">{link.name}</p>
+                                            </div>
+                                        </Link>
                                     </DrawerClose>
                                 ))
                             }
+                            <DrawerClose asChild>
+                                <Link href="https://wa.me/+8801601770053" target="_blank" className="flex justify-center gap-2 items-center text-gray-700 hover:bg-[#eb6635] rounded border border-black/50 px-3 py-2 transition group">
+                                    <Phone className="w-4 h-4 text-red-600 group-hover:text-white" />
+                                    <div>
+                                        <p className="text-xs text-gray-700 group-hover:text-white">Whatsapp Us Now</p>
+                                    </div>
+                                </Link>
+                            </DrawerClose>
                         </div>
                     </div>
                     <DrawerFooter className="hidden">

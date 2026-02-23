@@ -76,12 +76,13 @@ export default function TestimonialsCarousel({ testimonials }: { testimonials: T
         <section className="py-16 px-6 bg-white">
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
-                <div className="text-center mb-12">
-                    <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-3">
+                <div className="text-center mb-5">
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
                         What Our Customers Say
                     </h2>
                     <p className="text-gray-500 text-lg">
-                        Read reviews from satisfied Texas homeowners
+                        Read reviews from satisfied clients who trusted us for their fire evacuation
+                        planning needs.
                     </p>
                 </div>
 
@@ -100,8 +101,8 @@ export default function TestimonialsCarousel({ testimonials }: { testimonials: T
                                 <CarouselItem
                                     key={testimonial.id}
                                     className={`pl-6 basis-full md:basis-[70%] lg:basis-[35%] transition-all duration-500 ease-in-out ${index === selectedIndex
-                                        ? 'opacity-100 scale-100 z-10'
-                                        : 'opacity-30 scale-90 z-0'
+                                        ? 'scale-100 z-10'
+                                        : 'scale-90 z-0'
                                         }`}
                                 >
                                     <Card className="border-gray-200 bg-red-100/50 shadow-sm hover:shadow-md transition-shadow h-full">

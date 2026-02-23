@@ -27,9 +27,10 @@ model User {
   email    String  @unique
   imageUrl String?
 
-  services Service[]
-  reviews  Review[]
-  banners  Banner?
+  services          Service[]
+  reviews           Review[]
+  banners           Banner?
+  contactSubmission ContactSubmission[]
 }
 
 model Service {
@@ -107,14 +108,41 @@ model PortfolioImage {
 }
 
 model ContactSubmission {
-  id              String   @id @default(cuid())
-  fullName        String
-  phoneNumber     String
-  email           String
-  propertyAddress String?
-  serviceCategory String?
-  serviceType     String?
-  notes           String?
-  imageKey        String?
-  createdAt       DateTime @default(now())
+  id                   String                 @id @default(cuid())
+  userId               String
+  user                 User                   @relation(fields: [userId], references: [clerkId], onDelete: Cascade)
+  projectAddress       String
+  emergencyNumber      String
+  googleMapLink        String
+  companyLogo          CompanyLogo?
+  safetyEquipmentMedia SafetyEquipmentMedia[]
+  projectVisualsMedia  ProjectVisualsMedia[]
+}
+
+model CompanyLogo {
+  id                  String            @id @default(cuid())
+  key                 String            @unique
+  url                 String
+  contactSubmissionId String            @unique
+  contactSubmission   ContactSubmission @relation(fields: [contactSubmissionId], references: [id], onDelete: Cascade)
+}
+
+model ProjectVisualsMedia {
+  id   String @id @default(cuid())
+  key  String @unique
+  url  String
+  type String
+
+  contactSubmissionId String
+  contactSubmission   ContactSubmission @relation(fields: [contactSubmissionId], references: [id], onDelete: Cascade)
+}
+
+model SafetyEquipmentMedia {
+  id   String @id @default(cuid())
+  key  String @unique
+  url  String
+  type String
+
+  contactSubmissionId String
+  contactSubmission   ContactSubmission @relation(fields: [contactSubmissionId], references: [id], onDelete: Cascade)
 }

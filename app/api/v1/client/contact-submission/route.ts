@@ -1,9 +1,9 @@
 import prisma from "@/lib/prisma";
 import { S3 } from "@/lib/s3Client";
-import { DeleteObjectCommand, DeleteObjectsCommand } from "@aws-sdk/client-s3";
+import { DeleteObjectsCommand } from "@aws-sdk/client-s3";
 import { currentUser } from "@clerk/nextjs/server";
 import { NextResponse } from "next/server";
-import { success, z } from "zod";
+import { z } from "zod";
 
 
 const ContactSubmissionSchema = z.object({

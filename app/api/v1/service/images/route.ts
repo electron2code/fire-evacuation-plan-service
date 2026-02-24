@@ -30,7 +30,7 @@ export async function POST(request: Request) {
             return NextResponse.json({ message: 'Invalid request data' }, { status: 400 });
         }
         const { fileName, contentType, size } = validation.data;
-        const uniqueKey = `${uuidv4()}-${fileName}`;
+        const uniqueKey = `${uuidv4()}-${fileName}`.replace(/\s/g, '');
         const command = new PutObjectCommand({
             Bucket: process.env.S3_BUCKET_NAME,
             Key: uniqueKey,

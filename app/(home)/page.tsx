@@ -57,6 +57,22 @@ export async function generateMetadata(): Promise<Metadata> {
       'how to create an evacuation plan',
       'safety plan template',
       'fire safety plan',
+      'Evacuation Plan Service',
+      'Fire Evacuation Plan',
+      'Emergency Evacuation Plan',
+      'Emergency Exit Map',
+      'Building Evacuation Plan',
+      'Fire Escape Plan Drawing',
+      'Fire evacuation plan for office building',
+      'Emergency exit map for factory',
+      'Evacuation plan design service near me',
+      'Building fire escape plan PDF',
+      'OSHA compliant evacuation plan',
+      'Commercial building evacuation drawing',
+      'Fire evacuation plan service in Bangladesh',
+      'Evacuation plan design in Dhaka',
+      'Emergency exit map service in Kaliganj',
+      'Fire safety drawing service Bangladesh',
     ],
     authors: [{ name: 'Md. Sabbir Hossain' }, { name: 'Md. Sabbir Hossain', url: 'https://www.evacuationplanservice.com/about' }],
     creator: 'Electron2Code',
@@ -79,6 +95,55 @@ export async function generateMetadata(): Promise<Metadata> {
       locale: 'en_US',
       type: 'website',
       countryName: "Bangladesh"
+    },
+
+    robots: {
+      index: true,
+      follow: true,
+      nocache: false,
+      googleBot: {
+        index: true,
+        follow: true,
+        noimageindex: false,
+        'max-video-preview': -1,
+        'max-image-preview': 'large',
+        'max-snippet': -1,
+      },
+    },
+
+    icons: {
+      icon: '/icon.png',
+      shortcut: '/shortcut-icon.png',
+      apple: '/apple-icon.png',
+      other: {
+        rel: 'apple-touch-icon-precomposed',
+        url: '/apple-touch-icon-precomposed.png',
+      },
+    },
+
+    twitter: {
+      card: 'app',
+      title: 'Evacuation Plan Service',
+      description: "Welcome to Evacuation Plan Service — your trusted partner in professional emergency planning solutions. We specialize in creating clear, compliant, and easy-to-understand evacuation plans for offices, factories, commercial buildings, and residential properties. Our mission is simple: to help businesses and property owners ensure safety, preparedness, and peace of mind.",
+      siteId: '1467726470533754880',
+      creator: '@nextjs',
+      creatorId: '1467726470533754880',
+      images: {
+        url: `${process.env.NEXT_PUBLIC_BUCKET_URL}/${bannerImages[0]?.key}`,
+        alt: 'Evacution Plan Service Logo',
+      },
+      app: {
+        name: 'twitter_app',
+        id: {
+          iphone: 'twitter_app://iphone',
+          ipad: 'twitter_app://ipad',
+          googleplay: 'twitter_app://googleplay',
+        },
+        url: {
+          iphone: 'https://iphone_url',
+          ipad: 'https://ipad_url',
+        },
+      },
     },
   }
 }

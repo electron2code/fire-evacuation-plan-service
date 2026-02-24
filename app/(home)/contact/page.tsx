@@ -741,13 +741,13 @@ export default function ContactPage() {
 
                     {/* Submit Button */}
                     <div className="pt-6">
-                        <button disabled={isSubmitting} className="w-full bg-[#3a5033] text-white font-bold py-4 rounded-lg shadow-lg hover:bg-[#2d3e27] transition-colors">
+                        <button disabled={isSubmitting} className="w-full bg-[#eb4913] text-white font-bold py-4 rounded-lg cursor-pointer shadow-lg hover:bg-[#247c04] transition-colors">
                             {isSubmitting ? "Submitting... " : "Submit Information"}
                         </button>
                     </div>
 
                     {/* Footer Info */}
-                    <div className="bg-[#e8f0e4] p-4 rounded-lg flex items-center gap-3 border border-green-200">
+                    <div className="bg-[#e8f0e4] p-4 rounded-lg flex justify-center items-center gap-3 border border-green-200">
                         <CheckCircle size={20} className="text-green-700 shrink-0" />
                         <p className="text-sm font-medium text-[#3a5033]">
                             Once we receive this information, we will start working on your evacuation plan immediately.

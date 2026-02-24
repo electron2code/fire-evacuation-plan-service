@@ -194,7 +194,7 @@ function EducationCard({ institute, degree, years }: { institute: string, degree
                 <GraduationCap className="size-5 text-gray-700 -mt-0.5" />
             </div>
             <div>
-                <h4 className="text-base font-medium mb-1">{institute}</h4>
+                <h4 className="text-gray-700 text-base font-medium mb-1">{institute}</h4>
                 <p className="text-gray-700">{degree}</p>
                 <p className="text-gray-700">Graduated {years}</p>
             </div>
@@ -211,7 +211,7 @@ function WorkCard({ companyName, CompanyLogo, profileLink, profileName }: { comp
                 </div>
             </div>
             <div>
-                <h4 className="text-base font-medium">{companyName}</h4>
+                <h4 className="text-gray-700 text-base font-medium">{companyName}</h4>
                 <Link className="text-blue-500 hover:text-blue-600 active:text-blue-800 visited:text-blue-900" href={profileLink} target="_blank">{profileName}</Link>
             </div>
         </div>

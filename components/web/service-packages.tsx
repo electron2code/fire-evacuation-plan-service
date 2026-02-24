@@ -51,7 +51,7 @@ export default function ServicePackages({ tiers, serviceTitle, serviceImageUrl, 
             }
             <div className="space-y-2 w-full flex justify-center mt-4">
                 <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full">
-                    <Button className="w-full py-6 rounded-none bg-gray-800 text-gray-200 hover:bg-gray-900 hover:text-gray-200">
+                    <Button className="w-full py-6 rounded-none bg-[#ff6a00] cursor-pointer text-gray-200 hover:bg-[#f89019] hover:text-gray-200">
                         Continue
                         <ArrowRight className="w-4 h-4 ml-2" />
                     </Button>

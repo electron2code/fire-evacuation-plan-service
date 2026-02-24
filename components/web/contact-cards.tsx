@@ -47,7 +47,7 @@ export default function ContactCards() {
                     </div>
                 </div>
                 <div className="py-5 px-4">
-                    <Link className="inline-block text-center bg-[#32a844] text-gray-50 font-bold px-5 py-2 rounded w-full" href="mailto:example@gmail.com">Email me</Link>
+                    <Link className="inline-block text-center bg-[#32a844] text-gray-50 font-bold px-5 py-2 rounded w-full" href="mailto:evacuationplanservice@gmail.com">Email me</Link>
                 </div>
             </div>
         </div>

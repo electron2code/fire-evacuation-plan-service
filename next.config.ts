@@ -6,7 +6,7 @@ const nextConfig: NextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "fire-evacuation-plan-service-v1.t3.storage.dev",
+        hostname: "fire-evacuation-plan-service-v2.t3.storage.dev",
         pathname: "/**",
       },
       {

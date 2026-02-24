@@ -57,9 +57,9 @@ function Footer() {
                             </Link>
                             <Link
                                 target='_blank'
-                                href="https://x.com/SHSHUVO47228012"
+                                href="https://www.linkedin.com/in/md-sabbir-hossain-259322213/"
                                 className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded flex items-center justify-center transition-colors"
-                                aria-label="Twitter"
+                                aria-label="Linkedin"
                             >
                                 <svg width={24} height={24} id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 74.87 72.96"><defs><style></style></defs><path fill='none' stroke='#fff' strokeMiterlimit={10} strokeWidth={0.5} d="M46.58,30.24c2.51-2.83,5.59-3.45,8.85-3.4a66.5,66.5,0,0,1,10.1.48,15.43,15.43,0,0,1,12.53,15c.09,10.68,0,21.36,0,32,0,1.42-.49,1.88-1.92,1.88q-7.39,0-14.8,0c-1.47,0-1.87-.41-1.87-1.88q0-13.59,0-27.16A6.36,6.36,0,0,0,55.81,41a6.23,6.23,0,0,0-6.8.67,5.85,5.85,0,0,0-2.5,4.91q0,13.64,0,27.27c0,2-.32,2.34-2.32,2.34H29.88c-1.56,0-1.95-.39-1.95-1.94q0-22.68,0-45.37c0-1.54.39-1.91,2-1.92H44.09c2.14,0,2.38.23,2.43,2.36C46.52,29.54,46.54,29.74,46.58,30.24ZM30.9,29.87V73.24H43.61V46.64a9.3,9.3,0,0,1,11.52-8.89c4.49,1.15,7.23,4.74,7.24,9.62,0,8.2,0,16.4,0,24.6v1.26H75.1a3.81,3.81,0,0,0,.07-.44c0-10.24.06-20.47,0-30.71a12.56,12.56,0,0,0-9.49-11.81c-2.51-.55-5.18-.34-7.77-.57-4.79-.43-8.74.94-11.6,5a1.89,1.89,0,0,1-1.73.56,2.16,2.16,0,0,1-.9-1.61,36.65,36.65,0,0,1,0-3.79Z" transform="translate(-3.49 -3.52)" /><path fill='none' stroke='#fff' strokeMiterlimit={10} strokeWidth={0.5} d="M22.61,51.56v22.5c0,1.84-.3,2.17-2.1,2.17H6.2C4.44,76.23,4,75.82,4,74.1V29.21C4,27.36,4.39,27,6.23,27H20.66c1.59,0,1.95.35,1.95,1.94ZM7,29.88V73.23H19.7V29.88Z" transform="translate(-3.49 -3.52)" /><path fill='none' stroke='#fff' strokeMiterlimit={10} strokeWidth={0.5} d="M13.26,22.88A9.56,9.56,0,1,1,23,13.36,9.59,9.59,0,0,1,13.26,22.88Zm.09-16.2A6.66,6.66,0,1,0,13.29,20a6.66,6.66,0,1,0,.06-13.32Z" transform="translate(-3.49 -3.52)" /></svg>
                             </Link>
@@ -130,7 +130,6 @@ function Footer() {
                             <li>
                                 <Link href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
                                     Middle East
-
                                 </Link>
                             </li>
                             <li>
@@ -170,11 +169,12 @@ function Footer() {
                                 </div>
                                 <div>
                                     <Link
-                                        href="mailto:example@gmail.com"
+                                        href="mailto:evacuationplanservice@gmail.com"
                                         className="text-sm hover:text-orange-500 transition-colors break-all"
                                     >
-                                        example@gmail.com
+                                        evacuationplanservice@gmail.com
                                     </Link>
+                                    <p className="text-xs text-gray-400">Official Email</p>
                                 </div>
                             </div>
                             <div className="flex items-start gap-3">

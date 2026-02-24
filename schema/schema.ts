@@ -7,7 +7,7 @@ const ServiceTierSchema = z.object({
     type: TierTypeEnum,
     title: z.string().min(1, "Tier title is required"),
     description: z.string().min(1, "Tier description is required"),
-    price: z.coerce.number().min(1, "Price must be at least 1"),
+    price: z.number(),
 });
 
 // Main Form Schema

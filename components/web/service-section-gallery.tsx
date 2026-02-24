@@ -19,7 +19,7 @@ export default async function ServiceSectionGallery({ limit, className = "", Car
             {services.map((service, index) => (
                 !Carousel ? <ServiceCard key={index} title={service.title} images={service.images} description={service.description} /> :
                     <ServiceCard index={index} id={service.id} key={index} title={service.title} images={service.images} description={service.description}>
-                        <Carousel images={service.images} className="h-77.5" />
+                        <Carousel images={service.images} className="h-50 md:h-77.5 aspect-320/400" />
                     </ServiceCard>
             ))}
         </div>

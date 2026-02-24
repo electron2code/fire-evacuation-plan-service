@@ -3,7 +3,7 @@ import Link from "next/link";
 
 export default function ContactCards() {
     return (
-        <div className="flex items-center gap-3">
+        <div className="flex flex-wrap items-center gap-14 md:gap-3">
             <div className="w-full relative max-w-md px-4 shadow-[0_0_0_rgba(210, 210, 210, 0.5)] border border-gray-300 rounded">
                 <div className="absolute left-1/2 -translate-x-1/2 -top-10 w-16 h-16 rounded-full bg-[#32a844] flex items-center justify-center">
                     <Image src="/whatsapp-icon.svg" width={48} height={48} alt="WhatsApp Icon" />

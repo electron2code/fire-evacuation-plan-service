@@ -18,7 +18,7 @@ interface ServiceCardProps {
     className?: string;
 }
 
-export default function ServiceCardCarousel({ images, className = "h-[438.87px]" }: ServiceCardProps) {
+export default function ServiceCardCarousel({ images, className = "h-[438.87px] p-0" }: ServiceCardProps) {
     return (
         <Carousel className={`w-full m-0 ${className}`}>
             <CarouselContent className="h-full">

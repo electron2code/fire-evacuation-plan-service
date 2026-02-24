@@ -5,6 +5,7 @@ import { Button } from '../ui/button';
 import prisma from '@/lib/prisma';
 import parse from 'html-react-parser';
 import Link from 'next/link';
+import { getReviews } from '@/lib/data';
 
 interface review {
     id: string;
@@ -17,7 +18,7 @@ interface review {
 }
 
 async function App() {
-    const reviews = await prisma.review.findMany();
+    const { reviews } = await getReviews();
     const banner = await prisma.banner.findFirst({
         include: {
             creator: false

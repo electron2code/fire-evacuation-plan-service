@@ -1,7 +1,7 @@
 "use client";
 
 import { useCallback } from 'react'
-import { useDropzone } from 'react-dropzone'
+import { useDropzone, FileRejection } from 'react-dropzone'
 import type { DropFile } from './hero-slider';
 import { v4 as uuidv4 } from 'uuid';
 import { toast } from 'sonner';
@@ -25,16 +25,24 @@ export default function DropzoneComponent({ dropFile, setDropFile }: { dropFile:
     }
   }, [])
 
-  const onDropRejected = useCallback((rejectedFiles: File[]) => {
+  const onDropRejected = useCallback((rejectedFiles: FileRejection[]) => {
+    // Check the length of the rejected array
     const toManyFiles = rejectedFiles.length > 1;
-    const fileTooLarge = rejectedFiles[0]?.errors[0]?.code === 'file-too-large';
+
+    // Safely check the error code of the first rejected file if it exists
+    const fileTooLarge = rejectedFiles[0]?.errors.some(
+      (e) => e.code === 'file-too-large'
+    );
+
     if (toManyFiles) {
       toast.error("Please upload only one file at a time.");
-    }
-    if (fileTooLarge) {
+    } else if (fileTooLarge) {
       toast.error("File size exceeds 5MB limit.");
+    } else {
+      // Optional: Handle other rejection types (like invalid file type)
+      toast.error("File could not be uploaded.");
     }
-  }, [])
+  }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,

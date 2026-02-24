@@ -1,5 +1,4 @@
-import { Card, CardContent } from '@/components/ui/card';
-import { BrickWallFire } from 'lucide-react';
+import { Card } from '@/components/ui/card';
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -27,7 +26,7 @@ export function ServiceCard({
 
         const oddOrEven = index + 1 ? (index + 1) % 2 : 0
         return (
-            <Card className={`flex p-0 justify-between border border-gray-100/70 flex-col md:flex-row hover:border-orange-400 my-16 shadow-lg transition-transform duration-300 hover:-translate-y-1 max-w-5xl mx-auto backdrop-filter backdrop-blur-md bg-linear-to-r from-gray-100 to-gray-200`}>
+            <Card className={`flex p-0 justify-between items-center border border-gray-100/70 flex-col md:flex-row hover:border-orange-400 my-16 shadow-lg transition-transform duration-300 hover:-translate-y-1 max-w-5xl mx-auto backdrop-filter backdrop-blur-md bg-linear-to-r from-gray-100 to-gray-200`}>
                 <div className={`flex-1 p-8 shrink-0 min-w-sm md:min-w-md lg:min-w-lg ${oddOrEven ? "order-1" : "order-2"}`}>
                     {children}
                 </div>

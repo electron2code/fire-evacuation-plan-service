@@ -2,7 +2,7 @@
 
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ServiceFormSchema, ServiceFormValues } from "@/schema/schema";
+import { ServiceFormValues, ServiceFormSchema } from "@/schema/schema";
 import { updateServiceAction } from "@/actions/update-service";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
@@ -15,7 +15,7 @@ import ServiceImageSlider from "./service-image-slider";
 // Define strict types for the initial data to match Prisma result
 interface ServiceTier {
     id: string;
-    type: "BASIC" | "STANDARD" | "PREMIUM";
+    type: string; // Changed from union type to string to match Zod schema
     title: string;
     description: string;
     price: number;

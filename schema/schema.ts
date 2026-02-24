@@ -1,11 +1,13 @@
 import { z } from "zod";
 
+export const TierTypeEnum = z.enum(["BASIC", "STANDARD", "PREMIUM"]);
+
 // Schema for a single Pricing Tier
 const ServiceTierSchema = z.object({
-    type: z.string(),
+    type: TierTypeEnum,
     title: z.string().min(1, "Tier title is required"),
     description: z.string().min(1, "Tier description is required"),
-    price: z.number(),
+    price: z.coerce.number().min(1, "Price must be at least 1"),
 });
 
 // Main Form Schema

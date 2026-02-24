@@ -2,7 +2,7 @@
 
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ServiceFormValues, ServiceFormSchema } from "@/schema/schema";
+import { } from "@/schema/schema";
 import { updateServiceAction } from "@/actions/update-service";
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
@@ -11,6 +11,32 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import ServiceImageSlider from "./service-image-slider";
+
+import { z } from "zod";
+
+const TierTypeEnum = z.enum(["BASIC", "STANDARD", "PREMIUM"]);
+
+// Schema for a single Pricing Tier
+const ServiceTierSchema = z.object({
+    type: TierTypeEnum,
+    title: z.string().min(1, "Tier title is required"),
+    description: z.string().min(1, "Tier description is required"),
+    price: z.number(),
+});
+
+// Main Form Schema
+export const ServiceFormSchema = z.object({
+    title: z.string().min(10, "Title must be at least 10 characters"),
+    language: z.string().min(1, "Language is required"),
+    description: z.string().min(50, "Description must be at least 50 characters"),
+    // We expect an array of exactly 3 tiers (Basic, Standard, Premium)
+    tiers: z.array(ServiceTierSchema).length(3),
+    // For this example, we assume image keys are strings returned from an uploader
+    // imageKeys: z.array(z.string()).min(1, "At least one image is required"),
+    imageKeys: z.array(z.string())
+});
+
+export type ServiceFormValues = z.infer<typeof ServiceFormSchema>;
 
 // Define strict types for the initial data to match Prisma result
 interface ServiceTier {
@@ -50,7 +76,7 @@ export default function ServiceEditForm({ service }: { service: ServiceData }) {
             // Note: Schema expects imageKeys[], array of strings.
             imageKeys: service.images.map(img => img.key),
             tiers: service.tiers.map(t => ({
-                type: t.type,
+                type: t.type === "BASIC" ? "BASIC" : t.type === "STANDARD" ? "STANDARD" : "PREMIUM",
                 title: t.title,
                 description: t.description,
                 price: t.price

@@ -42,12 +42,14 @@ export const POST = async (request: Request) => {
             return NextResponse.json({ success: false, message: "All fields are required to submit the form" }, { status: 400 });
         }
 
-        const { companyLogo, safetyEquipmentMedia, projectVisualsMedia, ...restFormData } = validation.data;
+        const { companyLogo, safetyEquipmentMedia, projectVisualsMedia, projectAddress, emergencyNumber, googleMapLink } = validation.data;
 
         const contactSubmission = await prisma.contactSubmission.create({
             data: {
                 userId: user.id,
-                ...restFormData,
+                projectAddress,
+                emergencyNumber,
+                googleMapLink,
                 companyLogo: {
                     create: {
                         ...companyLogo

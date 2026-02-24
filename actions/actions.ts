@@ -13,7 +13,7 @@ export async function createServiceAction(data: ServiceFormValues, serviceImages
         return { error: "Invalid data" };
     }
 
-    const { title, language, description, tiers, imageKeys } = result.data;
+    const { title, language, description, tiers } = result.data;
 
     // 2. Create Service with Nested Writes (Transaction)
     try {

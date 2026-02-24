@@ -7,6 +7,8 @@ import Image from "next/image";
 import { Metadata, ResolvingMetadata } from "next";
 import SignInAction from "@/components/web/SignInAction";
 import { getService } from "@/lib/data";
+import { Suspense } from "react";
+import ServicePageSkeleton from "@/components/web/ServicePackageSkeleton";
 
 interface ServiceDetailsProps {
     params: Promise<{ id: string }>
@@ -104,68 +106,70 @@ export default async function ServiceDetails({ params }: ServiceDetailsProps) {
     }
 
     return (
-        <section className="bg-gray-50 min-h-screen py-12">
-            <div className="w-full max-w-7xl mx-auto px-4 md:px-6 space-y-12">
-                {/* Service Details Section */}
-                <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-                    <div className="flex-1 min-w-0">
-                        <ServiceCardCarousel images={service?.images.length ? service.images : []} />
-                        <div className="mt-14 bg-white p-8 rounded shadow-sm border border-gray-200">
-                            <h1 className="text-3xl font-bold text-gray-900 mb-4">{service.title}</h1>
-                            <p className="text-gray-600 leading-relaxed whitespace-pre-wrap wrap-anywhere">{service.description}</p>
-                        </div>
-                    </div>
-                    <div className="w-full lg:w-125 shrink-0 flex flex-col">
-                        <div className="order-2 md:order-1">
-                            <ServicePackages serviceTitle={service.title} serviceImageUrl={service.images[0]?.key || ""} serviceDescription={service.description} tiers={service?.tiers.length ? service.tiers : []} />
-                        </div>
-
-                        {/* Host Info */}
-                        <div className="mt-6 bg-white p-6 order-1 md:order-2 rounded-xl border border-gray-200 shadow-sm flex items-center gap-4">
-                            <Image
-                                src={service.owner.imageUrl || ""}
-                                alt={service.owner.name || "Owner"}
-                                className="w-14 h-14 rounded-full object-cover border border-gray-100"
-                                width={60}
-                                height={60}
-                            />
-                            <div>
-                                <p className="text-sm text-gray-500">Service provided by</p>
-                                <p className="font-semibold text-gray-900 text-lg">{service.owner.name}</p>
+        <Suspense fallback={<ServicePageSkeleton />}>
+            <section className="bg-gray-50 min-h-screen py-12">
+                <div className="w-full max-w-7xl mx-auto px-4 md:px-6 space-y-12">
+                    {/* Service Details Section */}
+                    <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+                        <div className="flex-1 min-w-0">
+                            <ServiceCardCarousel images={service?.images.length ? service.images : []} />
+                            <div className="mt-14 bg-white p-8 rounded shadow-sm border border-gray-200">
+                                <h1 className="text-3xl font-bold text-gray-900 mb-4">{service.title}</h1>
+                                <p className="text-gray-600 leading-relaxed whitespace-pre-wrap wrap-anywhere">{service.description}</p>
                             </div>
                         </div>
-                    </div>
-                </div>
-
-                {/* Reviews Section */}
-                <div className="border-t border-gray-200 pt-12">
-                    <div className="grid lg:grid-cols-3 gap-12">
-                        {/* Review List */}
-                        <div className="lg:col-span-2 space-y-8">
-                            <div className="flex items-center justify-between">
-                                <h2 className="text-2xl font-bold text-gray-900">
-                                    Client Reviews
-                                </h2>
-                                <span className="bg-amber-100 text-amber-800 text-sm font-medium px-3 py-1 rounded-full">
-                                    {service.reviews.length} {service.reviews.length === 1 ? 'Review' : 'Reviews'}
-                                </span>
+                        <div className="w-full lg:w-125 shrink-0 flex flex-col">
+                            <div className="order-2 md:order-1">
+                                <ServicePackages serviceTitle={service.title} serviceImageUrl={service.images[0]?.key || ""} serviceDescription={service.description} tiers={service?.tiers.length ? service.tiers : []} />
                             </div>
-                            <ReviewList reviews={service.reviews} />
-                        </div>
 
-                        {/* Add Review Form */}
-                        <div className="lg:col-span-1">
-                            {user.userId ? (
-                                <div className="sticky top-8">
-                                    <AddReviewForm serviceId={service.id} />
+                            {/* Host Info */}
+                            <div className="mt-6 bg-white p-6 order-1 md:order-2 rounded-xl border border-gray-200 shadow-sm flex items-center gap-4">
+                                <Image
+                                    src={service.owner.imageUrl || ""}
+                                    alt={service.owner.name || "Owner"}
+                                    className="w-14 h-14 rounded-full object-cover border border-gray-100"
+                                    width={60}
+                                    height={60}
+                                />
+                                <div>
+                                    <p className="text-sm text-gray-500">Service provided by</p>
+                                    <p className="font-semibold text-gray-900 text-lg">{service.owner.name}</p>
                                 </div>
-                            ) : (
-                                <SignInAction />
-                            )}
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Reviews Section */}
+                    <div className="border-t border-gray-200 pt-12">
+                        <div className="grid lg:grid-cols-3 gap-12">
+                            {/* Review List */}
+                            <div className="lg:col-span-2 space-y-8">
+                                <div className="flex items-center justify-between">
+                                    <h2 className="text-2xl font-bold text-gray-900">
+                                        Client Reviews
+                                    </h2>
+                                    <span className="bg-amber-100 text-amber-800 text-sm font-medium px-3 py-1 rounded-full">
+                                        {service.reviews.length} {service.reviews.length === 1 ? 'Review' : 'Reviews'}
+                                    </span>
+                                </div>
+                                <ReviewList reviews={service.reviews} />
+                            </div>
+
+                            {/* Add Review Form */}
+                            <div className="lg:col-span-1">
+                                {user.userId ? (
+                                    <div className="sticky top-8">
+                                        <AddReviewForm serviceId={service.id} />
+                                    </div>
+                                ) : (
+                                    <SignInAction />
+                                )}
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </Suspense>
     )
 }

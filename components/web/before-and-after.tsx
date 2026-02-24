@@ -97,7 +97,16 @@ function BeforeAfterCard({ title, before, after }: BeforeAfterCardProps) {
                     <div className="relative" style={{ width: `${initialImageWidth}px`, height: "100%" }}>
 
                         {before.slice(-4) === ".mp4" ? (
-                            <video autoPlay={true} loop muted controls className="w-full h-full" src={before}></video>
+                            <video className="h-full w-full object-cover" width="320" height="240" autoPlay loop controls muted preload="none">
+                                <source src={before} type="video/mp4" />
+                                <track
+                                    src="/path/to/captions.vtt"
+                                    kind="subtitles"
+                                    srcLang="en"
+                                    label="English"
+                                />
+                                Your browser does not support the video tag.
+                            </video>
                         ) : (<Image
                             src={before}
                             alt="Before"

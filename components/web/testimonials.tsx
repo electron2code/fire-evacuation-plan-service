@@ -1,5 +1,7 @@
 import prisma from "@/lib/prisma"
 import TestimonialsCarousel from "./testimonials-carousel";
+import { Suspense } from "react";
+import ReviewCardSkeleton from "./ReviewCardSkeleton";
 
 export default async function Testimonials() {
     const reviews = await prisma.review.findMany({
@@ -15,7 +17,9 @@ export default async function Testimonials() {
     });
     return (
         <section>
-            <TestimonialsCarousel testimonials={reviews} />
+            <Suspense fallback={<ReviewCardSkeleton />}>
+                <TestimonialsCarousel testimonials={reviews} />
+            </Suspense>
         </section>
     )
 }

@@ -50,11 +50,11 @@ export default function ReviewList({ reviews }: ReviewListProps) {
                                         {review.user.name || "Anonymous User"}
                                     </h4>
                                     <span className="text-xs text-gray-500">
-                                        {new Date(review.createdAt).toLocaleDateString(undefined, {
-                                            year: 'numeric',
-                                            month: 'long',
-                                            day: 'numeric'
-                                        })}
+                                        {new Intl.DateTimeFormat("en-US", {
+                                            year: "numeric",
+                                            month: "long",
+                                            day: "numeric",
+                                        }).format(review.createdAt)}
                                     </span>
                                 </div>
                             </div>

@@ -33,7 +33,7 @@ export function ServiceCard({
                 <div className={`max-w-xl shrink wrap-break-word flex-1 flex flex-col gap-4 p-7 ${index && ((index + 1) % 2 !== 0) ? "order-2" : "order-1"}`}>
                     <div className='flex-1'>
                         <h3 className='text-2xl md:text-3xl mb-10 font-bold text-slate-700'>{title}</h3>
-                        <p className='text-slate-500 leading-relaxed wrap-anywhere mt-4'>{description}</p>
+                        <p className='text-slate-500 leading-relaxed wrap-anywhere mt-4 line-clamp-4'>{description}</p>
                     </div>
                     <div className='flex'>
                         <Link className="group flex rounded-full border border-white hover:border-orange-500 items-center gap-1 py-2 px-3 text-white font-bold text-sm bg-linear-to-r from-[#9dc94b] to-[#ff6a00] transition-all hover:scale-105" href={`/services${id ? `/${id}` : ""}`}>Learn More

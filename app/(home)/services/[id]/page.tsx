@@ -1,17 +1,22 @@
 import ServiceCardCarousel from "@/components/web/service-card-carousel";
 import ServicePackages from "@/components/web/service-packages";
 import ReviewList from "@/components/web/review-list";
-import AddReviewForm from "@/components/web/add-review-form";
-import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { Metadata, ResolvingMetadata } from "next";
-import SignInAction from "@/components/web/SignInAction";
-import { getService } from "@/lib/data";
+import { getService, getServices } from "@/lib/data";
 import { Suspense } from "react";
 import ServicePageSkeleton from "@/components/web/ServicePackageSkeleton";
+import ReviewAction from "@/components/web/reviewAction";
 
 interface ServiceDetailsProps {
     params: Promise<{ id: string }>
+}
+
+export async function generateStaticParams() {
+    const services = await getServices(10);
+    return services.map((service) => ({
+        id: service.id,
+    }));
 }
 
 
@@ -95,7 +100,6 @@ export async function generateMetadata(
 
 export default async function ServiceDetails({ params }: ServiceDetailsProps) {
     const { id } = await params;
-    const user = await auth();
     const service = await getService(id);
     if (!service) {
         return <div
@@ -158,13 +162,7 @@ export default async function ServiceDetails({ params }: ServiceDetailsProps) {
 
                             {/* Add Review Form */}
                             <div className="lg:col-span-1">
-                                {user.userId ? (
-                                    <div className="sticky top-8">
-                                        <AddReviewForm serviceId={service.id} />
-                                    </div>
-                                ) : (
-                                    <SignInAction />
-                                )}
+                                <ReviewAction serviceId={service.id} />
                             </div>
                         </div>
                     </div>

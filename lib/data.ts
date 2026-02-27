@@ -45,3 +45,22 @@ export const getReviews = cache(async () => {
     const reviews = await prisma.review.findMany();
     return { reviews };
 });
+
+export const getServices = cache(async (limit: number) => {
+    const services = await prisma.service.findMany({
+        take: limit,
+        include: {
+            images: true,
+            owner: {
+                select: {
+                    id: false,
+                    clerkId: false,
+                    name: true,
+                    email: true,
+                    imageUrl: true,
+                }
+            },
+        },
+    });
+    return services;
+});

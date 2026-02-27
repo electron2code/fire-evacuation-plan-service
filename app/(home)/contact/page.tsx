@@ -58,11 +58,6 @@ export default function ContactPage() {
             return;
         }
 
-        // if (file) {
-        //     const imageUrl = URL.createObjectURL(file);
-        //     setCompanyLogoUrl(imageUrl);
-        // }
-
         const fileName = file.name;
         const size = file.size;
         const contentType = file.type;

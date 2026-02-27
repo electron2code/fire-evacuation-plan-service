@@ -12,7 +12,7 @@ export default function HeroBackground({ bannerImages }: { bannerImages: BannerI
         if (!bannerImages.length) return;
         const interval = setInterval(() => {
             setBackgroundIndex((prev) => (prev + 1) % bannerImages.length);
-        }, 5000);
+        }, 10000);
         return () => clearInterval(interval)
     }, [bannerImages]);
 

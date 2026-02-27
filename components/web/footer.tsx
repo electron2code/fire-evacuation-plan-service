@@ -1,13 +1,10 @@
-"use client";
-
-import { Facebook, Instagram, Mail, Phone, ArrowUp, Clock1, Clock4 } from 'lucide-react';
+import { Facebook, Instagram, Clock4, } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import ScrollToTopButton from './scroll-to-top-button';
+import FooterServices from './footer-services';
 
 function Footer() {
-    const scrollToTop = () => {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
 
     return (
         <footer className="bg-[#1a2332] text-white">
@@ -68,33 +65,7 @@ function Footer() {
 
                     <div>
                         <h4 className="font-bold text-lg mb-6">Services</h4>
-                        <ul className="mb-6">
-                            <li>
-                                <Link href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
-                                    Emergency Evacuation Plans
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
-                                    Site Map Planning
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
-                                    Google Map Planning
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
-                                    Floor Plan Re-Design
-                                </Link>
-                            </li>
-                            <li>
-                                <Link href="#" className="text-gray-300 hover:text-white transition-colors text-sm">
-                                    Plan Updates & Revisions
-                                </Link>
-                            </li>
-                        </ul>
+                        <FooterServices />
                         <Link
                             href="/services"
                             className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-lg font-medium transition-colors text-sm"
@@ -204,13 +175,7 @@ function Footer() {
                 </div>
             </div>
 
-            <button
-                onClick={scrollToTop}
-                className="fixed bottom-20 right-8 w-12 h-12 bg-orange-500 hover:bg-orange-600 rounded-full flex items-center justify-center shadow-lg transition-colors z-50"
-                aria-label="Scroll to top"
-            >
-                <ArrowUp className="w-6 h-6" />
-            </button>
+            <ScrollToTopButton />
         </footer>
     );
 }

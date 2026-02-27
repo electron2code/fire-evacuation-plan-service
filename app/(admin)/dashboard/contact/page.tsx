@@ -2,7 +2,7 @@
 
 import { Button, buttonVariants } from "@/components/ui/button";
 import { Card, CardAction, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { ExternalLink, MapIcon, SquareArrowUpRight } from "lucide-react";
+import { ExternalLink, SquareArrowUpRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
@@ -62,8 +62,6 @@ export default function ContactPage() {
             });
 
             const contactResponse = await response.json();
-
-            // console.log("contactResponse", contactResponse);
             setContacts(contactResponse.contacts);
         } catch (error: any) {
             console.error("Something went wrong", error.message);

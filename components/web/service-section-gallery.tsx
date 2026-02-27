@@ -1,8 +1,8 @@
-import prisma from "@/lib/prisma";
 import { ServiceCard } from "./serviceCard";
 import { ServiceCarousel } from "./service-card-carousel";
 import { Suspense } from "react";
 import ServiceSkeleton from "./service-skeleton";
+import { getServices } from "@/lib/data";
 
 export default async function ServiceSectionGallery({ limit, className = "", Carousel }: { limit: number, className: string, Carousel?: ServiceCarousel }) {
     return (
@@ -13,10 +13,7 @@ export default async function ServiceSectionGallery({ limit, className = "", Car
 }
 
 async function Services({ limit, className = "", Carousel }: { limit: number, className: string, Carousel?: ServiceCarousel }) {
-    const services = await prisma.service.findMany({
-        include: { images: true, owner: true },
-        take: limit,
-    });
+    const services = await getServices(limit);
     if (!services.length) {
         return (
             <div className="w-full min-h-125 flex flex-col items-center justify-center">

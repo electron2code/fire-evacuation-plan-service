@@ -145,6 +145,9 @@ export async function generateMetadata(): Promise<Metadata> {
         },
       },
     },
+    verification: {
+      google: "KF3gB9sDgu5d_rgs5xV32AGrpHLMqMpHlBEoPkd4WGM"
+    }
   }
 }
 

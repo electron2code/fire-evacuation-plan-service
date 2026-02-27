@@ -55,8 +55,6 @@ function BeforeAfterCard({ title, before, after }: BeforeAfterCardProps) {
         }
     }, [containerRef, initialImageWidth]);
 
-    console.log("initialImageWidth:", initialImageWidth);
-
     const handleMove = (e: React.MouseEvent<HTMLDivElement>) => {
         if (!dragging || !containerRef.current) return;
 

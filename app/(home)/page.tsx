@@ -96,7 +96,6 @@ export async function generateMetadata(): Promise<Metadata> {
       type: 'website',
       countryName: "Bangladesh"
     },
-
     robots: {
       index: true,
       follow: true,
@@ -104,10 +103,10 @@ export async function generateMetadata(): Promise<Metadata> {
       googleBot: {
         index: true,
         follow: true,
-        noimageindex: false,
-        'max-video-preview': -1,
-        'max-image-preview': 'large',
-        'max-snippet': -1,
+        // noimageindex: false,
+        // 'max-video-preview': -1,
+        // 'max-image-preview': 'large',
+        // 'max-snippet': -1,
       },
     },
 

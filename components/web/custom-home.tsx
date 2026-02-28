@@ -2,7 +2,6 @@ import { CheckCircle2, ArrowRight, Clock4 } from 'lucide-react';
 import HeroBackground from './heroBackground';
 import { Card } from '../ui/card';
 import { Button } from '../ui/button';
-import prisma from '@/lib/prisma';
 import parse from 'html-react-parser';
 import Link from 'next/link';
 import { getBanner, getReviews } from '@/lib/data';

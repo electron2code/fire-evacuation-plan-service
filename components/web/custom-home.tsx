@@ -5,7 +5,6 @@ import { Button } from '../ui/button';
 import parse from 'html-react-parser';
 import Link from 'next/link';
 import { getBanner, getReviews } from '@/lib/data';
-import { Suspense } from 'react';
 
 interface review {
     id: string;
@@ -19,41 +18,8 @@ interface review {
 
 export default function App() {
     return (
-        <Suspense fallback={<div className="min-h-screen flex items-center justify-center"></div>}>
-            <HeroSectionContent />
-        </Suspense>
-    );
-}
-
-async function HeroSectionContent() {
-    const { reviews } = await getReviews();
-    const { banner, bannerImages } = await getBanner();
-    const heroTitle = banner?.content || `
-        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight">
-        Expert Fire Evacuation
-        </h1>
-        <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-red-600 mb-8 leading-tight">
-        Emergency Exit Planner
-        </h2>
-        
-        <p className="text-lg md:text-xl text-gray-200 mb-10 leading-relaxed max-w-2xl">
-        We specialize in creating clear, compliant, and easy-to-understand evacuation plans for offices, factories, commercial buildings, and residential properties.
-        </p>
-`;
-    const contentReactNode = parse(heroTitle);
-
-    function calcAvgRating(reviews: review[]) {
-        let totalRating = 0
-        for (const review of reviews) {
-            totalRating += review.rating;
-        }
-
-        return Number((totalRating / reviews.length).toFixed(1));
-    }
-
-    return (
         <div className="min-h-screen relative">
-            <HeroBackground bannerImages={bannerImages} />
+            <HeroBannerElement />
             <div className="absolute inset-0 bg-linear-to-r from-black/90 via-black/60 to-black/30"></div>
             <div className="relative z-10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20">
@@ -62,9 +28,7 @@ async function HeroSectionContent() {
                             <span className="text-yellow-400 text-lg">🔥</span>
                             <span className="text-white text-sm font-medium">Fire Safety & Evacuation Planning Specialists</span>
                         </div>
-                        <div className='content mb-7 text-shadow-zinc-400 text-shadow-2xs'>
-                            {contentReactNode}
-                        </div>
+                        <HeroContent />
                         <Link href="/contact">
                             <Button className="inline-flex items-center justify-center whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 bg-linear-to-br from-orange-600 via-red-600 to-red-700 text-white shadow-premium hover:from-orange-500 hover:via-red-500 hover:to-red-600 group relative gradient-primary hover:shadow-glow text-lg px-20 py-5 h-auto font-semibold shine-effect overflow-hidden transition-all duration-300 hover:scale-105 rounded-full z-10">
                                 <span className='leading-2'> Order Evacuation Plan Now</span>
@@ -119,22 +83,7 @@ async function HeroSectionContent() {
                                 </div>
                             </div>
                         </Card>
-
-                        <Card className="bg-white/10 py-3 backdrop-blur-md border border-white/20 rounded-lg px-5 hover:bg-white/15 transition flex items-center">
-                            {reviews.length && <div className="flex items-center space-x-3 h-full justify-between">
-                                <div className="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center shrink-0">
-                                    <CheckCircle2 className="w-6 h-6 text-white" />
-                                </div>
-                                <div>
-                                    <p className="text-white font-semibold text-sm">Google Rating</p>
-                                    <div className="flex space-x-0.5 mt-0.5">
-                                        {[...new Array(calcAvgRating(reviews))].map((_, index) => (
-                                            <span key={index} className="text-yellow-400 text-xs">⭐</span>
-                                        ))}
-                                    </div>
-                                </div>
-                            </div>}
-                        </Card>
+                        <GoogleRating />
                         <Card className="bg-white/10 py-3 backdrop-blur-md border border-white/20 rounded-lg px-5 hover:bg-white/15 transition flex items-center">
                             <div className="flex items-center space-x-3 h-full">
                                 <div className="w-10 h-10 bg-gray-700 text-2xl rounded-full flex items-center justify-center shrink-0">
@@ -150,4 +99,63 @@ async function HeroSectionContent() {
             </div>
         </div>
     );
+}
+
+
+async function HeroContent() {
+    const { banner } = await getBanner();
+    const heroTitle = banner?.content || `
+        <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight">
+        Expert Fire Evacuation
+        </h1>
+        <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-red-600 mb-8 leading-tight">
+        Emergency Exit Planner
+        </h2>
+        
+        <p className="text-lg md:text-xl text-gray-200 mb-10 leading-relaxed max-w-2xl">
+        We specialize in creating clear, compliant, and easy-to-understand evacuation plans for offices, factories, commercial buildings, and residential properties.
+        </p>
+`;
+    const contentReactNode = parse(heroTitle);
+
+    return (
+        <div className='content mb-7 text-shadow-zinc-400 text-shadow-2xs'>
+            {contentReactNode}
+        </div>
+    )
+}
+
+async function GoogleRating() {
+    const { reviews } = await getReviews();
+    function calcAvgRating(reviews: review[]) {
+        let totalRating = 0
+        for (const review of reviews) {
+            totalRating += review.rating;
+        }
+
+        return Number((totalRating / reviews.length).toFixed(1));
+    }
+
+    return (
+        <Card className="bg-white/10 py-3 backdrop-blur-md border border-white/20 rounded-lg px-5 hover:bg-white/15 transition flex items-center">
+            {reviews.length && <div className="flex items-center space-x-3 h-full justify-between">
+                <div className="w-10 h-10 bg-gray-600 rounded-full flex items-center justify-center shrink-0">
+                    <CheckCircle2 className="w-6 h-6 text-white" />
+                </div>
+                <div>
+                    <p className="text-white font-semibold text-sm">Google Rating</p>
+                    <div className="flex space-x-0.5 mt-0.5">
+                        {[...new Array(calcAvgRating(reviews))].map((_, index) => (
+                            <span key={index} className="text-yellow-400 text-xs">⭐</span>
+                        ))}
+                    </div>
+                </div>
+            </div>}
+        </Card>
+    )
+}
+
+async function HeroBannerElement() {
+    const { bannerImages } = await getBanner();
+    return <HeroBackground bannerImages={bannerImages} />
 }

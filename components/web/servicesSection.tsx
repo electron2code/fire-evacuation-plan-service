@@ -1,6 +1,6 @@
-import { Suspense } from 'react';
+// import { Suspense } from 'react';
 import ServiceSectionGallery from './service-section-gallery';
-import ServiceSkeleton from './service-skeleton';
+// import ServiceSkeleton from './service-skeleton';
 
 export default async function OurServices() {
     return (
@@ -15,9 +15,9 @@ export default async function OurServices() {
                     </p>
                 </div>
                 <div className='pt-20'>
-                    <Suspense fallback={<ServiceSkeleton />}>
-                        <ServiceSectionGallery className='grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-7 items-center' limit={6} />
-                    </Suspense>
+                    {/* <Suspense fallback={<ServiceSkeleton />}> */}
+                    <ServiceSectionGallery className='grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-7 items-center' limit={6} />
+                    {/* </Suspense> */}
                 </div>
             </div>
         </section>

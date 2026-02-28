@@ -6,7 +6,6 @@ import FooterServices from './footer-services';
 import { Suspense } from 'react';
 
 function Footer() {
-
     return (
         <footer className="bg-[#1a2332] text-white">
             <div className="max-w-7xl mx-auto px-6 py-12">

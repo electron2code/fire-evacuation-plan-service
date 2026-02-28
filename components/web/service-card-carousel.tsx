@@ -1,3 +1,4 @@
+"use client";
 import { Card } from "@/components/ui/card"
 import {
     Carousel,
@@ -7,6 +8,7 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel"
 import Image from "next/image";
+import { ImageViewModal } from "./image-view-modal";
 
 
 interface ServiceCardProps {
@@ -23,11 +25,12 @@ export default function ServiceCardCarousel({ images, className = "h-fit p-0" }:
         <Carousel className={`w-full m-0 ${className}`}>
             <CarouselContent className="h-full">
                 {images.map((image, index) => (
-                    <CarouselItem key={index} className="w-full h-full">
+                    <CarouselItem key={index} className="w-full h-full relative">
                         <div className="p-1 w-full h-full">
                             <Card className="bg-gray-100 h-full p-0 rounded-xl overflow-hidden">
                                 <Image src={`${process.env.NEXT_PUBLIC_BUCKET_URL}/${image.key}`} className="w-full h-full object-cover object-center" alt={image.key} width={2000} height={1480} />
                             </Card>
+                            <ImageViewModal images={images} />
                         </div>
                     </CarouselItem>
                 ))}

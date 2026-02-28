@@ -3,6 +3,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import ScrollToTopButton from './scroll-to-top-button';
 import FooterServices from './footer-services';
+import { Suspense } from 'react';
 
 function Footer() {
 
@@ -65,7 +66,9 @@ function Footer() {
 
                     <div>
                         <h4 className="font-bold text-lg mb-6">Services</h4>
-                        <FooterServices />
+                        <Suspense fallback={<div className="h-40 w-full bg-gray-300 rounded animate-pulse" />}>
+                            <FooterServices />
+                        </Suspense>
                         <Link
                             href="/services"
                             className="inline-flex items-center gap-2 bg-orange-500 hover:bg-orange-600 text-white px-5 py-2.5 rounded-lg font-medium transition-colors text-sm"

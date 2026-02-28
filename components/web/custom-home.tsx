@@ -17,10 +17,18 @@ interface review {
     updatedAt: Date;
 }
 
-async function App() {
+export default function App() {
+    return (
+        <Suspense fallback={<div className="min-h-screen flex items-center justify-center"></div>}>
+            <HeroSectionContent />
+        </Suspense>
+    );
+}
+
+async function HeroSectionContent() {
     const { reviews } = await getReviews();
-    const banner = (await getBanner()).banner || {
-        content: `
+    const { banner, bannerImages } = await getBanner();
+    const heroTitle = banner?.content || `
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-4 leading-tight">
         Expert Fire Evacuation
         </h1>
@@ -29,11 +37,10 @@ async function App() {
         </h2>
         
         <p className="text-lg md:text-xl text-gray-200 mb-10 leading-relaxed max-w-2xl">
-        Transforming Texas homes with award-winning craftsmanship, innovative solutions, and unwavering commitment to excellence
+        We specialize in creating clear, compliant, and easy-to-understand evacuation plans for offices, factories, commercial buildings, and residential properties.
         </p>
-`};
-
-    const contentReactNode = parse(banner.content);
+`;
+    const contentReactNode = parse(heroTitle);
 
     function calcAvgRating(reviews: review[]) {
         let totalRating = 0
@@ -46,7 +53,7 @@ async function App() {
 
     return (
         <div className="min-h-screen relative">
-            <HeroBackgroundSuspense />
+            <HeroBackground bannerImages={bannerImages} />
             <div className="absolute inset-0 bg-linear-to-r from-black/90 via-black/60 to-black/30"></div>
             <div className="relative z-10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20">
@@ -144,16 +151,3 @@ async function App() {
         </div>
     );
 }
-
-async function HeroBackgroundSuspense() {
-    // Don't await the data fetching function
-    const bannerImages = (await getBanner()).bannerImages
-
-    return (
-        <Suspense fallback={<div className='min-h-screen w-full bg-gray-700'>Loading...</div>}>
-            <HeroBackground bannerImages={bannerImages} />
-        </Suspense>
-    )
-}
-
-export default App;

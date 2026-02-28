@@ -1,6 +1,8 @@
 import ServiceCardCarousel from "@/components/web/service-card-carousel";
 import ServiceSectionGallery from "@/components/web/service-section-gallery";
+import ServiceSkeleton from "@/components/web/service-skeleton";
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
     title: "Evacution Plan Services",
@@ -78,7 +80,9 @@ export default async function ServicesPage() {
                 </h1>
             </section>
             <main className="w-full max-w-7xl mx-auto grid-cols-1 md:grid-cols-2 relative">
-                <ServiceSectionGallery className="w-full p-5" limit={100} Carousel={ServiceCardCarousel} />
+                <Suspense fallback={<ServiceSkeleton />}>
+                    <ServiceSectionGallery className="w-full p-5" limit={100} Carousel={ServiceCardCarousel} />
+                </Suspense>
             </main>
         </div>
     )

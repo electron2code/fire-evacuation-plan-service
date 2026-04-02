@@ -57,72 +57,72 @@ export default function ServiceCard({ service, setServices }: { service: Service
     }
 
     return (
-        <Link href={`/services/${service.id}`} className="w-full">
-            <Card className="overflow-hidden group hover:shadow-lg transition-all duration-300 max-w-[320px] cursor-pointer border-zinc-200/50">
-                {/* 1. Image Section */}
-                <div className="relative aspect-16/10 overflow-hidden bg-gray-100">
-                    <Image
-                        src={`${process.env.NEXT_PUBLIC_BUCKET_URL}/${service.images[0]?.key}` || "/placeholder-service.jpg"}
-                        alt={service.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    />
+        // <Link href={`/services/${service.id}`} className="w-full">
+        <Card className="overflow-hidden group hover:shadow-lg transition-all duration-300 max-w-[320px] cursor-pointer border-zinc-200/50">
+            {/* 1. Image Section */}
+            <div className="relative aspect-16/10 overflow-hidden bg-gray-100">
+                <Image
+                    src={`${process.env.NEXT_PUBLIC_BUCKET_URL}/${service.images[0]?.key}` || "/placeholder-service.jpg"}
+                    alt={service.title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+                />
+            </div>
+
+            <CardContent className="p-4 space-y-3">
+                {/* 2. Owner Info */}
+                <div className="flex items-center gap-2">
+                    {service.owner.imageUrl ? (
+                        <Image
+                            src={service.owner.imageUrl}
+                            alt="Owner"
+                            width={24}
+                            height={24}
+                            className="rounded-full"
+                        />
+                    ) : (
+                        <div className="bg-zinc-100 p-1 rounded-full">
+                            <User size={14} />
+                        </div>
+                    )}
+                    <span className="text-xs font-semibold text-zinc-700 hover:underline">
+                        {service.owner.name || "Anonymous Seller"}
+                    </span>
                 </div>
 
-                <CardContent className="p-4 space-y-3">
-                    {/* 2. Owner Info */}
-                    <div className="flex items-center gap-2">
-                        {service.owner.imageUrl ? (
-                            <Image
-                                src={service.owner.imageUrl}
-                                alt="Owner"
-                                width={24}
-                                height={24}
-                                className="rounded-full"
-                            />
-                        ) : (
-                            <div className="bg-zinc-100 p-1 rounded-full">
-                                <User size={14} />
-                            </div>
-                        )}
-                        <span className="text-xs font-semibold text-zinc-700 hover:underline">
-                            {service.owner.name || "Anonymous Seller"}
-                        </span>
-                    </div>
-
-                    {/* 3. Title */}
-                    <h3 className="text-sm font-medium line-clamp-2 min-h-10 group-hover:text-blue-600 transition-colors">
-                        {service.title}
-                    </h3>
-                    {/* 4. Rating & Meta */}
-                    <div className="flex items-center gap-1 text-sm font-bold">
-                        <Star className="fill-yellow-400 text-yellow-400" size={16} />
-                        <span>{avgRating}</span>
-                        <span className="text-zinc-400 font-normal">({totalReviews})</span>
-                    </div>
-                    <div className="line-clamp-3 text-sm text-zinc-600">
-                        <ServiceDescription description={service.description} />
-                    </div>
-
-                    <div className="flex items-center gap-1 text-xs text-zinc-500">
-                        <Languages size={14} />
-                        <span>{service.language}</span>
-                    </div>
-                    <div className="flex items-center gap-1 text-xs text-zinc-500">
-                        Started from
-                        <span>${startingPrice}</span>
-                    </div>
-                </CardContent>
-                {/* <hr className="border-zinc-300/50" /> */}
-                <div className="flex items-center justify-center gap-2 p-3">
-                    <Link suppressHydrationWarning onClick={(e) => e.stopPropagation()} href={`/dashboard/services/edit/${service.id}`}>
-                        <Button className="bg-blue-700 text-white hover:bg-blue-800 cursor-pointer">
-                            Edit
-                        </Button>
-                    </Link>
-                    <Button onClick={handleDeleteService} disabled={deleting} className="text-white bg-red-500 hover:bg-red-600 active:bg-red-700">Delete</Button>
+                {/* 3. Title */}
+                <h3 className="text-sm font-medium line-clamp-2 min-h-10 group-hover:text-blue-600 transition-colors">
+                    {service.title}
+                </h3>
+                {/* 4. Rating & Meta */}
+                <div className="flex items-center gap-1 text-sm font-bold">
+                    <Star className="fill-yellow-400 text-yellow-400" size={16} />
+                    <span>{avgRating}</span>
+                    <span className="text-zinc-400 font-normal">({totalReviews})</span>
                 </div>
-            </Card>
-        </Link>
+                <div className="line-clamp-3 text-sm text-zinc-600">
+                    <ServiceDescription description={service.description} />
+                </div>
+
+                <div className="flex items-center gap-1 text-xs text-zinc-500">
+                    <Languages size={14} />
+                    <span>{service.language}</span>
+                </div>
+                <div className="flex items-center gap-1 text-xs text-zinc-500">
+                    Started from
+                    <span>${startingPrice}</span>
+                </div>
+            </CardContent>
+            {/* <hr className="border-zinc-300/50" /> */}
+            <div className="flex items-center justify-center gap-2 p-3">
+                <Link suppressHydrationWarning onClick={(e) => e.stopPropagation()} href={`/dashboard/services/edit/${service.id}`}>
+                    <Button className="bg-blue-700 text-white hover:bg-blue-800 cursor-pointer">
+                        Edit
+                    </Button>
+                </Link>
+                <Button onClick={handleDeleteService} disabled={deleting} className="text-white bg-red-500 hover:bg-red-600 active:bg-red-700">Delete</Button>
+            </div>
+        </Card>
+        // </Link>
     );
 }

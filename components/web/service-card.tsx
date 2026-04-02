@@ -115,7 +115,7 @@ export default function ServiceCard({ service, setServices }: { service: Service
                 </CardContent>
                 {/* <hr className="border-zinc-300/50" /> */}
                 <div className="flex items-center justify-center gap-2 p-3">
-                    <Link onClick={(e) => e.stopPropagation()} href={`/dashboard/services/edit/${service.id}`}>
+                    <Link suppressHydrationWarning onClick={(e) => e.stopPropagation()} href={`/dashboard/services/edit/${service.id}`}>
                         <Button className="bg-blue-700 text-white hover:bg-blue-800 cursor-pointer">
                             Edit
                         </Button>

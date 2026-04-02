@@ -3,7 +3,8 @@ import { useState } from "react";
 import { Button } from "../ui/button";
 import ServicePackage from "./service-package";
 import { ArrowRight } from "lucide-react";
-import Link from "next/link";
+import ContactModal from "./contact-modal";
+import { useAuth, useClerk } from "@clerk/nextjs";
 
 interface Tier {
     type: "BASIC" | "STANDARD" | "PREMIUM";
@@ -12,9 +13,22 @@ interface Tier {
     price: number;
     id: string;
     serviceId: string;
+    deliveryTime: string;
+    projectSize: string;
+    evacuationPlan: string;
+    floorPlanRedesign: boolean;
+    sitePlan: string;
+    zonePlan: string;
+    revisions: string;
 }
 
-export default function ServicePackages({ tiers, serviceTitle, serviceImageUrl, serviceDescription }: { tiers: Tier[], serviceTitle?: string, serviceImageUrl?: string, serviceDescription?: string }) {
+export default function ServicePackages({ tiers, images, serviceTitle, serviceImageUrl, serviceDescription }: {
+    tiers: Tier[], images: {
+        id: string
+        key: string
+        serviceId: string
+    }[], serviceTitle?: string, serviceImageUrl?: string, serviceDescription?: string
+}) {
     const [tier, setTier] = useState<Tier | null>(tiers.length ? tiers[0] : null);
 
     const imageUrl = serviceImageUrl ? `${process.env.NEXT_PUBLIC_BUCKET_URL}/${serviceImageUrl}` : "";
@@ -34,6 +48,8 @@ export default function ServicePackages({ tiers, serviceTitle, serviceImageUrl, 
     const phoneNumber = "+8801601770053";
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
 
+    const { isSignedIn, isLoaded } = useAuth();
+    const { openSignIn } = useClerk();
 
     return (
         <div className="flex-1 py-5">
@@ -50,12 +66,19 @@ export default function ServicePackages({ tiers, serviceTitle, serviceImageUrl, 
                 </div>
             }
             <div className="space-y-2 w-full flex justify-center mt-4">
-                <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full">
-                    <Button className="w-full py-6 rounded-none bg-[#ff6a00] cursor-pointer text-gray-200 hover:bg-[#f89019] hover:text-gray-200">
-                        Continue
-                        <ArrowRight className="w-4 h-4 ml-2" />
-                    </Button>
-                </Link>
+                {/* <Link href={whatsappUrl} target="_blank" rel="noopener noreferrer" className="w-full"> */}
+                {isLoaded && isSignedIn ? (<Button suppressHydrationWarning className="w-full relative py-6 rounded-none bg-[#ff6a00] cursor-pointer text-gray-200 hover:bg-[#f89019] hover:text-gray-200">
+                    Continue
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                    <div>
+                        <ContactModal encodedMessage={encodedMessage} images={images} serviceTitle={serviceTitle || ""} />
+                    </div>
+                </Button>) : (<Button onClick={() => { openSignIn(); }} className="w-full relative py-6 rounded-none bg-[#ff6a00] cursor-pointer text-gray-200 hover:bg-[#f89019] hover:text-gray-200">
+                    Continue
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>)
+                }
+                {/* </Link> */}
             </div>
         </div>
     )

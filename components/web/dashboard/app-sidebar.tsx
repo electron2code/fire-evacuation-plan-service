@@ -1,4 +1,4 @@
-import { Grid, Home, HandPlatter, Search, Settings, Contact } from "lucide-react"
+import { Grid, Home, HandPlatter, Search, Settings, Contact, TextQuote } from "lucide-react"
 
 import {
   Sidebar,
@@ -34,6 +34,11 @@ const items = [
     url: "/dashboard/contact",
     icon: Contact,
   },
+  {
+    title: "Reviews",
+    url: "/dashboard/reviews",
+    icon: TextQuote
+  }
 ]
 
 export default function AppSidebar() {

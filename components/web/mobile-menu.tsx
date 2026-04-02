@@ -34,11 +34,6 @@ const links = [
         name: "About Us",
         href: "/about",
     },
-    {
-        icon: <BookUser className="w-4 h-4 text-red-600 group-hover:text-white" />,
-        name: "Contact",
-        href: "/contact",
-    },
 ]
 
 export function MobileMenu() {

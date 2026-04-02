@@ -3,10 +3,9 @@
 import prisma from "@/lib/prisma";
 import { ServiceFormSchema, ServiceFormValues } from "@/schema/schema";
 import { currentUser } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
 import { revalidatePath } from "next/cache";
 
-export async function updateServiceAction(serviceId: string, data: ServiceFormValues) {
+export async function updateServiceAction(serviceId: string, data: ServiceFormValues, serviceImagesKeys: string[]) {
     // 1. Validate data
     const result = ServiceFormSchema.safeParse(data);
 
@@ -60,9 +59,9 @@ export async function updateServiceAction(serviceId: string, data: ServiceFormVa
             });
 
             // Create new images
-            if (result.data.imageKeys && result.data.imageKeys.length > 0) {
+            if (serviceImagesKeys && serviceImagesKeys.length > 0) {
                 await tx.serviceImage.createMany({
-                    data: result.data.imageKeys.map((key) => ({
+                    data: serviceImagesKeys.map((key) => ({
                         serviceId: serviceId,
                         key: key,
                     })),
@@ -82,6 +81,13 @@ export async function updateServiceAction(serviceId: string, data: ServiceFormVa
                     title: tier.title,
                     description: tier.description,
                     price: tier.price,
+                    deliveryTime: tier.deliveryTime,
+                    projectSize: tier.projectSize,
+                    evacuationPlan: tier.evacuationPlan,
+                    floorPlanRedesign: tier.floorPlanRedesign,
+                    sitePlan: tier.sitePlan,
+                    zonePlan: tier.zonePlan,
+                    revisions: tier.revisions,
                 })),
             });
         });

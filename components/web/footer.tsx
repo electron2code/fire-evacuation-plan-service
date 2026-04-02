@@ -7,7 +7,7 @@ import { Suspense } from 'react';
 
 function Footer() {
     return (
-        <footer className="bg-[#1a2332] text-white">
+        <footer className="bg-[#1a2332] text-white relative">
             <div className="max-w-7xl mx-auto px-6 py-12">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
                     <div>
@@ -177,7 +177,11 @@ function Footer() {
                 </div>
             </div>
 
-            <ScrollToTopButton />
+            <div className="fixed top-0 right-0 flex justify-end pointer-events-none">
+                <div className="pointer-events-auto">
+                    <ScrollToTopButton />
+                </div>
+            </div>
         </footer>
     );
 }

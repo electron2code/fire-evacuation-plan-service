@@ -1,3 +1,4 @@
+"use client";
 import { SignedIn, SignedOut, SignInButton, UserButton } from "@clerk/nextjs";
 
 export default function AuthAction() {

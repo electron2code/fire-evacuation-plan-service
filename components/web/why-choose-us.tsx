@@ -1,5 +1,5 @@
-import { Card, CardContent } from '@/components/ui/card';
-import { Shield, Clock, Award, Users, FileText } from 'lucide-react';
+import { Card } from '@/components/ui/card';
+import { Clock } from 'lucide-react';
 import Image from 'next/image';
 
 interface FeatureProps {

@@ -389,6 +389,7 @@ export const ModelName = {
   ServiceImage: 'ServiceImage',
   ServiceTier: 'ServiceTier',
   Review: 'Review',
+  OutsideReviewImage: 'OutsideReviewImage',
   BannerImage: 'BannerImage',
   Banner: 'Banner',
   PortfolioImage: 'PortfolioImage',
@@ -411,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "service" | "serviceImage" | "serviceTier" | "review" | "bannerImage" | "banner" | "portfolioImage" | "contactSubmission" | "companyLogo" | "projectVisualsMedia" | "safetyEquipmentMedia"
+    modelProps: "user" | "service" | "serviceImage" | "serviceTier" | "review" | "outsideReviewImage" | "bannerImage" | "banner" | "portfolioImage" | "contactSubmission" | "companyLogo" | "projectVisualsMedia" | "safetyEquipmentMedia"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -782,6 +783,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         count: {
           args: Prisma.ReviewCountArgs<ExtArgs>
           result: runtime.Types.Utils.Optional<Prisma.ReviewCountAggregateOutputType> | number
+        }
+      }
+    }
+    OutsideReviewImage: {
+      payload: Prisma.$OutsideReviewImagePayload<ExtArgs>
+      fields: Prisma.OutsideReviewImageFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.OutsideReviewImageFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutsideReviewImagePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.OutsideReviewImageFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutsideReviewImagePayload>
+        }
+        findFirst: {
+          args: Prisma.OutsideReviewImageFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutsideReviewImagePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.OutsideReviewImageFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutsideReviewImagePayload>
+        }
+        findMany: {
+          args: Prisma.OutsideReviewImageFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutsideReviewImagePayload>[]
+        }
+        create: {
+          args: Prisma.OutsideReviewImageCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutsideReviewImagePayload>
+        }
+        createMany: {
+          args: Prisma.OutsideReviewImageCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.OutsideReviewImageCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutsideReviewImagePayload>[]
+        }
+        delete: {
+          args: Prisma.OutsideReviewImageDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutsideReviewImagePayload>
+        }
+        update: {
+          args: Prisma.OutsideReviewImageUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutsideReviewImagePayload>
+        }
+        deleteMany: {
+          args: Prisma.OutsideReviewImageDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.OutsideReviewImageUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.OutsideReviewImageUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutsideReviewImagePayload>[]
+        }
+        upsert: {
+          args: Prisma.OutsideReviewImageUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$OutsideReviewImagePayload>
+        }
+        aggregate: {
+          args: Prisma.OutsideReviewImageAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateOutsideReviewImage>
+        }
+        groupBy: {
+          args: Prisma.OutsideReviewImageGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OutsideReviewImageGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.OutsideReviewImageCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.OutsideReviewImageCountAggregateOutputType> | number
         }
       }
     }
@@ -1381,6 +1456,13 @@ export const ServiceTierScalarFieldEnum = {
   title: 'title',
   description: 'description',
   price: 'price',
+  deliveryTime: 'deliveryTime',
+  projectSize: 'projectSize',
+  evacuationPlan: 'evacuationPlan',
+  floorPlanRedesign: 'floorPlanRedesign',
+  sitePlan: 'sitePlan',
+  zonePlan: 'zonePlan',
+  revisions: 'revisions',
   serviceId: 'serviceId'
 } as const
 
@@ -1398,6 +1480,14 @@ export const ReviewScalarFieldEnum = {
 } as const
 
 export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
+
+
+export const OutsideReviewImageScalarFieldEnum = {
+  id: 'id',
+  key: 'key'
+} as const
+
+export type OutsideReviewImageScalarFieldEnum = (typeof OutsideReviewImageScalarFieldEnum)[keyof typeof OutsideReviewImageScalarFieldEnum]
 
 
 export const BannerImageScalarFieldEnum = {
@@ -1555,6 +1645,13 @@ export type ListFloatFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaMode
 
 
 /**
+ * Reference to a field of type 'Boolean'
+ */
+export type BooleanFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Boolean'>
+    
+
+
+/**
  * Reference to a field of type 'Int'
  */
 export type IntFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Int'>
@@ -1667,6 +1764,7 @@ export type GlobalOmitConfig = {
   serviceImage?: Prisma.ServiceImageOmit
   serviceTier?: Prisma.ServiceTierOmit
   review?: Prisma.ReviewOmit
+  outsideReviewImage?: Prisma.OutsideReviewImageOmit
   bannerImage?: Prisma.BannerImageOmit
   banner?: Prisma.BannerOmit
   portfolioImage?: Prisma.PortfolioImageOmit

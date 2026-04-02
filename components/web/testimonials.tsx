@@ -1,25 +1,24 @@
-import prisma from "@/lib/prisma"
 import TestimonialsCarousel from "./testimonials-carousel";
 import { Suspense } from "react";
 import ReviewCardSkeleton from "./ReviewCardSkeleton";
+import { getReviews } from "@/lib/data";
 
-export default async function Testimonials() {
-    const reviews = await prisma.review.findMany({
-        include: {
-            user: {
-                select: {
-                    imageUrl: true,
-                    name: true,
-                    id: true
-                }
-            }
-        }
-    });
+export default function Testimonials() {
     return (
         <section>
             <Suspense fallback={<ReviewCardSkeleton />}>
-                <TestimonialsCarousel testimonials={reviews} />
+                <TestimonialsSSR />
             </Suspense>
         </section>
+    )
+}
+
+
+async function TestimonialsSSR() {
+    const { reviews } = await getReviews();
+    return (
+        <>
+            <TestimonialsCarousel testimonials={reviews} />
+        </>
     )
 }

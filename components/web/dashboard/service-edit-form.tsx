@@ -1,64 +1,35 @@
 "use client";
-
-import { useForm, useFieldArray } from "react-hook-form";
+import { useEffect, useRef, useState } from 'react';
+import { useForm, useFieldArray, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { } from "@/schema/schema";
-import { updateServiceAction } from "@/actions/update-service";
-import { useState } from "react";
+import { ServiceFormSchema, ServiceFormValues } from "@/schema/schema";
+import { Editor } from '@tinymce/tinymce-react';
+import type { Editor as TinyMCEEditor } from 'tinymce';
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
-import { useRouter } from "next/navigation";
-import ServiceImageSlider from "./service-image-slider";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from '@/components/ui/select';
+import { Field, FieldGroup, FieldLabel } from '@/components/ui/field';
+import { Checkbox } from '@/components/ui/checkbox';
+import ServiceImageSlider from './service-image-slider';
+import { updateServiceAction } from '@/actions/update-service';
+import { useRouter } from 'next/navigation';
 
-import { z } from "zod";
-
-const TierTypeEnum = z.enum(["BASIC", "STANDARD", "PREMIUM"]);
-
-// Schema for a single Pricing Tier
-const ServiceTierSchema = z.object({
-    type: TierTypeEnum,
-    title: z.string().min(1, "Tier title is required"),
-    description: z.string().min(1, "Tier description is required"),
-    price: z.number(),
-});
-
-// Main Form Schema
-export const ServiceFormSchema = z.object({
-    title: z.string().min(10, "Title must be at least 10 characters"),
-    language: z.string().min(1, "Language is required"),
-    description: z.string().min(50, "Description must be at least 50 characters"),
-    // We expect an array of exactly 3 tiers (Basic, Standard, Premium)
-    tiers: z.array(ServiceTierSchema).length(3),
-    // For this example, we assume image keys are strings returned from an uploader
-    // imageKeys: z.array(z.string()).min(1, "At least one image is required"),
-    imageKeys: z.array(z.string())
-});
-
-export type ServiceFormValues = z.infer<typeof ServiceFormSchema>;
-
-// Define strict types for the initial data to match Prisma result
-interface ServiceTier {
-    id: string;
-    type: string; // Changed from union type to string to match Zod schema
-    title: string;
-    description: string;
-    price: number;
-}
-
-interface ServiceData {
-    id: string;
-    title: string;
-    language: string;
-    description: string;
-    images: { key: string }[];
-    tiers: ServiceTier[];
-}
-
-export default function ServiceEditForm({ service }: { service: ServiceData }) {
+export default function ServiceUploadForm({ service }: {
+    service: ServiceFormValues & {
+        id: string;
+        images: {
+            id: string;
+            key: string;
+            serviceId: string;
+        }[]
+    }
+}) {
     const [isSubmitting, setIsSubmitting] = useState(false);
-    const [imageKeys, setImageKeys] = useState<string[]>(service.images.map(img => img.key));
+    const [serviceImagesKeys, setServiceImagesKey] = useState<Array<string>>(service.images.map((img) => img.key));
+    const [mounted, setMounted] = useState(false);
+    const editorRef = useRef<TinyMCEEditor | null>(null);
     const router = useRouter();
 
     const {
@@ -66,21 +37,18 @@ export default function ServiceEditForm({ service }: { service: ServiceData }) {
         control,
         handleSubmit,
         formState: { errors },
+        reset
     } = useForm<ServiceFormValues>({
         resolver: zodResolver(ServiceFormSchema),
         defaultValues: {
             title: service.title,
             language: service.language,
             description: service.description,
-            // Keep existing images as keys. 
-            // Note: Schema expects imageKeys[], array of strings.
-            imageKeys: service.images.map(img => img.key),
-            tiers: service.tiers.map(t => ({
-                type: t.type === "BASIC" ? "BASIC" : t.type === "STANDARD" ? "STANDARD" : "PREMIUM",
-                title: t.title,
-                description: t.description,
-                price: t.price
-            })),
+            tiers: [
+                { type: "BASIC", title: service.tiers[0]?.title || "", description: service.tiers[0]?.description || "", price: service.tiers[0]?.price || 0, deliveryTime: service.tiers[0]?.deliveryTime || "", projectSize: service.tiers[0]?.projectSize || "", evacuationPlan: service.tiers[0]?.evacuationPlan || "", floorPlanRedesign: service.tiers[0]?.floorPlanRedesign || false, sitePlan: service.tiers[0]?.sitePlan || "", zonePlan: service.tiers[0]?.zonePlan || "", revisions: service.tiers[0]?.revisions || "" },
+                { type: "STANDARD", title: service.tiers[1]?.title || "", description: service.tiers[1]?.description || "", price: service.tiers[1]?.price || 0, deliveryTime: service.tiers[1]?.deliveryTime || "", projectSize: service.tiers[1]?.projectSize || "", evacuationPlan: service.tiers[1]?.evacuationPlan || "", floorPlanRedesign: service.tiers[1]?.floorPlanRedesign || false, sitePlan: service.tiers[1]?.sitePlan || "", zonePlan: service.tiers[1]?.zonePlan || "", revisions: service.tiers[1]?.revisions || "" },
+                { type: "PREMIUM", title: service.tiers[2]?.title || "", description: service.tiers[2]?.description || "", price: service.tiers[2]?.price || 0, deliveryTime: service.tiers[2]?.deliveryTime || "", projectSize: service.tiers[2]?.projectSize || "", evacuationPlan: service.tiers[2]?.evacuationPlan || "", floorPlanRedesign: service.tiers[2]?.floorPlanRedesign || false, sitePlan: service.tiers[2]?.sitePlan || "", zonePlan: service.tiers[2]?.zonePlan || "", revisions: service.tiers[2]?.revisions || "" },
+            ],
         },
     });
 
@@ -89,150 +57,358 @@ export default function ServiceEditForm({ service }: { service: ServiceData }) {
         name: "tiers",
     });
 
+    useEffect(() => {
+        setMounted(true);
+    }, []);
+
     const onSubmit = async (data: ServiceFormValues) => {
         setIsSubmitting(true);
-        // The form schema expects imageKeys in data, but we are managing it separately here.
-        // We should merge it.
-        const submissionData = { ...data, imageKeys };
-
         try {
-            const result = await updateServiceAction(service.id, submissionData);
-
-            if (result.error) {
+            if (serviceImagesKeys.length === 0) {
+                toast.error("At least 1 service image is required");
+                setIsSubmitting(false);
+                return
+            }
+            const description = editorRef.current?.getContent() || "";
+            const result = await updateServiceAction(service.id, { ...data, description }, serviceImagesKeys);
+            if ("error" in result) {
                 toast.error(result.error);
             } else {
-                toast.success("Service updated successfully");
+                toast.success("Updated a service successfully");
                 router.push("/dashboard/services/all-services");
-                router.refresh();
             }
         } catch (error) {
-            toast.error("Failed to update service");
+            console.error("Error updating service:", error);
+            toast.error("Failed to update service, try again");
         } finally {
             setIsSubmitting(false);
         }
     };
 
+    if (!mounted) {
+        return null;
+    }
+
+    console.log("Service description for editor", service.description);
+
     return (
-        <form onSubmit={handleSubmit(onSubmit)} className="max-w-4xl mx-auto space-y-8 p-6 bg-white dark:bg-slate-900 rounded-xl shadow-sm border border-gray-200 dark:border-gray-800">
-
-            <div className="flex items-center justify-between">
-                <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">Edit Service</h1>
+        <div>
+            <div className='px-10'>
+                <ServiceImageSlider setServicImagesKeys={setServiceImagesKey} initialImages={service.images} />
             </div>
+            <form onSubmit={handleSubmit(onSubmit, (errors) => console.log("Validation Error", errors))} className="max-w-4xl mx-auto space-y-8 p-6">
+                <div className="space-y-4 border p-4 rounded-lg bg-white dark:bg-slate-800 dark:text-gray-400 shadow-sm">
+                    <h2 className="text-xl font-bold text-gray-800">General Information</h2>
 
-            <div className="flex items-center justify-center">
-                <div className="w-full max-w-2xl">
-                    <ServiceImageSlider setServicImagesKeys={setImageKeys} initialImages={service.images} />
-                </div>
-            </div>
-
-            {/* --- Section 1: Basic Info --- */}
-            <div className="space-y-4 border p-4 rounded-lg bg-gray-50 dark:bg-slate-800/50">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">General Information</h2>
-
-                <div>
-                    <label className="block text-sm font-medium mb-1">Service Title</label>
-                    <Input
-                        {...register("title")}
-                        className="w-full"
-                    />
-                    {errors.title && <p className="text-red-500 text-sm mt-1">{errors.title.message}</p>}
-                </div>
-
-                <div className="grid grid-cols-2 gap-4">
                     <div>
-                        <label className="block text-sm font-medium mb-1">Language</label>
-                        <Input
-                            {...register("language")}
-                            className="w-full"
+                        <label className="block text-sm font-medium">Service Title</label>
+                        <Controller
+                            name="title"
+                            control={control}
+                            rules={{ required: true }}
+                            render={({ field }) => <Input
+                                {...field}
+                                placeholder="I will build a full stack application..."
+                                className="w-full border rounded p-2 mt-1"
+                            />}
                         />
-                        {errors.language && <p className="text-red-500 text-sm mt-1">{errors.language.message}</p>}
+                        {errors.title && <p className="text-red-500 text-sm">{errors.title.message}</p>}
+                    </div>
+
+                    <div className="grid grid-cols-2 gap-4">
+                        <div>
+                            <label className="block text-sm font-medium">Language</label>
+                            <Controller
+                                name="language"
+                                control={control}
+                                rules={{ required: true }}
+                                render={({ field }) => <Input {...field} placeholder="e.g. English, Spanish"
+                                    className="w-full border rounded p-2 mt-1" />}
+                            />
+                            {errors.language && <p className="text-red-500 text-sm">{errors.language.message}</p>}
+                        </div>
+                    </div>
+                    <div>
+                        <label className="block text-sm font-medium mb-2">Description</label>
+                        <Editor
+                            apiKey={process.env.NEXT_PUBLIC_TINYMCE_API_KEY}
+                            onInit={(_evt, editor: TinyMCEEditor) => editorRef.current = editor}
+                            initialValue={service.description || ""}
+                            init={{
+                                height: 300,
+                                menubar: false,
+                                plugins: [
+                                    'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 'preview',
+                                    'anchor', 'searchreplace', 'visualblocks', 'code', 'fullscreen',
+                                    'insertdatetime', 'media', 'table', 'code', 'help', 'wordcount'
+                                ],
+                                toolbar: 'undo redo | blocks | ' +
+                                    'bold italic forecolor | alignleft aligncenter ' +
+                                    'alignright alignjustify | bullist numlist outdent indent | ' +
+                                    'removeformat | help',
+                                content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }'
+                            }}
+                        />
                     </div>
                 </div>
 
-                <div>
-                    <label className="block text-sm font-medium mb-1">Description</label>
-                    <Textarea
-                        {...register("description")}
-                        rows={6}
-                        className="w-full"
-                    />
-                    {errors.description && <p className="text-red-500 text-sm mt-1">{errors.description.message}</p>}
+                {/* --- Section 2: Packages (3 Column Layout) --- */}
+                <div className="space-y-4">
+                    <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">Packages</h2>
+
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {fields.map((field, index) => (
+                            <div key={field.id} className="border rounded-lg p-4 bg-gray-50 dark:bg-gray-950 flex flex-col gap-3 relative">
+                                {/* Badge for Tier Type */}
+                                <div className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded w-fit absolute -top-2 left-4">
+                                    {field.type}
+                                </div>
+
+                                {/* Package Title */}
+                                <div className="mt-2">
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Package Name</label>
+                                    <Controller
+                                        name={`tiers.${index}.title`}
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field }) => <Input {...field} placeholder={`Package Title`}
+                                            className="w-full border rounded p-2 text-sm" />}
+                                    />
+
+                                    {errors.tiers?.[index]?.title && (
+                                        <p className="text-red-500 text-xs">{errors.tiers[index]?.title?.message}</p>
+                                    )}
+                                </div>
+
+                                {/* Package Description */}
+                                <div>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Details</label>
+                                    <Controller
+                                        name={`tiers.${index}.description`}
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field }) => <Textarea {...field} placeholder={`Package Description`}
+                                            className="w-full border rounded p-2 text-sm" />}
+                                    />
+                                    {errors.tiers?.[index]?.description && (
+                                        <p className="text-red-500 text-xs">{errors.tiers[index]?.description?.message}</p>
+                                    )}
+                                </div>
+
+                                <div>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Delivery Time</label>
+                                    <Controller
+                                        name={`tiers.${index}.deliveryTime`}
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field }) => (
+                                            <Select value={field.value} onValueChange={field.onChange}>
+                                                <SelectTrigger className="w-full">
+                                                    <SelectValue placeholder="Select Delivery Time" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectGroup>
+                                                        <SelectLabel>Delivery Time</SelectLabel>
+                                                        {
+                                                            Array.from({ length: 30 }, (_, i) => (
+                                                                <SelectItem className='uppercase' key={i} value={`${i + 1}`}>{i + 1} {i === 0 ? "day" : "days"} delivery</SelectItem>
+                                                            ))
+                                                        }
+                                                    </SelectGroup>
+                                                </SelectContent>
+                                            </Select>
+                                        )}
+                                    />
+                                    {errors.tiers?.[index]?.deliveryTime && (
+                                        <p className="text-red-500 text-xs">{errors.tiers[index]?.deliveryTime?.message}</p>
+                                    )}
+                                </div>
+
+                                <div>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Project Size</label>
+                                    <Controller
+                                        name={`tiers.${index}.projectSize`}
+                                        control={control} rules={{ required: true, validate: (value) => Number(value) > 0 }}
+                                        render={({ field }) => <Input {...field} type="number" placeholder={`e.g. 1000 (sq ft)`}
+                                            className="w-full border rounded p-2 text-sm" />}
+                                    />
+                                    {errors.tiers?.[index]?.projectSize && (
+                                        <p className="text-red-500 text-xs">{errors.tiers[index]?.projectSize?.message}</p>
+                                    )}
+                                </div>
+
+                                <div>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Evacuation Plan</label>
+                                    <Controller
+                                        name={`tiers.${index}.evacuationPlan`}
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field }) => (
+                                            <Select value={field.value} onValueChange={field.onChange}>
+                                                <SelectTrigger className="w-full">
+                                                    <SelectValue placeholder="Select Evacuation Plan" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectGroup>
+                                                        <SelectLabel>Evacuation Plans</SelectLabel>
+                                                        {
+                                                            Array.from({ length: 20 }, (_, i) => (
+                                                                <SelectItem key={i} value={`${i + 1}`}>{i + 1}</SelectItem>
+                                                            ))
+                                                        }
+                                                    </SelectGroup>
+                                                </SelectContent>
+                                            </Select>
+                                        )}
+                                    />
+                                    {errors.tiers?.[index]?.evacuationPlan && (
+                                        <p className="text-red-500 text-xs">{errors.tiers[index]?.evacuationPlan?.message}</p>
+                                    )}
+                                </div>
+                                <FieldGroup className="w-full border rounded-sm p-3">
+                                    <Field orientation="horizontal">
+                                        <FieldLabel htmlFor={`floor-plan-redesign-checkbox-${index}`} className="text-xs font-bold text-gray-500 uppercase">
+                                            Floor Plan Redesign
+                                        </FieldLabel>
+                                        <Controller
+                                            name={`tiers.${index}.floorPlanRedesign`}
+                                            control={control}
+                                            render={({ field }) => (
+                                                <Checkbox
+                                                    id={`floor-plan-redesign-checkbox-${index}`}
+                                                    checked={field.value}
+                                                    onCheckedChange={field.onChange}
+                                                />
+                                            )}
+                                        />
+                                    </Field>
+                                    {
+                                        errors.tiers?.[index]?.floorPlanRedesign && (
+                                            <p className="text-red-500 text-xs">{errors.tiers[index]?.floorPlanRedesign?.message}</p>
+                                        )
+                                    }
+                                </FieldGroup>
+                                <div>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Site Plan</label>
+                                    <Controller
+                                        name={`tiers.${index}.sitePlan`}
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field }) => (
+                                            <Select value={field.value} onValueChange={field.onChange}>
+                                                <SelectTrigger className="w-full">
+                                                    <SelectValue placeholder="Select Site Plan" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectGroup>
+                                                        <SelectLabel>Site Plans</SelectLabel>
+                                                        {
+                                                            Array.from({ length: 20 }, (_, i) => (
+                                                                <SelectItem key={i} value={`${i + 1}`}>{i + 1}</SelectItem>
+                                                            ))
+                                                        }
+                                                        <SelectItem key={"none"} value={`none`}>None</SelectItem>
+                                                    </SelectGroup>
+                                                </SelectContent>
+                                            </Select>
+                                        )}
+                                    />
+                                    {
+                                        errors.tiers?.[index]?.sitePlan && (
+                                            <p className="text-red-500 text-xs">{errors.tiers[index]?.sitePlan?.message}</p>
+                                        )
+                                    }
+                                </div>
+                                <div>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Zone Plans</label>
+
+                                    <Controller
+                                        name={`tiers.${index}.zonePlan`}
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field }) => (
+                                            <Select value={field.value} onValueChange={field.onChange}>
+                                                <SelectTrigger className="w-full">
+                                                    <SelectValue placeholder="Select Zone Plan" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectGroup>
+                                                        <SelectLabel>Zone Plans</SelectLabel>
+                                                        {
+                                                            Array.from({ length: 20 }, (_, i) => (
+                                                                <SelectItem key={i} value={`${i + 1}`}>{i + 1}</SelectItem>
+                                                            ))
+                                                        }
+                                                        <SelectItem key={"none"} value={`none`}>None</SelectItem>
+                                                    </SelectGroup>
+                                                </SelectContent>
+                                            </Select>
+                                        )}
+                                    />
+                                    {
+                                        errors.tiers?.[index]?.zonePlan && (
+                                            <p className="text-red-500 text-xs">{errors.tiers[index]?.zonePlan?.message}</p>
+                                        )
+                                    }
+                                </div>
+                                <div>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Revisions</label>
+
+                                    <Controller
+                                        name={`tiers.${index}.revisions`}
+                                        control={control}
+                                        rules={{ required: true }}
+                                        render={({ field }) => (
+                                            <Select value={field.value} onValueChange={field.onChange}>
+                                                <SelectTrigger className="w-full">
+                                                    <SelectValue placeholder="Select Revisions" />
+                                                </SelectTrigger>
+                                                <SelectContent>
+                                                    <SelectGroup>
+                                                        <SelectLabel>Revisions</SelectLabel>
+                                                        {
+                                                            Array.from({ length: 20 }, (_, i) => (
+                                                                <SelectItem key={i} value={`${i + 1}`}>{i + 1}</SelectItem>
+                                                            ))
+                                                        }
+                                                        <SelectItem key={"unlimited"} value={`unlimited`}>Unlimited</SelectItem>
+                                                    </SelectGroup>
+                                                </SelectContent>
+                                            </Select>
+                                        )}
+                                    />
+                                    {
+                                        errors.tiers?.[index]?.revisions && (
+                                            <p className="text-red-500 text-xs">{errors.tiers[index]?.revisions?.message}</p>
+                                        )
+                                    }
+                                </div>
+                                {/* Package Price */}
+                                <div>
+                                    <label className="text-xs font-bold text-gray-500 uppercase">Price ($)</label>
+                                    <Input
+                                        type="number"
+                                        {...register(`tiers.${index}.price`, { valueAsNumber: true })}
+                                        className="w-full border rounded p-2 text-sm"
+                                    />
+                                    {errors.tiers?.[index]?.price && (
+                                        <p className="text-red-500 text-xs">{errors.tiers[index]?.price?.message}</p>
+                                    )}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
-            </div>
 
-            {/* --- Section 2: Packages --- */}
-            <div className="space-y-4">
-                <h2 className="text-xl font-bold text-gray-800 dark:text-gray-200">Packages</h2>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                    {fields.map((field, index) => (
-                        <div key={field.id} className="border rounded-lg p-4 bg-gray-50 dark:bg-gray-950 flex flex-col gap-3 relative pt-6">
-                            {/* Badge for Tier Type */}
-                            <div className="bg-blue-600 text-white text-xs font-bold px-2 py-1 rounded w-fit absolute top-0 left-0 rounded-tl-lg rounded-br-lg">
-                                {field.type}
-                            </div>
-
-                            {/* Package Title */}
-                            <div>
-                                <label className="text-xs font-bold text-gray-500 uppercase mb-1 block">Package Name</label>
-                                <Input
-                                    {...register(`tiers.${index}.title`)}
-                                    placeholder={`${field.type} Option`}
-                                    className="w-full text-sm"
-                                />
-                                {errors.tiers?.[index]?.title && (
-                                    <p className="text-red-500 text-xs mt-1">{errors.tiers[index]?.title?.message}</p>
-                                )}
-                            </div>
-
-                            {/* Package Description */}
-                            <div>
-                                <label className="text-xs font-bold text-gray-500 uppercase mb-1 block">Details</label>
-                                <Textarea
-                                    {...register(`tiers.${index}.description`)}
-                                    rows={4}
-                                    className="w-full text-sm"
-                                />
-                                {errors.tiers?.[index]?.description && (
-                                    <p className="text-red-500 text-xs mt-1">{errors.tiers[index]?.description?.message}</p>
-                                )}
-                            </div>
-
-                            {/* Package Price */}
-                            <div>
-                                <label className="text-xs font-bold text-gray-500 uppercase mb-1 block">Price ($)</label>
-                                <Input
-                                    type="number"
-                                    {...register(`tiers.${index}.price`, { valueAsNumber: true })}
-                                    className="w-full text-sm"
-                                />
-                                {errors.tiers?.[index]?.price && (
-                                    <p className="text-red-500 text-xs mt-1">{errors.tiers[index]?.price?.message}</p>
-                                )}
-                            </div>
-                        </div>
-                    ))}
-                </div>
-            </div>
-
-            {/* --- Submit --- */}
-            <div className="flex gap-4">
-                <Button
-                    type="button"
-                    variant="outline"
-                    className="flex-1"
-                    onClick={() => router.back()}
-                >
-                    Cancel
-                </Button>
+                {/* --- Submit --- */}
                 <Button
                     type="submit"
                     disabled={isSubmitting}
-                    className="flex-1 bg-amber-600 hover:bg-amber-700 text-white font-bold"
+                    className="w-full bg-black text-white font-bold py-3 rounded hover:bg-gray-800 disabled:opacity-50"
                 >
                     {isSubmitting ? "Updating Service..." : "Update Service"}
                 </Button>
-            </div>
-        </form>
+            </form>
+        </div>
     );
 }

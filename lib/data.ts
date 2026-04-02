@@ -42,9 +42,28 @@ export const getBanner = cache(async () => {
     return { banner, bannerImages };
 });
 export const getReviews = cache(async () => {
-    const reviews = await prisma.review.findMany();
+    const reviews = await prisma.review.findMany({
+        include: {
+            user: {
+                select: {
+                    imageUrl: true,
+                    name: true,
+                    id: true
+                }
+            }
+        },
+    });
     return { reviews };
 });
+
+export const getOutsideReviewImages = cache(async (limit: number, page: number) => {
+    const images = await prisma.outsideReviewImage.findMany({
+        take: limit,
+        skip: (page - 1) * limit
+    });
+    return { images };
+});
+
 
 export const getServices = cache(async (limit: number) => {
     const services = await prisma.service.findMany({

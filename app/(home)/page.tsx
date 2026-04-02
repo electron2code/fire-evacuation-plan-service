@@ -7,6 +7,7 @@ import Testimonials from "@/components/web/testimonials";
 import BeforeAfterShowcase from "@/components/web/before-and-after";
 import { Metadata } from "next";
 import { getBanner } from "@/lib/data";
+import OurStory from "@/components/web/our-story";
 
 export async function generateMetadata(): Promise<Metadata> {
   const { banner, bannerImages } = await getBanner();
@@ -158,6 +159,7 @@ export default function Home() {
       <WhyChooseSection />
       <ClaimsAssistanceSection />
       <BeforeAfterShowcase />
+      <OurStory />
       <Testimonials />
       <ReadyToTransform />
     </>

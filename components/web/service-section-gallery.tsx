@@ -15,9 +15,9 @@ export default async function ServiceSectionGallery({ limit, className = "", Car
         <div className={`w-full ${className}`}>
             {
                 services.map((service, index) => (
-                    !Carousel ? <ServiceCard key={index} title={service.title} images={service.images} description={service.description} /> :
-                        <ServiceCard index={index} id={service.id} key={index} title={service.title} images={service.images} description={service.description}>
-                            <Carousel images={service.images} className="h-50 md:h-77.5 aspect-320/400" />
+                    !Carousel ? <ServiceCard key={index} language={service.language} title={service.title} images={service.images} description={service.description} /> :
+                        <ServiceCard index={index} id={service.id} key={index} language={service.language} title={service.title} images={service.images} description={service.description}>
+                            <Carousel images={service.images} className="h-full" />
                         </ServiceCard>
                 ))
             }

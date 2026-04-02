@@ -1,4 +1,3 @@
-import ServiceCardCarousel from "@/components/web/service-card-carousel";
 import ServicePackages from "@/components/web/service-packages";
 import ReviewList from "@/components/web/review-list";
 import Image from "next/image";
@@ -7,6 +6,8 @@ import { getService, getServices } from "@/lib/data";
 import { Suspense } from "react";
 import ServicePageSkeleton from "@/components/web/ServicePackageSkeleton";
 import ReviewAction from "@/components/web/reviewAction";
+import ServiceImagesShowcase from "@/components/web/service-images-showcase";
+import ServiceDescription from "@/components/web/service-description";
 
 interface ServiceDetailsProps {
     params: Promise<{ id: string }>
@@ -122,15 +123,15 @@ async function ServiceDetailsContent({ serviceId }: { serviceId: string }) {
                 {/* Service Details Section */}
                 <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
                     <div className="flex-1 min-w-0">
-                        <ServiceCardCarousel images={service?.images.length ? service.images : []} />
-                        <div className="mt-14 bg-white p-8 rounded shadow-sm border border-gray-200">
+                        <ServiceImagesShowcase images={service?.images.length ? service.images : []} />
+                        <div className="mt-8 md:mt-14 bg-white p-8 rounded shadow-sm border border-gray-200">
                             <h1 className="text-3xl font-bold text-gray-900 mb-4">{service.title}</h1>
-                            <p className="text-gray-600 leading-relaxed whitespace-pre-wrap wrap-anywhere">{service.description}</p>
+                            <ServiceDescription description={service.description} />
                         </div>
                     </div>
                     <div className="w-full lg:w-125 shrink-0 flex flex-col">
                         <div className="order-2 md:order-1">
-                            <ServicePackages serviceTitle={service.title} serviceImageUrl={service.images[0]?.key || ""} serviceDescription={service.description} tiers={service?.tiers.length ? service.tiers : []} />
+                            <ServicePackages serviceTitle={service.title} images={service.images.length ? service.images : []} serviceImageUrl={service.images[0]?.key || ""} serviceDescription={service.description} tiers={service?.tiers.length ? service.tiers : []} />
                         </div>
 
                         {/* Host Info */}
@@ -165,8 +166,6 @@ async function ServiceDetailsContent({ serviceId }: { serviceId: string }) {
                             </div>
                             <ReviewList reviews={service.reviews} />
                         </div>
-
-                        {/* Add Review Form */}
                         <div className="lg:col-span-1">
                             <ReviewAction serviceId={service.id} />
                         </div>

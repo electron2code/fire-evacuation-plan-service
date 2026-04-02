@@ -40,6 +40,13 @@ export type ServiceTierMinAggregateOutputType = {
   title: string | null
   description: string | null
   price: number | null
+  deliveryTime: string | null
+  projectSize: string | null
+  evacuationPlan: string | null
+  floorPlanRedesign: boolean | null
+  sitePlan: string | null
+  zonePlan: string | null
+  revisions: string | null
   serviceId: string | null
 }
 
@@ -49,6 +56,13 @@ export type ServiceTierMaxAggregateOutputType = {
   title: string | null
   description: string | null
   price: number | null
+  deliveryTime: string | null
+  projectSize: string | null
+  evacuationPlan: string | null
+  floorPlanRedesign: boolean | null
+  sitePlan: string | null
+  zonePlan: string | null
+  revisions: string | null
   serviceId: string | null
 }
 
@@ -58,6 +72,13 @@ export type ServiceTierCountAggregateOutputType = {
   title: number
   description: number
   price: number
+  deliveryTime: number
+  projectSize: number
+  evacuationPlan: number
+  floorPlanRedesign: number
+  sitePlan: number
+  zonePlan: number
+  revisions: number
   serviceId: number
   _all: number
 }
@@ -77,6 +98,13 @@ export type ServiceTierMinAggregateInputType = {
   title?: true
   description?: true
   price?: true
+  deliveryTime?: true
+  projectSize?: true
+  evacuationPlan?: true
+  floorPlanRedesign?: true
+  sitePlan?: true
+  zonePlan?: true
+  revisions?: true
   serviceId?: true
 }
 
@@ -86,6 +114,13 @@ export type ServiceTierMaxAggregateInputType = {
   title?: true
   description?: true
   price?: true
+  deliveryTime?: true
+  projectSize?: true
+  evacuationPlan?: true
+  floorPlanRedesign?: true
+  sitePlan?: true
+  zonePlan?: true
+  revisions?: true
   serviceId?: true
 }
 
@@ -95,6 +130,13 @@ export type ServiceTierCountAggregateInputType = {
   title?: true
   description?: true
   price?: true
+  deliveryTime?: true
+  projectSize?: true
+  evacuationPlan?: true
+  floorPlanRedesign?: true
+  sitePlan?: true
+  zonePlan?: true
+  revisions?: true
   serviceId?: true
   _all?: true
 }
@@ -191,6 +233,13 @@ export type ServiceTierGroupByOutputType = {
   title: string
   description: string
   price: number
+  deliveryTime: string
+  projectSize: string
+  evacuationPlan: string
+  floorPlanRedesign: boolean
+  sitePlan: string
+  zonePlan: string
+  revisions: string
   serviceId: string
   _count: ServiceTierCountAggregateOutputType | null
   _avg: ServiceTierAvgAggregateOutputType | null
@@ -223,6 +272,13 @@ export type ServiceTierWhereInput = {
   title?: Prisma.StringFilter<"ServiceTier"> | string
   description?: Prisma.StringFilter<"ServiceTier"> | string
   price?: Prisma.FloatFilter<"ServiceTier"> | number
+  deliveryTime?: Prisma.StringFilter<"ServiceTier"> | string
+  projectSize?: Prisma.StringFilter<"ServiceTier"> | string
+  evacuationPlan?: Prisma.StringFilter<"ServiceTier"> | string
+  floorPlanRedesign?: Prisma.BoolFilter<"ServiceTier"> | boolean
+  sitePlan?: Prisma.StringFilter<"ServiceTier"> | string
+  zonePlan?: Prisma.StringFilter<"ServiceTier"> | string
+  revisions?: Prisma.StringFilter<"ServiceTier"> | string
   serviceId?: Prisma.StringFilter<"ServiceTier"> | string
   service?: Prisma.XOR<Prisma.ServiceScalarRelationFilter, Prisma.ServiceWhereInput>
 }
@@ -233,6 +289,13 @@ export type ServiceTierOrderByWithRelationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  deliveryTime?: Prisma.SortOrder
+  projectSize?: Prisma.SortOrder
+  evacuationPlan?: Prisma.SortOrder
+  floorPlanRedesign?: Prisma.SortOrder
+  sitePlan?: Prisma.SortOrder
+  zonePlan?: Prisma.SortOrder
+  revisions?: Prisma.SortOrder
   serviceId?: Prisma.SortOrder
   service?: Prisma.ServiceOrderByWithRelationInput
 }
@@ -247,6 +310,13 @@ export type ServiceTierWhereUniqueInput = Prisma.AtLeast<{
   title?: Prisma.StringFilter<"ServiceTier"> | string
   description?: Prisma.StringFilter<"ServiceTier"> | string
   price?: Prisma.FloatFilter<"ServiceTier"> | number
+  deliveryTime?: Prisma.StringFilter<"ServiceTier"> | string
+  projectSize?: Prisma.StringFilter<"ServiceTier"> | string
+  evacuationPlan?: Prisma.StringFilter<"ServiceTier"> | string
+  floorPlanRedesign?: Prisma.BoolFilter<"ServiceTier"> | boolean
+  sitePlan?: Prisma.StringFilter<"ServiceTier"> | string
+  zonePlan?: Prisma.StringFilter<"ServiceTier"> | string
+  revisions?: Prisma.StringFilter<"ServiceTier"> | string
   serviceId?: Prisma.StringFilter<"ServiceTier"> | string
   service?: Prisma.XOR<Prisma.ServiceScalarRelationFilter, Prisma.ServiceWhereInput>
 }, "id" | "serviceId_type">
@@ -257,6 +327,13 @@ export type ServiceTierOrderByWithAggregationInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  deliveryTime?: Prisma.SortOrder
+  projectSize?: Prisma.SortOrder
+  evacuationPlan?: Prisma.SortOrder
+  floorPlanRedesign?: Prisma.SortOrder
+  sitePlan?: Prisma.SortOrder
+  zonePlan?: Prisma.SortOrder
+  revisions?: Prisma.SortOrder
   serviceId?: Prisma.SortOrder
   _count?: Prisma.ServiceTierCountOrderByAggregateInput
   _avg?: Prisma.ServiceTierAvgOrderByAggregateInput
@@ -274,6 +351,13 @@ export type ServiceTierScalarWhereWithAggregatesInput = {
   title?: Prisma.StringWithAggregatesFilter<"ServiceTier"> | string
   description?: Prisma.StringWithAggregatesFilter<"ServiceTier"> | string
   price?: Prisma.FloatWithAggregatesFilter<"ServiceTier"> | number
+  deliveryTime?: Prisma.StringWithAggregatesFilter<"ServiceTier"> | string
+  projectSize?: Prisma.StringWithAggregatesFilter<"ServiceTier"> | string
+  evacuationPlan?: Prisma.StringWithAggregatesFilter<"ServiceTier"> | string
+  floorPlanRedesign?: Prisma.BoolWithAggregatesFilter<"ServiceTier"> | boolean
+  sitePlan?: Prisma.StringWithAggregatesFilter<"ServiceTier"> | string
+  zonePlan?: Prisma.StringWithAggregatesFilter<"ServiceTier"> | string
+  revisions?: Prisma.StringWithAggregatesFilter<"ServiceTier"> | string
   serviceId?: Prisma.StringWithAggregatesFilter<"ServiceTier"> | string
 }
 
@@ -283,6 +367,13 @@ export type ServiceTierCreateInput = {
   title: string
   description: string
   price: number
+  deliveryTime: string
+  projectSize: string
+  evacuationPlan: string
+  floorPlanRedesign?: boolean
+  sitePlan: string
+  zonePlan: string
+  revisions: string
   service: Prisma.ServiceCreateNestedOneWithoutTiersInput
 }
 
@@ -292,6 +383,13 @@ export type ServiceTierUncheckedCreateInput = {
   title: string
   description: string
   price: number
+  deliveryTime: string
+  projectSize: string
+  evacuationPlan: string
+  floorPlanRedesign?: boolean
+  sitePlan: string
+  zonePlan: string
+  revisions: string
   serviceId: string
 }
 
@@ -301,6 +399,13 @@ export type ServiceTierUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  deliveryTime?: Prisma.StringFieldUpdateOperationsInput | string
+  projectSize?: Prisma.StringFieldUpdateOperationsInput | string
+  evacuationPlan?: Prisma.StringFieldUpdateOperationsInput | string
+  floorPlanRedesign?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sitePlan?: Prisma.StringFieldUpdateOperationsInput | string
+  zonePlan?: Prisma.StringFieldUpdateOperationsInput | string
+  revisions?: Prisma.StringFieldUpdateOperationsInput | string
   service?: Prisma.ServiceUpdateOneRequiredWithoutTiersNestedInput
 }
 
@@ -310,6 +415,13 @@ export type ServiceTierUncheckedUpdateInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  deliveryTime?: Prisma.StringFieldUpdateOperationsInput | string
+  projectSize?: Prisma.StringFieldUpdateOperationsInput | string
+  evacuationPlan?: Prisma.StringFieldUpdateOperationsInput | string
+  floorPlanRedesign?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sitePlan?: Prisma.StringFieldUpdateOperationsInput | string
+  zonePlan?: Prisma.StringFieldUpdateOperationsInput | string
+  revisions?: Prisma.StringFieldUpdateOperationsInput | string
   serviceId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -319,6 +431,13 @@ export type ServiceTierCreateManyInput = {
   title: string
   description: string
   price: number
+  deliveryTime: string
+  projectSize: string
+  evacuationPlan: string
+  floorPlanRedesign?: boolean
+  sitePlan: string
+  zonePlan: string
+  revisions: string
   serviceId: string
 }
 
@@ -328,6 +447,13 @@ export type ServiceTierUpdateManyMutationInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  deliveryTime?: Prisma.StringFieldUpdateOperationsInput | string
+  projectSize?: Prisma.StringFieldUpdateOperationsInput | string
+  evacuationPlan?: Prisma.StringFieldUpdateOperationsInput | string
+  floorPlanRedesign?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sitePlan?: Prisma.StringFieldUpdateOperationsInput | string
+  zonePlan?: Prisma.StringFieldUpdateOperationsInput | string
+  revisions?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ServiceTierUncheckedUpdateManyInput = {
@@ -336,6 +462,13 @@ export type ServiceTierUncheckedUpdateManyInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  deliveryTime?: Prisma.StringFieldUpdateOperationsInput | string
+  projectSize?: Prisma.StringFieldUpdateOperationsInput | string
+  evacuationPlan?: Prisma.StringFieldUpdateOperationsInput | string
+  floorPlanRedesign?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sitePlan?: Prisma.StringFieldUpdateOperationsInput | string
+  zonePlan?: Prisma.StringFieldUpdateOperationsInput | string
+  revisions?: Prisma.StringFieldUpdateOperationsInput | string
   serviceId?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
@@ -360,6 +493,13 @@ export type ServiceTierCountOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  deliveryTime?: Prisma.SortOrder
+  projectSize?: Prisma.SortOrder
+  evacuationPlan?: Prisma.SortOrder
+  floorPlanRedesign?: Prisma.SortOrder
+  sitePlan?: Prisma.SortOrder
+  zonePlan?: Prisma.SortOrder
+  revisions?: Prisma.SortOrder
   serviceId?: Prisma.SortOrder
 }
 
@@ -373,6 +513,13 @@ export type ServiceTierMaxOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  deliveryTime?: Prisma.SortOrder
+  projectSize?: Prisma.SortOrder
+  evacuationPlan?: Prisma.SortOrder
+  floorPlanRedesign?: Prisma.SortOrder
+  sitePlan?: Prisma.SortOrder
+  zonePlan?: Prisma.SortOrder
+  revisions?: Prisma.SortOrder
   serviceId?: Prisma.SortOrder
 }
 
@@ -382,6 +529,13 @@ export type ServiceTierMinOrderByAggregateInput = {
   title?: Prisma.SortOrder
   description?: Prisma.SortOrder
   price?: Prisma.SortOrder
+  deliveryTime?: Prisma.SortOrder
+  projectSize?: Prisma.SortOrder
+  evacuationPlan?: Prisma.SortOrder
+  floorPlanRedesign?: Prisma.SortOrder
+  sitePlan?: Prisma.SortOrder
+  zonePlan?: Prisma.SortOrder
+  revisions?: Prisma.SortOrder
   serviceId?: Prisma.SortOrder
 }
 
@@ -443,12 +597,23 @@ export type FloatFieldUpdateOperationsInput = {
   divide?: number
 }
 
+export type BoolFieldUpdateOperationsInput = {
+  set?: boolean
+}
+
 export type ServiceTierCreateWithoutServiceInput = {
   id?: string
   type: $Enums.TierType
   title: string
   description: string
   price: number
+  deliveryTime: string
+  projectSize: string
+  evacuationPlan: string
+  floorPlanRedesign?: boolean
+  sitePlan: string
+  zonePlan: string
+  revisions: string
 }
 
 export type ServiceTierUncheckedCreateWithoutServiceInput = {
@@ -457,6 +622,13 @@ export type ServiceTierUncheckedCreateWithoutServiceInput = {
   title: string
   description: string
   price: number
+  deliveryTime: string
+  projectSize: string
+  evacuationPlan: string
+  floorPlanRedesign?: boolean
+  sitePlan: string
+  zonePlan: string
+  revisions: string
 }
 
 export type ServiceTierCreateOrConnectWithoutServiceInput = {
@@ -494,6 +666,13 @@ export type ServiceTierScalarWhereInput = {
   title?: Prisma.StringFilter<"ServiceTier"> | string
   description?: Prisma.StringFilter<"ServiceTier"> | string
   price?: Prisma.FloatFilter<"ServiceTier"> | number
+  deliveryTime?: Prisma.StringFilter<"ServiceTier"> | string
+  projectSize?: Prisma.StringFilter<"ServiceTier"> | string
+  evacuationPlan?: Prisma.StringFilter<"ServiceTier"> | string
+  floorPlanRedesign?: Prisma.BoolFilter<"ServiceTier"> | boolean
+  sitePlan?: Prisma.StringFilter<"ServiceTier"> | string
+  zonePlan?: Prisma.StringFilter<"ServiceTier"> | string
+  revisions?: Prisma.StringFilter<"ServiceTier"> | string
   serviceId?: Prisma.StringFilter<"ServiceTier"> | string
 }
 
@@ -503,6 +682,13 @@ export type ServiceTierCreateManyServiceInput = {
   title: string
   description: string
   price: number
+  deliveryTime: string
+  projectSize: string
+  evacuationPlan: string
+  floorPlanRedesign?: boolean
+  sitePlan: string
+  zonePlan: string
+  revisions: string
 }
 
 export type ServiceTierUpdateWithoutServiceInput = {
@@ -511,6 +697,13 @@ export type ServiceTierUpdateWithoutServiceInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  deliveryTime?: Prisma.StringFieldUpdateOperationsInput | string
+  projectSize?: Prisma.StringFieldUpdateOperationsInput | string
+  evacuationPlan?: Prisma.StringFieldUpdateOperationsInput | string
+  floorPlanRedesign?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sitePlan?: Prisma.StringFieldUpdateOperationsInput | string
+  zonePlan?: Prisma.StringFieldUpdateOperationsInput | string
+  revisions?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ServiceTierUncheckedUpdateWithoutServiceInput = {
@@ -519,6 +712,13 @@ export type ServiceTierUncheckedUpdateWithoutServiceInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  deliveryTime?: Prisma.StringFieldUpdateOperationsInput | string
+  projectSize?: Prisma.StringFieldUpdateOperationsInput | string
+  evacuationPlan?: Prisma.StringFieldUpdateOperationsInput | string
+  floorPlanRedesign?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sitePlan?: Prisma.StringFieldUpdateOperationsInput | string
+  zonePlan?: Prisma.StringFieldUpdateOperationsInput | string
+  revisions?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 export type ServiceTierUncheckedUpdateManyWithoutServiceInput = {
@@ -527,6 +727,13 @@ export type ServiceTierUncheckedUpdateManyWithoutServiceInput = {
   title?: Prisma.StringFieldUpdateOperationsInput | string
   description?: Prisma.StringFieldUpdateOperationsInput | string
   price?: Prisma.FloatFieldUpdateOperationsInput | number
+  deliveryTime?: Prisma.StringFieldUpdateOperationsInput | string
+  projectSize?: Prisma.StringFieldUpdateOperationsInput | string
+  evacuationPlan?: Prisma.StringFieldUpdateOperationsInput | string
+  floorPlanRedesign?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  sitePlan?: Prisma.StringFieldUpdateOperationsInput | string
+  zonePlan?: Prisma.StringFieldUpdateOperationsInput | string
+  revisions?: Prisma.StringFieldUpdateOperationsInput | string
 }
 
 
@@ -537,6 +744,13 @@ export type ServiceTierSelect<ExtArgs extends runtime.Types.Extensions.InternalA
   title?: boolean
   description?: boolean
   price?: boolean
+  deliveryTime?: boolean
+  projectSize?: boolean
+  evacuationPlan?: boolean
+  floorPlanRedesign?: boolean
+  sitePlan?: boolean
+  zonePlan?: boolean
+  revisions?: boolean
   serviceId?: boolean
   service?: boolean | Prisma.ServiceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["serviceTier"]>
@@ -547,6 +761,13 @@ export type ServiceTierSelectCreateManyAndReturn<ExtArgs extends runtime.Types.E
   title?: boolean
   description?: boolean
   price?: boolean
+  deliveryTime?: boolean
+  projectSize?: boolean
+  evacuationPlan?: boolean
+  floorPlanRedesign?: boolean
+  sitePlan?: boolean
+  zonePlan?: boolean
+  revisions?: boolean
   serviceId?: boolean
   service?: boolean | Prisma.ServiceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["serviceTier"]>
@@ -557,6 +778,13 @@ export type ServiceTierSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.E
   title?: boolean
   description?: boolean
   price?: boolean
+  deliveryTime?: boolean
+  projectSize?: boolean
+  evacuationPlan?: boolean
+  floorPlanRedesign?: boolean
+  sitePlan?: boolean
+  zonePlan?: boolean
+  revisions?: boolean
   serviceId?: boolean
   service?: boolean | Prisma.ServiceDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["serviceTier"]>
@@ -567,10 +795,17 @@ export type ServiceTierSelectScalar = {
   title?: boolean
   description?: boolean
   price?: boolean
+  deliveryTime?: boolean
+  projectSize?: boolean
+  evacuationPlan?: boolean
+  floorPlanRedesign?: boolean
+  sitePlan?: boolean
+  zonePlan?: boolean
+  revisions?: boolean
   serviceId?: boolean
 }
 
-export type ServiceTierOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "title" | "description" | "price" | "serviceId", ExtArgs["result"]["serviceTier"]>
+export type ServiceTierOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "type" | "title" | "description" | "price" | "deliveryTime" | "projectSize" | "evacuationPlan" | "floorPlanRedesign" | "sitePlan" | "zonePlan" | "revisions" | "serviceId", ExtArgs["result"]["serviceTier"]>
 export type ServiceTierInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   service?: boolean | Prisma.ServiceDefaultArgs<ExtArgs>
 }
@@ -592,6 +827,13 @@ export type $ServiceTierPayload<ExtArgs extends runtime.Types.Extensions.Interna
     title: string
     description: string
     price: number
+    deliveryTime: string
+    projectSize: string
+    evacuationPlan: string
+    floorPlanRedesign: boolean
+    sitePlan: string
+    zonePlan: string
+    revisions: string
     serviceId: string
   }, ExtArgs["result"]["serviceTier"]>
   composites: {}
@@ -1022,6 +1264,13 @@ export interface ServiceTierFieldRefs {
   readonly title: Prisma.FieldRef<"ServiceTier", 'String'>
   readonly description: Prisma.FieldRef<"ServiceTier", 'String'>
   readonly price: Prisma.FieldRef<"ServiceTier", 'Float'>
+  readonly deliveryTime: Prisma.FieldRef<"ServiceTier", 'String'>
+  readonly projectSize: Prisma.FieldRef<"ServiceTier", 'String'>
+  readonly evacuationPlan: Prisma.FieldRef<"ServiceTier", 'String'>
+  readonly floorPlanRedesign: Prisma.FieldRef<"ServiceTier", 'Boolean'>
+  readonly sitePlan: Prisma.FieldRef<"ServiceTier", 'String'>
+  readonly zonePlan: Prisma.FieldRef<"ServiceTier", 'String'>
+  readonly revisions: Prisma.FieldRef<"ServiceTier", 'String'>
   readonly serviceId: Prisma.FieldRef<"ServiceTier", 'String'>
 }
     

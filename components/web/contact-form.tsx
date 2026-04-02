@@ -6,14 +6,13 @@ import {
     Upload,
     CheckCircle,
     Camera,
-    MapPin,
     TrashIcon
 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import Image from "next/image";
 
-export default function ContactPage() {
+export default function ContactForm({ serviceTitle, encodedMessage }: { serviceTitle: string, encodedMessage: string }) {
     const { openSignIn } = useClerk();
     const { isSignedIn, isLoaded } = useUser();
     const [formData, setFormData] = useState({
@@ -395,9 +394,9 @@ export default function ContactPage() {
                 throw new Error(`Something went wrong with status ${response.status}`);
             }
 
-            const encodedMessage = encodeURIComponent(message);
+            const allEncodedMessage = encodeURIComponent(message + encodedMessage);
             const phoneNumber = "+8801601770053";
-            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${allEncodedMessage}`;
             window.open(whatsappUrl, '_blank');
             setCompanyLogoKey("");
             setCompanyLogoUrl("");
@@ -408,6 +407,7 @@ export default function ContactPage() {
                 fireEmergencyNumber: "",
                 googleLocationLink: ""
             });
+            (document.querySelector('[data-state="open"]') as HTMLDivElement).click();
         } catch (error: any) {
             console.error("Error: ", error.message);
         } finally {
@@ -417,33 +417,18 @@ export default function ContactPage() {
 
     return (
         <div className="min-h-screen bg-[#f0f4f0] font-sans text-slate-700">
-            <div className="relative flex justify-center items-center bg-linear-to-r via-blue-300 from-blue-100 to-blue-200 py-10 gap-4">
-                {/* Simple SVG Placeholder for the top illustration */}
-                <div className="w-64 h-40 bg-linear-to-b from-green-500 to-green-700 rounded flex items-center justify-center relative overflow-hidden">
-                    <div className="bg-white p-2 rounded shadow-lg transform -rotate-3 w-32 h-40">
-                        <div className="flex items-center gap-1 border-b pb-1 mb-2">
-                            <div className="w-3 h-3 bg-green-600 rounded-full"></div>
-                            <span className="text-[8px] font-bold">Evacuation Plan</span>
-                        </div>
-                        <div className="space-y-1">
-                            {[1, 2, 3, 4, 5].map(i => <div key={i} className="h-1 bg-gray-200 w-full rounded"></div>)}
-                        </div>
-                    </div>
-                    <div className="absolute top-10 left-4 text-red-500 drop-shadow-md"><MapPin size={48} fill="currentColor" /></div>
-                    <div className="absolute bottom-4 right-4 bg-red-600 text-white rounded-full p-2 border-4 border-white shadow-lg">
-                        <span className="font-bold text-xl">!</span>
-                    </div>
-                </div>
-
-                <div className="text-center mb-8 max-w-md">
-                    <div className="flex w-full items-center justify-center gap-3 mt-6 text-green-800 font-bold text-lg md:text-xl">
-                        <CheckCircle className="fill-green-700 text-white" />
-                        <h2 className="text-4xl">To begin your work, I will need the following</h2>
-                    </div>
-                </div>
-            </div>
+            {/* <div className="relative flex justify-center items-center bg-linear-to-r via-blue-200 from-blue-900 to-blue-500 py-10 gap-4 h-28 md:h-40 transition-all duration-300">
+                <Image
+                    src="/contact-image.png"
+                    className="w-60 h-auto md:w-80 absolute -bottom-1/2 left-1/2 transform -translate-x-1/2 rotate-6 transition-all duration-300"
+                    alt="Contact banner"
+                    width={1536}
+                    height={1024}
+                />
+            </div> */}
 
             <div className="w-full max-w-4xl mx-auto py-10 px-4">
+                <h1 className="text-2xl md:text-3xl font-bold text-slate-800 z-10 mb-5">{serviceTitle}</h1>
                 <form onSubmit={handleSubmitForm} className="space-y-4">
                     {/* 1. Project Address */}
                     <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">

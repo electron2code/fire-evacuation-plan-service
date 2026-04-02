@@ -123,6 +123,18 @@
   body {
     @apply bg-background text-foreground;
   }
+
+  .cms-content ul {
+    list-style-type: disc;
+    margin-left: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .cms-content ol {
+    list-style-type: decimal;
+    margin-left: 1.5rem;
+  }
 }
 
 @layer utilities {
@@ -169,6 +181,22 @@
     scrollbar-color: theme('colors.blue.500') theme('colors.gray.200');
     /* thumb and track colors */
   }
+}
+
+.cms-content ul {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.cms-content ol {
+  list-style-type: decimal;
+  margin-left: 1.5rem;
+}
+
+.no-tailwind {
+  all: revert;
 }
 
 .list-style {

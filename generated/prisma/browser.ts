@@ -43,6 +43,11 @@ export type ServiceTier = Prisma.ServiceTierModel
  */
 export type Review = Prisma.ReviewModel
 /**
+ * Model OutsideReviewImage
+ * 
+ */
+export type OutsideReviewImage = Prisma.OutsideReviewImageModel
+/**
  * Model BannerImage
  * 
  */

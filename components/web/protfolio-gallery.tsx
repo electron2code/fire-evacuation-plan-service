@@ -1,8 +1,9 @@
 "use client";
-
-import { Card } from "@/components/ui/card";
-import Image from "next/image";
 import { useEffect, useState } from "react";
+import PortfolioImageCard from "./portfolio-image-card";
+import Image from "next/image";
+import { ImageViewModal } from "./image-view-modal";
+import { Card } from "../ui/card";
 
 interface PortfolioImage {
     id: string,
@@ -13,12 +14,11 @@ interface PortfolioImage {
 export default function PortfolioGallery() {
     const [portfolioImages, setPortfolioImages] = useState<Array<PortfolioImage>>([]);
     const [isLoading, setIsLoading] = useState(false);
-
     useEffect(() => {
         const fetchPortfolioImages = async () => {
             setIsLoading(true);
             try {
-                const response = await fetch(`/api/v1/portfolio/images?limit=${20}&page=${1}`);
+                const response = await fetch(`/api/v1/portfolio/images?limit=${50}&page=${1}`);
 
                 if (!response.ok) {
                     console.log("Error fetching portfolio, status:", response.status);
@@ -38,6 +38,15 @@ export default function PortfolioGallery() {
         }
         fetchPortfolioImages();
     }, [])
+
+    const [modalOpen, setModalOpen] = useState(false);
+    const [selectedIndex, setSelectedIndex] = useState<number | null>(null);
+
+    const handleImageClick = (index: number) => {
+        setSelectedIndex(index);
+        setModalOpen(true);
+    };
+
     if (isLoading) {
         return (
             <div className="w-full min-h-screen relative">
@@ -61,14 +70,27 @@ export default function PortfolioGallery() {
     }
     return (
         <div className="w-full pt-10 px-4 md:px-6 columns-1 sm:colums-2 md:columns-3 lg:columns-4">
-            {
-                portfolioImages.map((image) => (
-                    <Card className="p-0 rounded-none border-0 border-transparent m-0 my-4 w-fit h-fit bg-transparent" key={image.id}>
-                        <Image src={image.url} unoptimized className="w-full h-full rounded md:rounded-xl hover:scale-105 transition-all" alt="" width={300} height={350} />
-                    </Card>
-                ))
-
-            }
+            {portfolioImages.map((image, index) => (
+                <Card
+                    key={image.id}
+                    className="p-0 rounded-none border-0 border-transparent m-0 my-4 w-fit h-fit bg-transparent"
+                    onClick={() => handleImageClick(index)}
+                    style={{ cursor: "pointer" }}
+                >
+                    <Image src={image.url} unoptimized className="w-full h-full rounded md:rounded-xl hover:scale-105 transition-all" alt="" width={300} height={350} />
+                </Card>
+            ))}
+            {selectedIndex !== null && (
+                <ImageViewModal
+                    images={portfolioImages}
+                    internalCurrentImageIndex={selectedIndex}
+                    open={modalOpen}
+                    onOpenChange={(open) => {
+                        setModalOpen(open);
+                        if (!open) setSelectedIndex(null);
+                    }}
+                />
+            )}
         </div>
     )
 }

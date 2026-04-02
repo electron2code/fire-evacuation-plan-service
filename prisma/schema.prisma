@@ -70,6 +70,14 @@ model ServiceTier {
   description String
   price       Float
 
+  deliveryTime      String
+  projectSize       String
+  evacuationPlan    String
+  floorPlanRedesign Boolean @default(false)
+  sitePlan          String
+  zonePlan          String
+  revisions         String
+
   serviceId String
   service   Service @relation(fields: [serviceId], references: [id], onDelete: Cascade)
 
@@ -88,6 +96,11 @@ model Review {
   user      User     @relation(fields: [userId], references: [clerkId])
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+model OutsideReviewImage {
+  id  String @id @default(cuid())
+  key String
 }
 
 model BannerImage {

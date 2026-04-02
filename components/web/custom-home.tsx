@@ -5,6 +5,7 @@ import { Button } from '../ui/button';
 import parse from 'html-react-parser';
 import Link from 'next/link';
 import { getBanner, getReviews } from '@/lib/data';
+import { Suspense } from 'react';
 
 interface review {
     id: string;
@@ -19,7 +20,9 @@ interface review {
 export default function App() {
     return (
         <div className="min-h-screen relative">
-            <HeroBannerElement />
+            <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><p className="text-gray-500">Loading...</p></div>}      >
+                <HeroBannerElement />
+            </Suspense>
             <div className="absolute inset-0 bg-linear-to-r from-black/90 via-black/60 to-black/30"></div>
             <div className="relative z-10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20">
@@ -28,7 +31,9 @@ export default function App() {
                             <span className="text-yellow-400 text-lg">🔥</span>
                             <span className="text-white text-sm font-medium">Fire Safety & Evacuation Planning Specialists</span>
                         </div>
-                        <HeroContent />
+                        <Suspense fallback={<div className="w-full h-12 bg-gray-700 rounded-lg animate-pulse" />}>
+                            <HeroContent />
+                        </Suspense>
                         <Link href="/contact">
                             <Button className="inline-flex items-center justify-center whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 bg-linear-to-br from-orange-600 via-red-600 to-red-700 text-white shadow-premium hover:from-orange-500 hover:via-red-500 hover:to-red-600 group relative gradient-primary hover:shadow-glow text-lg px-20 py-5 h-auto font-semibold shine-effect overflow-hidden transition-all duration-300 hover:scale-105 rounded-full z-10">
                                 <span className='leading-2'> Order Evacuation Plan Now</span>
@@ -83,7 +88,9 @@ export default function App() {
                                 </div>
                             </div>
                         </Card>
-                        <GoogleRating />
+                        <Suspense fallback={<div className="w-full h-12 bg-gray-700 rounded-lg animate-pulse" />} >
+                            <GoogleRating />
+                        </Suspense>
                         <Card className="bg-white/10 py-3 backdrop-blur-md border border-white/20 rounded-lg px-5 hover:bg-white/15 transition flex items-center">
                             <div className="flex items-center space-x-3 h-full">
                                 <div className="w-10 h-10 bg-gray-700 text-2xl rounded-full flex items-center justify-center shrink-0">

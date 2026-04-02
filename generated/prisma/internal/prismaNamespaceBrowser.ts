@@ -56,6 +56,7 @@ export const ModelName = {
   ServiceImage: 'ServiceImage',
   ServiceTier: 'ServiceTier',
   Review: 'Review',
+  OutsideReviewImage: 'OutsideReviewImage',
   BannerImage: 'BannerImage',
   Banner: 'Banner',
   PortfolioImage: 'PortfolioImage',
@@ -120,6 +121,13 @@ export const ServiceTierScalarFieldEnum = {
   title: 'title',
   description: 'description',
   price: 'price',
+  deliveryTime: 'deliveryTime',
+  projectSize: 'projectSize',
+  evacuationPlan: 'evacuationPlan',
+  floorPlanRedesign: 'floorPlanRedesign',
+  sitePlan: 'sitePlan',
+  zonePlan: 'zonePlan',
+  revisions: 'revisions',
   serviceId: 'serviceId'
 } as const
 
@@ -137,6 +145,14 @@ export const ReviewScalarFieldEnum = {
 } as const
 
 export type ReviewScalarFieldEnum = (typeof ReviewScalarFieldEnum)[keyof typeof ReviewScalarFieldEnum]
+
+
+export const OutsideReviewImageScalarFieldEnum = {
+  id: 'id',
+  key: 'key'
+} as const
+
+export type OutsideReviewImageScalarFieldEnum = (typeof OutsideReviewImageScalarFieldEnum)[keyof typeof OutsideReviewImageScalarFieldEnum]
 
 
 export const BannerImageScalarFieldEnum = {

@@ -19,10 +19,6 @@ const links = [
         name: "About Us",
         href: "/about",
     },
-    {
-        name: "Contact",
-        href: "/contact",
-    }
 ]
 
 export default function DesktopMenu() {

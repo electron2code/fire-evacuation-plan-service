@@ -3,9 +3,8 @@
 import prisma from "@/lib/prisma"; // your prisma client
 import { ServiceFormSchema, ServiceFormValues } from "@/schema/schema";
 import { currentUser } from "@clerk/nextjs/server";
-import { redirect } from "next/navigation";
 
-export async function createServiceAction(data: ServiceFormValues, serviceImagesKeys: string[]) {
+export async function createServiceAction(data: ServiceFormValues & { description: string }, serviceImagesKeys: string[]) {
     // 1. Validate data on server
     const result = ServiceFormSchema.safeParse(data);
 
@@ -13,7 +12,8 @@ export async function createServiceAction(data: ServiceFormValues, serviceImages
         return { error: "Invalid data" };
     }
 
-    const { title, language, description, tiers } = result.data;
+    const { title, language, tiers } = result.data;
+    const description = data.description; // Get description from form data (or you can handle it separately if needed)
 
     // 2. Create Service with Nested Writes (Transaction)
     try {
@@ -40,6 +40,13 @@ export async function createServiceAction(data: ServiceFormValues, serviceImages
                         title: tier.title,
                         description: tier.description,
                         price: tier.price,
+                        deliveryTime: tier.deliveryTime,
+                        projectSize: tier.projectSize,
+                        evacuationPlan: tier.evacuationPlan,
+                        floorPlanRedesign: tier.floorPlanRedesign,
+                        sitePlan: tier.sitePlan,
+                        zonePlan: tier.zonePlan,
+                        revisions: tier.revisions,
                     })),
                 },
             },
@@ -52,6 +59,4 @@ export async function createServiceAction(data: ServiceFormValues, serviceImages
         console.error(error);
         return { error: "Database error" };
     }
-
-    redirect("/dashboard");
 }

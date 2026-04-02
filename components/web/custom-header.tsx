@@ -1,4 +1,4 @@
-import { ArrowRight, Home, Phone } from "lucide-react";
+import { Phone } from "lucide-react";
 import Link from "next/link";
 import AuthAction from "./authAction";
 import { currentUser } from "@clerk/nextjs/server";

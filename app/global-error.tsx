@@ -1,8 +1,7 @@
 "use client";
 
-import { useEffect } from "react";
 
-export const dynamic = "force-dynamic";
+import { useEffect } from "react";
 
 export default function GlobalError({
   error,

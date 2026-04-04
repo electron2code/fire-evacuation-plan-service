@@ -105,14 +105,16 @@ function BeforeAfterCard({ title, before, after }: BeforeAfterCardProps) {
                                 />
                                 Your browser does not support the video tag.
                             </video>
-                        ) : (<Image
-                            src={before}
-                            alt="Before"
-                            width={Number(initialImageWidth)}
-                            height={200}
-                            priority
-                            className="object-cover object-center h-full w-full"
-                        />)}
+                        ) : (
+                            <Image
+                                src={before}
+                                alt="Before"
+                                width={Number(initialImageWidth)}
+                                height={200}
+                                loading="lazy"
+                                className="object-cover object-center h-full w-full"
+                            />
+                        )}
 
                         <span className="absolute bottom-4 left-4 bg-black/70 text-white text-xs px-3 py-1 rounded-full">
                             Before

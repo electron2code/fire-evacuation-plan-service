@@ -11,7 +11,7 @@ const deleteReqestSchema = z.object({
 })
 
 export async function DELETE(request: Request) {
-    console.log("DELETING");
+    // ...existing code...
     try {
         const user = await currentUser();
         const role = user?.publicMetadata.role;

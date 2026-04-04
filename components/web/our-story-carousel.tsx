@@ -61,7 +61,6 @@ export default function OurStoryCarousel({ ourStoryImages }: OurStoryCarouselPro
     };
 
 
-    console.log("currentImageIndex", currentImageIndex);
 
     return (
         <Carousel
@@ -90,9 +89,10 @@ export default function OurStoryCarousel({ ourStoryImages }: OurStoryCarouselPro
                                             alt={`Story ${index + 1}`}
                                             width={800}
                                             height={600}
+                                            loading="lazy"
                                             className={`object-cover rounded shadow transition-transform duration-300 ${index % 2 === 0
-                                                    ? 'group-hover:rotate-[-2deg] rotate-[-4deg]'
-                                                    : 'group-hover:rotate-[2deg] rotate-[4deg]'
+                                                ? 'group-hover:rotate-[-2deg] rotate-[-4deg]'
+                                                : 'group-hover:rotate-[2deg] rotate-[4deg]'
                                                 }`}
                                         />
                                         <ImageViewModal internalCurrentImageIndex={index} images={ourStoryImages} />

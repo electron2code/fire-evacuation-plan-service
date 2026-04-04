@@ -19,7 +19,7 @@ export const setBannerContent = async (content: string) => {
             }
         });
 
-        // console.log(existingBanner);
+        // ...existing code...
 
         if (existingBanner) {
             const updatedBanner = await prisma.banner.update({
@@ -45,7 +45,7 @@ export const setBannerContent = async (content: string) => {
         });
         return banner;
     } catch (error) {
-        console.log(error);
+        // ...existing code...
         return null;
     }
 }

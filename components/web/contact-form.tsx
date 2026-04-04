@@ -119,7 +119,7 @@ export default function ContactForm({ serviceTitle, encodedMessage }: { serviceT
                 xhr.send(file);
             });
         } catch (error) {
-            console.log("Error", error);
+            // ...existing code...
         }
 
     }
@@ -133,7 +133,7 @@ export default function ContactForm({ serviceTitle, encodedMessage }: { serviceT
             return;
         }
 
-        console.log(file);
+        // ...existing code...
 
         const fileName = file.name;
         const size = file.size;
@@ -198,7 +198,7 @@ export default function ContactForm({ serviceTitle, encodedMessage }: { serviceT
                 xhr.send(file);
             });
         } catch (error) {
-            console.log("Error", error);
+            // ...existing code...
         }
 
     }
@@ -211,7 +211,7 @@ export default function ContactForm({ serviceTitle, encodedMessage }: { serviceT
             return;
         }
 
-        console.log(file);
+        // ...existing code...
 
         const fileName = file.name;
         const size = file.size;
@@ -277,7 +277,7 @@ export default function ContactForm({ serviceTitle, encodedMessage }: { serviceT
                 xhr.send(file);
             });
         } catch (error) {
-            console.log("Error", error);
+            // ...existing code...
         }
     }
 
@@ -299,7 +299,7 @@ export default function ContactForm({ serviceTitle, encodedMessage }: { serviceT
             setCompanyLogoKey("");
             setCompanyLogoUrl("");
         } catch (error) {
-            console.log(error);
+            // ...existing code...
         }
     }
     const handleDeleteSafetyEquepment = async (key: string) => {
@@ -319,7 +319,7 @@ export default function ContactForm({ serviceTitle, encodedMessage }: { serviceT
             }
             setSafetyEquipmentFiles((prev) => prev.filter((sftEF) => sftEF.key !== key));
         } catch (error) {
-            console.log(error);
+            // ...existing code...
         }
     }
     const handleDeleteProjectVisualsFile = async (key: string) => {
@@ -339,7 +339,7 @@ export default function ContactForm({ serviceTitle, encodedMessage }: { serviceT
             }
             setProjectVisualsFiles((prev) => prev.filter((pvf) => pvf.key !== key));
         } catch (error) {
-            console.log(error);
+            // ...existing code...
         }
     }
 

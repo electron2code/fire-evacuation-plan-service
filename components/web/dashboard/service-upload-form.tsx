@@ -73,7 +73,7 @@ export default function ServiceUploadForm({ serviceImagesKeys }: { serviceImages
     }
 
     return (
-        <form onSubmit={handleSubmit(onSubmit, (errors) => console.log("Validation Error", errors))} className="max-w-4xl mx-auto space-y-8 p-6">
+        <form onSubmit={handleSubmit(onSubmit)} className="max-w-4xl mx-auto space-y-8 p-6">
 
             {/* --- Section 1: Basic Info --- */}
             <div className="space-y-4 border p-4 rounded-lg bg-white dark:bg-slate-800 dark:text-gray-400 shadow-sm">

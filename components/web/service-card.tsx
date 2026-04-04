@@ -27,7 +27,6 @@ export default function ServiceCard({ service, setServices }: { service: Service
     const totalRating = service.reviews?.reduce((accum, { rating }) => accum + rating, 0);
     const avgRating = totalRating ? totalRating / (service.reviews?.length as number) : 0;
     const totalReviews = service.reviews?.length || 0;
-    console.log(service.images);
 
 
     async function handleDeleteService() {

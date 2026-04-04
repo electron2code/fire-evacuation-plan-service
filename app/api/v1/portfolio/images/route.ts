@@ -69,7 +69,7 @@ const GetRequestSchema = z.object({
     page: z.number().int()
 })
 export async function GET(request: Request) {
-    console.log("Get request");
+    // ...existing code...
     try {
         const { searchParams } = new URL(request.url);
         const limit = Number(searchParams.get("limit"));

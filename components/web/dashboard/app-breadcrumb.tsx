@@ -24,7 +24,7 @@ export default function AppBreadcrumb() {
 
     const locations = pathname.split("/");
 
-    console.log(locations);
+    // ...existing code...
     return (
         <Breadcrumb>
             <BreadcrumbList>

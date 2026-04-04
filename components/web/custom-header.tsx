@@ -19,7 +19,7 @@ export default async function CustomHeader() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex items-center justify-between h-20">
                     <div className="flex items-center space-x-3">
-                        <Image src="/emergency-evacuation-plan-service-main-logo.png" className="" width={300} height={80} alt="Evacuation Plan Service Logo" />
+                        <Image src="/emergency-evacuation-plan-service-main-logo.png" className="" width={300} height={80} alt="Evacuation Plan Service Logo" priority />
                     </div>
 
                     <div className="flex">

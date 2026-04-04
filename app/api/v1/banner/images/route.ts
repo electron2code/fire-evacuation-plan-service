@@ -27,7 +27,7 @@ export async function GET() {
             const newImage = { ...image, url: imageUrl }
             response.push(newImage);
         }
-        // console.log(response);
+        // ...existing code...
         return NextResponse.json({ images: response }, { status: 200 });
     } catch (error) {
         return NextResponse.json({ message: "Internal Server Error" }, { status: 500 });
@@ -41,7 +41,7 @@ const deleteReqestSchema = z.object({
 })
 
 export async function DELETE(request: Request) {
-    console.log("DELETING");
+    // ...existing code...
     try {
         const user = await currentUser();
         const role = user?.publicMetadata.role;

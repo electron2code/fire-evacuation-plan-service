@@ -49,7 +49,14 @@ export function ImageViewModal({ internalCurrentImageIndex, images, open, onOpen
                             <CarouselItem key={index} className="w-full h-full relative bg-transparent">
                                 <div className="p-1 w-full h-screen">
                                     <Card className="bg-transparent rounded-none border-0 h-full w-full p-0 overflow-hidden object-contain">
-                                        <Image src={`${process.env.NEXT_PUBLIC_BUCKET_URL}/${image.key}`} className="w-auto h-full object-contain object-center" alt={image.key} width={3840} height={2160} />
+                                        <Image
+                                            src={`${process.env.NEXT_PUBLIC_BUCKET_URL}/${image.key}`}
+                                            className="w-auto h-full object-contain object-center"
+                                            alt={image.key}
+                                            fill
+                                            loading="lazy"
+                                            sizes="(max-width: 768px) 100vw, 90vw"
+                                        />
                                     </Card>
                                 </div>
                             </CarouselItem>

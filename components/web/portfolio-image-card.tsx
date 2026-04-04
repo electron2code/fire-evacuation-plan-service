@@ -22,7 +22,7 @@ export default function PortfolioImageCard({ portfolioImages, image, currentImag
     console.log("CurrentImageIndex", currentImageIndex);
     return (
         <Card className="p-0 rounded-none border-0 border-transparent m-0 my-4 w-fit h-fit bg-transparent" key={image.id}>
-            <Image src={image.url} unoptimized className="w-full h-full rounded md:rounded-xl hover:scale-105 transition-all" alt="" width={300} height={350} />
+            <Image src={image.url} className="w-full h-full rounded md:rounded-xl hover:scale-105 transition-all" alt={image.key || "Portfolio image"} width={300} height={350} loading="lazy" />
             <ImageViewModal images={portfolioImages} internalCurrentImageIndex={currentImageIndex} />
         </Card>
     )

@@ -53,7 +53,7 @@ export function ServiceCard({
                     <div className="flex-1 order-2 md:order-1 h-full w-full md:w-1/2 flex flex-col items-start shrink py-4 px-3">
                         <div className="space-y-3 mb-8 flex-1">
                             {language && <span className="text-xs bg-orange-500 text-white px-2 py-1 rounded-full">{language}</span>}
-                            <h3 className="text-2xl mt-4 font-bold text-slate-900">
+                            <h3 className="text-xl mt-4 font-bold text-slate-900">
                                 {title}
                             </h3>
                         </div>

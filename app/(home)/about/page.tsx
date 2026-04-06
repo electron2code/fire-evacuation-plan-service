@@ -139,34 +139,34 @@ export default function AboutPage() {
             <div className="w-full max-w-7xl mx-auto px-4 md:px-6">
                 <section className="flex flex-col items-center justify-center mt-10">
                     <div className="relative w-65 h-65 md:w-80 md:h-80 rounded-full bg-gray-300 shrink-0 overflow-hidden">
-                        <Image className="absolute w-full scale-[200px] h-full object-cover object-center" src={"/I-will-design-professional-emergency-evacuation-plan,-exit-plan,-safety-plan1.jpeg"} width={300} height={300} alt="Profile of SH Sabbir" />
+                        <Image className="absolute w-full scale-[200px] h-full object-cover object-center" src={"/I-will-design-professional-emergency-evacuation-plan,-exit-plan,-safety-plan1.jpeg"} width={1000} height={1000} alt="Profile of SH Sabbir" />
                     </div>
                     <div className="flex flex-col justify-center w-full py-5">
-                        <h1 className={`text-center text-3xl md:text-4xl text-gray-700 font-bold ${calibriFont.className}`}>Md. Sabbir Hossain</h1>
-                        <h2 className="text-center text-2xl md:text-3xl text-gray-800 w-full mt-3">Professional Graphics Designer</h2>
-                        <p className="text-center w-full px-5 mt-6 text-gray-800 tracking-wide">I am Md. Sabbir Hossain, I am a professional graphic designer full of knowledge and skills. I have a degree in graphic design with over 10 years of experience in fire emergency evacuation plans. I am a Level 2 seller working on fire emergency evacuation plans on Fiverr. I have been working on fire emergency evacuation plans on Fiverr since 2021. I have excellent knowledge of AutoCAD, Adobe Illustrator, Adobe Photoshop.
+                        <h1 className={`text-center text-3xl md:text-4xl text-orange-600 font-bold ${calibriFont.className}`}>Md. Sabbir Hossain</h1>
+                        <h2 className="text-center text-2xl md:text-3xl text-black w-full mt-3">Professional Graphics Designer</h2>
+                        <p className="text-center w-full px-5 mt-6 text-black tracking-wide">I am Md. Sabbir Hossain, I am a professional graphic designer full of knowledge and skills. I have a degree in graphic design with over 10 years of experience in fire emergency evacuation plans. I am a Level 2 seller working on fire emergency evacuation plans on Fiverr. I have been working on fire emergency evacuation plans on Fiverr since 2021. I have excellent knowledge of AutoCAD, Adobe Illustrator, Adobe Photoshop.
                             Feel free to contact thanks!</p>
                     </div>
                 </section>
 
                 <section className="mt-20 lg:mt-28">
-                    <h3 className="text-gray-700 text-2xl font-bold">Skills</h3>
+                    <h3 className="text-orange-600 text-2xl font-bold">Skills</h3>
                     <ul className="flex flex-wrap mt-5 gap-1 max-w-md items-center">
                         {
                             skills.workingSkills.map((skill, index) => (
-                                <li className="w-fit text-gray-700 tracking-wide text-nowrap px-3 py-2 rounded-sm border border-yellow-500/30 bg-gray-200 shadow" key={index}>{skill.title}</li>
+                                <li className="w-fit text-black font-semibold tracking-wide text-nowrap px-3 py-2 rounded-sm border border-yellow-500/30 bg-gray-200 shadow" key={index}>{skill.title}</li>
                             ))
                         }
                     </ul>
-                    <h3 className="text-gray-700 text-2xl font-bold mt-10">Softwares I use</h3>
+                    <h3 className="text-orange-600 text-2xl font-bold mt-10">Softwares I use</h3>
                     <ul className="flex flex-wrap mt-5 gap-1 max-w-md items-center">
                         {
                             skills.softwares.map((software, index) => (
-                                <li className="w-fit text-gray-700 tracking-wide text-nowrap px-3 py-2 rounded-sm border border-yellow-500/30 bg-gray-200 shadow" key={index}>{software}</li>
+                                <li className="w-fit text-black font-semibold tracking-wide text-nowrap px-3 py-2 rounded-sm border border-yellow-500/30 bg-gray-200 shadow" key={index}>{software}</li>
                             ))
                         }
                     </ul>
-                    <h3 className="text-gray-700 text-2xl font-bold mt-10">Education</h3>
+                    <h3 className="text-orange-600 text-2xl font-bold mt-10">Education</h3>
                     <div className="mt-4">
                         {
                             educations.map((edu, index) => (
@@ -175,7 +175,7 @@ export default function AboutPage() {
                         }
                     </div>
 
-                    <h3 className="text-gray-700 text-2xl font-bold mt-10">Works At</h3>
+                    <h3 className="text-orange-600 text-2xl font-bold mt-10">Works At</h3>
                     <div className="mt-4">
                         {
                             skills.worksAt.map((wat, index) => (
@@ -186,8 +186,8 @@ export default function AboutPage() {
                 </section>
 
                 <section className="mt-20">
-                    <h2 className="text-2xl font-bold text-gray-700">Contact Me:</h2>
-                    <p className="text-xl mt-3 font-bold text-gray-500">We're here to help.</p>
+                    <h2 className="text-2xl font-bold text-orange-600">Contact Me:</h2>
+                    <p className="text-xl mt-3 font-bold text-black">We're here to help.</p>
                     <div className="mt-20">
                         <ContactCards />
                     </div>
@@ -205,9 +205,9 @@ function EducationCard({ institute, degree, years }: { institute: string, degree
                 <GraduationCap className="size-5 text-gray-700 -mt-0.5" />
             </div>
             <div>
-                <h4 className="text-gray-700 text-base font-medium mb-1">{institute}</h4>
-                <p className="text-gray-700">{degree}</p>
-                <p className="text-gray-700">Graduated {years}</p>
+                <h4 className="text-black text-base font-medium mb-1">{institute}</h4>
+                <p className="text-black">{degree}</p>
+                <p className="text-black">Graduated {years}</p>
             </div>
         </div>
     )
@@ -222,7 +222,7 @@ function WorkCard({ companyName, CompanyLogo, profileLink, profileName }: { comp
                 </div>
             </div>
             <div>
-                <h4 className="text-gray-700 text-base font-medium">{companyName}</h4>
+                <h4 className="text-black text-base font-medium">{companyName}</h4>
                 <Link className="text-blue-500 hover:text-blue-600 active:text-blue-800 visited:text-blue-900" href={profileLink} target="_blank">{profileName}</Link>
             </div>
         </div>

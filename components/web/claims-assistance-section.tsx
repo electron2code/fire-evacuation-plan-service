@@ -54,11 +54,11 @@ export default function ClaimsAssistanceSection() {
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
                     {/* Left Column - Service Info */}
                     <div className="flex flex-col justify-center">
-                        <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-8">
+                        <h2 className="text-4xl lg:text-5xl font-bold text-orange-600 mb-8">
                             Information needed to get started work
                         </h2>
 
-                        <p className="text-gray-600 text-lg mb-12 leading-relaxed">
+                        <p className="text-black text-lg mb-12 leading-relaxed">
                             Please be mindful that the more information you share with me, the better I can meet your needs.
                         </p>
 

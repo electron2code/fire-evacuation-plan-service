@@ -68,7 +68,7 @@ function BeforeAfterCard({ title, before, after }: BeforeAfterCardProps) {
         <div className="w-full">
             <div className="flex items-center justify-center mb-5">
                 <div className="py-3 px-4 border border-black/50 rounded-sm">
-                    <h3 className="text-center text-gray-700 font-semibold">{title}</h3>
+                    <h3 className="text-center text-black font-bold">{title}</h3>
                 </div>
             </div>
 
@@ -152,12 +152,12 @@ function BeforeAfterCard({ title, before, after }: BeforeAfterCardProps) {
 export default function BeforeAfterShowcase() {
     return (
         <section className="max-w-7xl mx-auto px-6 py-16 mt-5">
-            <h2 className="text-center text-gray-700 text-3xl md:text-4xl font-bold mb-4">Before & After</h2>
-            <p className="text-center text-gray-500">
+            <h2 className="text-center text-orange-600 text-3xl md:text-4xl font-bold mb-4">Before & After</h2>
+            <p className="text-center text-black">
                 See the transformation our expert team delivers
             </p>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 gap-y-20 mt-12">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 gap-y-10 mt-8">
                 {data.map((item, index) => (
                     <BeforeAfterCard key={index} {...item} />
                 ))}

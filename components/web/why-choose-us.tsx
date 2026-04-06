@@ -31,11 +31,11 @@ export default function WhyChooseSection() {
     return (
         <section className="py-16 px-6 bg-white">
             <div className="max-w-6xl mx-auto">
-                <div className="text-center mb-12 md:mb-16">
-                    <h2 className="text-4xl font-bold text-gray-900 mb-3 md:mb-7">
+                <div className="text-center mb-8 md:mb-12">
+                    <h2 className="text-4xl font-bold text-orange-600 mb-3 md:mb-4">
                         Why Choose Our Evacuation Plan Service
                     </h2>
-                    <p className="text-lg text-gray-500">
+                    <p className="text-lg text-black max-w-md mx-auto">
                         Reliable evacuation plans built on global fire safety standards and proven life-protection principles.
                     </p>
                 </div>

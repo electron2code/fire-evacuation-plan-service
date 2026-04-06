@@ -22,7 +22,7 @@ function Footer() {
                         <div className="flex gap-3">
                             <Link
                                 target='_blank'
-                                href="https://www.facebook.com/S.H.SHUVO53/"
+                                href="https://www.facebook.com/evacuationplanservice/"
                                 className="w-10 h-10 bg-white/10 hover:bg-white/20 rounded flex items-center justify-center transition-colors"
                                 aria-label="Facebook"
                             >

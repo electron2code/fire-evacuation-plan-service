@@ -77,10 +77,10 @@ export default function TestimonialsCarousel({ testimonials }: { testimonials: T
             <div className="max-w-7xl mx-auto">
                 {/* Header */}
                 <div className="text-center mb-5">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">
+                    <h2 className="text-3xl md:text-4xl font-bold text-orange-600 mb-3">
                         What Our Customers Say
                     </h2>
-                    <p className="text-gray-500 text-lg">
+                    <p className="text-black text-lg">
                         Read reviews from satisfied clients who trusted us for their fire evacuation
                         planning needs.
                     </p>

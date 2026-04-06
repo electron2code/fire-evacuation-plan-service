@@ -34,10 +34,10 @@ export function ServiceCard({
                         {children}
                     </div>
                     <div className={`max-w-xl shrink wrap-break-word flex-1 flex flex-col gap-4 ${index && ((index + 1) % 2 !== 0) ? "order-2" : "order-1"}`}>
-                        <div className='flex-1 px-3'>
-                            {language && <span className="text-xs bg-orange-500 text-white px-2 py-1 rounded-full">{language}</span>}
-                            <h3 className='text-2xl mt-4 md:text-3xl mb-10 font-bold text-slate-700'>{title}</h3>
-                            <div className='text-slate-500 leading-relaxed wrap-anywhere mt-4 line-clamp-4'>
+                        <div className='flex-1 px-3 pt-4'>
+                            {language && <span className="text-sm bg-orange-500 text-white px-2 py-1 rounded-full">{language}</span>}
+                            <h3 className='text-xl mt-4 md:text-2xl mb-10 font-bold text-slate-700'>{title}</h3>
+                            <div className='text-slate-500 leading-relaxed wrap-anywhere mt-4 line-clamp-7'>
                                 <ServiceDescription description={description} />
                             </div>
                         </div>
@@ -48,19 +48,19 @@ export function ServiceCard({
     } else {
         return (
             <Link href={`/services${id ? `/${id}` : "#"}`}>
-                <Card className="w-full p-0 border px-2 py-2 border-gray-300/80 max-w-5xl overflow-hidden mx-auto flex flex-col items-center md:flex-row shadow-[0_10px_12px_rgba(0,0,0,0.35)] transition-transform duration-300 hover:-translate-y-1 hover:border-orange-500 bg-gray-100">
+                <Card className="w-full p-0 border px-2 pr-4 py-2 border-gray-300/80 max-w-5xl overflow-hidden mx-auto flex flex-col items-center md:flex-row shadow-[0_10px_12px_rgba(0,0,0,0.35)] transition-transform duration-300 hover:-translate-y-1 hover:border-orange-500 bg-gray-100">
                     {/* Left Column: Content */}
                     <div className="flex-1 order-2 md:order-1 h-full w-full md:w-1/2 flex flex-col items-start shrink py-4 px-3">
                         <div className="space-y-3 mb-8 flex-1">
                             {language && <span className="text-xs bg-orange-500 text-white px-2 py-1 rounded-full">{language}</span>}
-                            <h3 className="text-xl mt-4 font-bold text-slate-900">
+                            <h3 className="text-[17px] mt-4 font-bold text-slate-900">
                                 {title}
                             </h3>
                         </div>
                     </div>
 
                     {/* Right Column: Image */}
-                    <div className="shrink-0 order-1 md:order-2 flex-1 flex items-center justify-center h-full w-full md:w-1/2 rounded-xl overflow-hidden bg-gray-400">
+                    <div className="shrink-0 order-1 md:order-2 flex-2 flex items-center justify-center h-full w-full md:w-1/2 rounded-xl overflow-hidden bg-gray-400">
                         <Image
                             src={`${process.env.NEXT_PUBLIC_BUCKET_URL}/${images[0].key}`}
                             alt={images[0].key}

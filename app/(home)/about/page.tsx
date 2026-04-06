@@ -99,6 +99,9 @@ const skills =
         {
             title: "Floor Plan Redesign"
         },
+        {
+            title: "Zone Plan"
+        }
     ],
 
     softwares: [
@@ -106,12 +109,20 @@ const skills =
         "Adobe Photoshop",
         "AutoCAD",
     ],
-    worksAt: [{
-        CompanyLogo: <svg fill="#ffffff" width="30px" height="30px" viewBox="-2.5 -2 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" className="jam jam-fiverr" stroke="#ffffff"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M16.25 16.25v-10h-10v-.625c0-1.034.841-1.875 1.875-1.875H10V0H8.125A5.632 5.632 0 0 0 2.5 5.625v.625H0V10h2.5v6.25H0V20h8.75v-3.75h-2.5V10h6.285v6.25H10V20h8.75v-3.75h-2.5z"></path><circle cx="14.375" cy="1.875" r="1.875"></circle></g></svg>,
-        companyName: "Fiverr",
-        profileLink: "https://www.fiverr.com/shuvo7770053?public_mode=true",
-        profileName: "Md. Sabbir Hossain"
-    }]
+    worksAt: [
+        {
+            CompanyLogo: <svg fill="#ffffff" width="30px" height="30px" viewBox="-2.5 -2 24 24" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMin" className="jam jam-fiverr" stroke="#ffffff"><g id="SVGRepo_bgCarrier" strokeWidth="0"></g><g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M16.25 16.25v-10h-10v-.625c0-1.034.841-1.875 1.875-1.875H10V0H8.125A5.632 5.632 0 0 0 2.5 5.625v.625H0V10h2.5v6.25H0V20h8.75v-3.75h-2.5V10h6.285v6.25H10V20h8.75v-3.75h-2.5z"></path><circle cx="14.375" cy="1.875" r="1.875"></circle></g></svg>,
+            companyName: "Fiverr",
+            profileLink: "https://www.fiverr.com/shuvo7770053?public_mode=true",
+            profileName: "Md. Sabbir Hossain"
+        },
+        {
+            CompanyLogo: <svg id="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 283.89 283.98"><path d="M305.67,425.66c-78.62-.57-141.89-63.63-141.61-142.57a141.94,141.94,0,0,1,283.88.85C447.78,362.41,384.67,425.38,305.67,425.66Zm12.69-156.58c-1.58-3-3.29-5.88-4.66-8.92q-7.51-16.65-14.82-33.41a2.5,2.5,0,0,0-2.7-1.73c-6.95.07-13.91.09-20.86,0-1.79,0-2.41.47-2.39,2.34.08,8.91,0,17.82,0,26.73,0,10.75.27,21.51-.19,32.23-.37,8.68-5.51,15.7-15,16.73-5.88.64-11.54-.1-15.92-4.7-3.93-4.13-5.2-9.23-5.19-14.79,0-18.77,0-37.54,0-56.31,0-1.71-.45-2.27-2.23-2.25-7,.11-14,.05-21.05.05-3,0-3,0-3,3,0,18.58-.07,37.16,0,55.74a50.59,50.59,0,0,0,7.76,27.31,37,37,0,0,0,20,15.76,55,55,0,0,0,27.3,1.59,37.35,37.35,0,0,0,19.06-9.11c8.21-7.48,12.38-17.06,14-27.84.51-3.26.62-6.58.92-10a5.15,5.15,0,0,1,.4.49c3.72,6,7.46,12,11.1,18.07a4.09,4.09,0,0,1,.42,2.49c-.27,1.94-.74,3.84-1.16,5.75q-5.94,27.65-11.89,55.27c-.21,1-.29,2-.47,3.25,8.47,0,16.61,0,24.75-.06.45,0,1.14-.74,1.29-1.26.46-1.63.7-3.32,1-5q3-14.64,6-29.27c.69-3.36,1.29-6.73,2-10.31l1.95,1c10.85,5.69,22.43,8,34.47,6,27-4.53,42.54-30.17,37.47-55.29a45.47,45.47,0,0,0-49.5-36.17c-14.23,1.56-25.11,8.71-32.72,20.73C322.24,260.94,320.47,265,318.36,269.08Z" transform="translate(-164.06 -141.68)"/><path d="M361.69,303a37.19,37.19,0,0,1-21.44-8,1.93,1.93,0,0,1-.74-1.5c1.47-5.79,2.81-11.64,4.63-17.33a21,21,0,0,1,6.88-10c8.84-7.13,23.07-4.28,29,5.81,3.89,6.67,4.09,13.45.2,20.12C376.05,299.15,369.85,302.94,361.69,303Z" transform="translate(-164.06 -141.68)"/></svg>,
+            companyName: "Upwork",
+            profileLink: "https://www.upwork.com/freelancers/emergencyevacuationplan",
+            profileName: "Md. Sabbir Hossain"
+        }
+    ]
 }
 
 const educations = [
@@ -204,9 +215,9 @@ function EducationCard({ institute, degree, years }: { institute: string, degree
 
 function WorkCard({ companyName, CompanyLogo, profileLink, profileName }: { companyName: string, CompanyLogo: ReactNode, profileLink: string, profileName: string }) {
     return (
-        <div className="flex gap-2">
+        <div className="flex gap-2 mt-4">
             <div>
-                <div className="w-12 h-12 rounded-full bg-[#32a852] flex items-center justify-center">
+                <div className={`w-12 h-12 rounded-full ${companyName === "Upwork"? "bg-transparent": "bg-[#32a852]"} flex items-center justify-center`}>
                     {CompanyLogo}
                 </div>
             </div>

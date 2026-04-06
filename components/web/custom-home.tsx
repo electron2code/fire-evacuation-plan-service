@@ -34,7 +34,7 @@ export default function App() {
                         <Suspense fallback={<div className="w-full h-12 bg-gray-700 rounded-lg animate-pulse" />}>
                             <HeroContent />
                         </Suspense>
-                        <Link href="/contact">
+                        <Link href="/services">
                             <Button className="inline-flex items-center justify-center whitespace-nowrap ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed active:scale-95 bg-linear-to-br from-orange-600 via-red-600 to-red-700 text-white shadow-premium hover:from-orange-500 hover:via-red-500 hover:to-red-600 group relative gradient-primary hover:shadow-glow text-lg px-20 py-5 h-auto font-semibold shine-effect overflow-hidden transition-all duration-300 hover:scale-105 rounded-full z-10">
                                 <span className='leading-2'> Order Evacuation Plan Now</span>
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />

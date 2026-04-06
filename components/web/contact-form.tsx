@@ -450,7 +450,7 @@ export default function ContactForm({ serviceTitle, encodedMessage }: { serviceT
                     <div className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
                         <div className="flex items-center gap-3 mb-4">
                             <span className="bg-[#e24c3d] text-white w-8 h-8 rounded-full flex items-center justify-center font-bold">2</span>
-                            <h3 className="font-bold text-lg text-[#3a5033]">Fire Emergency Number</h3>
+                            <h3 className="font-bold text-lg text-[#3a5033]">Fire Emergency Number In Your Country.</h3>
                         </div>
                         <input
                             required

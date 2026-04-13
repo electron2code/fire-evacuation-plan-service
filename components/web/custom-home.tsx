@@ -23,7 +23,7 @@ export default function App() {
             <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><p className="text-gray-500">Loading...</p></div>}      >
                 <HeroBannerElement />
             </Suspense>
-            <div className="absolute inset-0 bg-linear-to-r from-black/90 via-black/60 to-black/30"></div>
+            <div className="absolute inset-0 bg-linear-to-r from-black/90 via-black/30 to-black/30"></div>
             <div className="relative z-10">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-20">
                     <div className="max-w-xl">

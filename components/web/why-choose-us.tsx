@@ -29,7 +29,7 @@ function FeatureCard({ icon, title, description, span = 'col-span-1' }: FeatureP
 
 export default function WhyChooseSection() {
     return (
-        <section className="py-16 px-6 bg-white">
+        <section className="py-8 px-6 bg-white">
             <div className="max-w-6xl mx-auto">
                 <div className="text-center mb-8 md:mb-12">
                     <h2 className="text-4xl font-bold text-orange-600 mb-3 md:mb-4">

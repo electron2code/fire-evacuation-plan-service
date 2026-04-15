@@ -81,7 +81,7 @@ export default function UploadPortfolio() {
                     setDropFile(null);
                 }
 
-                window.navigation.reload();
+                window.location.reload();
 
             } catch (error) {
                 toast.error("Failed to upload file.");

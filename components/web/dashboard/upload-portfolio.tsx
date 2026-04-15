@@ -18,11 +18,13 @@ interface DropFile {
 
 export default function UploadPortfolio() {
     const [dropFile, setDropFile] = useState<DropFile | null>(null);
+    const [isUploading, setIsUploading] = useState(false);
 
     async function uploadPortfolioToS3() {
         if (!dropFile) {
             toast.error("No file to upload.");
         } else {
+            setIsUploading(true);
             try {
                 // Placeholder for actual upload logic
                 const response = await fetch('/api/v1/portfolio/images', {
@@ -79,8 +81,12 @@ export default function UploadPortfolio() {
                     setDropFile(null);
                 }
 
+                window.navigation.reload();
+
             } catch (error) {
                 toast.error("Failed to upload file.");
+            } finally {
+                setIsUploading(false);
             }
         }
     }
@@ -89,7 +95,7 @@ export default function UploadPortfolio() {
             <DropzoneComponent dropFile={dropFile} setDropFile={setDropFile} />
             <div className="w-full flex justify-center py-3">
                 {
-                    dropFile && <Button disabled={dropFile.uploading} onClick={uploadPortfolioToS3} className="dark:bg-blue-500">Upload</Button>
+                    dropFile && <Button disabled={dropFile.uploading || isUploading} onClick={uploadPortfolioToS3} className="dark:bg-blue-500">{isUploading ? "Uploading...": "Upload"}</Button>
                 }
             </div>
         </div>

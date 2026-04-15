@@ -1,4 +1,4 @@
-import { BookUser, Boxes, FolderCode, Home, Menu, Phone, Users } from "lucide-react"
+import { BookUser, Boxes, BoxesIcon, FolderCode, HandHeart, HandPlatter, Home, Menu, Phone, Users } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import {
@@ -20,7 +20,7 @@ const links = [
         href: "/",
     },
     {
-        icon: <Boxes className="w-4 h-4 text-red-600 group-hover:text-white" />,
+        icon: <BoxesIcon className="w-4 h-4 text-red-600 group-hover:text-white" />,
         name: "Services",
         href: "/services",
     },

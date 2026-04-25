@@ -29,7 +29,7 @@ export function ServiceCard({
         const oddOrEven = index + 1 ? (index + 1) % 2 : 0
         return (
             <Link href={`/services${id ? `/${id}` : "#"}`}>
-                <Card className={`flex p-3 m-5 justify-between items-start border border-gray-100/70 flex-col md:flex-row hover:border-orange-400 my-16 shadow-lg transition-transform duration-300 hover:-translate-y-1 max-w-5xl mx-auto backdrop-filter backdrop-blur-md bg-linear-to-r from-gray-100 to-gray-200`}>
+                <Card className={`flex p-3 m-5 justify-between items-center border border-gray-100/70 flex-col md:flex-row hover:border-orange-400 my-16 shadow-lg transition-transform duration-300 hover:-translate-y-1 max-w-5xl mx-auto backdrop-filter backdrop-blur-md bg-linear-to-r from-gray-100 to-gray-200`}>
                     <div className={`flex-1 shrink-0 min-w-sm md:min-w-md lg:min-w-lg ${oddOrEven ? "order-1" : "order-2"}`}>
                         {children}
                     </div>
@@ -37,7 +37,7 @@ export function ServiceCard({
                         <div className='flex-1 px-3 pt-4'>
                             {language && <span className="text-sm bg-orange-500 text-white px-2 py-1 rounded-full">{language}</span>}
                             <h3 className='text-xl mt-4 md:text-2xl mb-10 font-bold text-slate-700'>{title}</h3>
-                            <div className='text-slate-500 leading-relaxed wrap-anywhere mt-4 line-clamp-7'>
+                            <div className='text-slate-500 leading-relaxed wrap-anywhere mt-4 line-clamp-6'>
                                 <ServiceDescription description={description} />
                             </div>
                         </div>

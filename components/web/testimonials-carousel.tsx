@@ -1,17 +1,9 @@
 'use client';
 
-import { Card, CardContent } from '@/components/ui/card';
-import {
-    Carousel,
-    CarouselContent,
-    CarouselItem,
-    CarouselNext,
-    CarouselPrevious,
-    type CarouselApi,
-} from '@/components/ui/carousel';
-import { Star, CheckCircle2 } from 'lucide-react';
-import { Badge } from '@/components/ui/badge';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import Autoplay from 'embla-carousel-autoplay';
+import { Star, CheckCircle2, ChevronLeft, ChevronRight, Quote } from 'lucide-react';
 import Image from 'next/image';
 
 interface Testimonial {
@@ -31,12 +23,12 @@ interface Testimonial {
 
 function StarRating({ rating }: { rating: number }) {
     return (
-        <div className="flex gap-1">
+        <div className="flex gap-0.5">
             {[...Array(5)].map((_, i) => (
                 <Star
                     key={i}
-                    className={`w-4 h-4 ${i < rating ? 'fill-yellow-400 text-yellow-400' : 'fill-gray-300 text-gray-300'
-                        }`}
+                    size={16}
+                    className={i < rating ? 'fill-yellow-400 text-yellow-400' : 'fill-gray-200 text-gray-200'}
                 />
             ))}
         </div>
@@ -44,122 +36,160 @@ function StarRating({ rating }: { rating: number }) {
 }
 
 export default function TestimonialsCarousel({ testimonials }: { testimonials: Testimonial[] }) {
-    const [api, setApi] = useState<CarouselApi>();
+    const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'center' }, [
+        Autoplay({ delay: 4000, stopOnInteraction: false })
+    ]);
     const [selectedIndex, setSelectedIndex] = useState(0);
 
+    const scrollPrev = useCallback(() => {
+        emblaApi?.scrollPrev();
+    }, [emblaApi]);
+
+    const scrollNext = useCallback(() => {
+        emblaApi?.scrollNext();
+    }, [emblaApi]);
+
     useEffect(() => {
-        if (!api) {
-            return;
-        }
+        if (!emblaApi) return;
 
-        setSelectedIndex(api.selectedScrollSnap());
+        const onSelect = () => {
+            setSelectedIndex(emblaApi.selectedScrollSnap());
+        };
 
-        api.on('select', () => {
-            setSelectedIndex(api.selectedScrollSnap());
-        });
-    }, [api]);
+        emblaApi.on('select', onSelect);
+        setSelectedIndex(emblaApi.selectedScrollSnap());
 
-    // Auto-play functionality
-    useEffect(() => {
-        if (!api) {
-            return;
-        }
+        return () => {
+            emblaApi.off('select', onSelect);
+        };
+    }, [emblaApi]);
 
-        const interval = setInterval(() => {
-            api.scrollNext();
-        }, 5000); // Auto-advance every 5 seconds
-
-        return () => clearInterval(interval);
-    }, [api]);
+    if (!testimonials || testimonials.length === 0) {
+        return null;
+    }
 
     return (
-        <section className="py-16 px-6 bg-white">
-            <div className="max-w-7xl mx-auto">
+        <section className="py-20 bg-gradient-to-b from-gray-50 to-white">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
-                <div className="text-center mb-5">
-                    <h2 className="text-3xl md:text-4xl font-bold text-orange-600 mb-3">
-                        What Our Customers Say
+                <div className="text-center mb-12">
+                    <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                        What Our <span className="text-orange-600">Customers Say</span>
                     </h2>
-                    <p className="text-black text-lg">
-                        Read reviews from satisfied clients who trusted us for their fire evacuation
-                        planning needs.
+                    <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+                        Read reviews from satisfied clients who trusted us for their fire evacuation planning needs.
                     </p>
                 </div>
 
                 {/* Carousel */}
-                <div className="relative px-4">
-                    <Carousel
-                        setApi={setApi}
-                        opts={{
-                            align: 'center',
-                            loop: true,
-                        }}
-                        className="w-full"
-                    >
-                        <CarouselContent className="-ml-6 py-10">
-                            {testimonials.map((testimonial, index) => (
-                                <CarouselItem
+                <div className="relative">
+                    {/* Main Carousel */}
+                    <div className="overflow-hidden" ref={emblaRef}>
+                        <div className="flex">
+                            {testimonials.map((testimonial) => (
+                                <div
                                     key={testimonial.id}
-                                    className={`pl-6 basis-full md:basis-[70%] lg:basis-[35%] transition-all duration-500 ease-in-out ${index === selectedIndex
-                                        ? 'scale-100 z-10'
-                                        : 'scale-90 z-0'
-                                        }`}
+                                    className="flex-[0_0_100%] md:flex-[0_0_80%] lg:flex-[0_0_60%] min-w-0 pl-4 pr-4"
                                 >
-                                    <Card className="border-gray-200 bg-red-100/50 shadow-sm hover:shadow-md transition-shadow h-full">
-                                        <CardContent className="p-6 flex flex-col h-full">
-                                            {/* Header with avatar and info */}
-                                            <div className="flex items-start justify-between mb-4">
-                                                <div className="flex items-center gap-3">
-                                                    <div className="w-12 h-12 overflow-hidden rounded-full bg-gray-900 flex items-center justify-center text-white font-semibold text-lg shrink-0">
-                                                        <Image src={testimonial.user.imageUrl ? testimonial.user.imageUrl : ""} width={60} height={60} alt={`profile of ${testimonial.user.name}`} />
-                                                    </div>
-                                                    <div>
-                                                        <h4 className="font-semibold text-gray-900">
-                                                            {testimonial.user.name}
-                                                        </h4>
+                                    <div className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8 mx-2 transform transition-all duration-300 hover:shadow-xl">
+                                        {/* Quote Icon */}
+                                        <div className="mb-6">
+                                            <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
+                                                <Quote className="w-6 h-6 text-orange-600" />
+                                            </div>
+                                        </div>
+
+                                        {/* Review Text */}
+                                        <p className="text-gray-700 text-lg leading-relaxed mb-8">
+                                            "{testimonial.comment}"
+                                        </p>
+
+                                        {/* Divider */}
+                                        <div className="h-px bg-gray-100 mb-6" />
+
+                                        {/* Author Info */}
+                                        <div className="flex items-center justify-between flex-wrap gap-4">
+                                            <div className="flex items-center gap-4">
+                                                <div className="relative w-14 h-14 rounded-full overflow-hidden bg-gray-200 shrink-0">
+                                                    {testimonial.user.imageUrl ? (
+                                                        <Image
+                                                            src={testimonial.user.imageUrl}
+                                                            alt={testimonial.user.name || 'User'}
+                                                            fill
+                                                            className="object-cover"
+                                                        />
+                                                    ) : (
+                                                        <div className="w-full h-full flex items-center justify-center bg-orange-600 text-white text-xl font-semibold">
+                                                            {testimonial.user.name?.[0]?.toUpperCase() || 'U'}
+                                                        </div>
+                                                    )}
+                                                </div>
+                                                <div>
+                                                    <h4 className="font-semibold text-gray-900 text-lg">
+                                                        {testimonial.user.name || 'Anonymous'}
+                                                    </h4>
+                                                    <div className="flex items-center gap-2 mt-1">
                                                         <StarRating rating={testimonial.rating} />
+                                                        <span className="text-gray-500 text-sm">
+                                                            {testimonial.rating}/5
+                                                        </span>
                                                     </div>
                                                 </div>
-                                                {testimonial.user.name && (
-                                                    <Badge
-                                                        variant="outline"
-                                                        className="bg-emerald-50 text-emerald-700 border-emerald-200 shrink-0"
-                                                    >
-                                                        BBB
-                                                    </Badge>
-                                                )}
                                             </div>
 
-                                            {/* Date */}
-                                            <p className="text-sm text-gray-500 mb-3" suppressHydrationWarning>{new Date(testimonial.createdAt).toLocaleDateString()}</p>
-
-                                            {/* Review text */}
-                                            <p className="text-gray-700 text-sm leading-relaxed flex-1 mb-4">
-                                                {testimonial.comment}
-                                            </p>
-
-                                            {/* Footer */}
-                                            <div className="flex items-center justify-between pt-4 border-t border-gray-100">
-                                                <span className="text-sm text-gray-600">Google</span>
-                                                {testimonial.user.name && (
-                                                    <div className="flex items-center gap-1 text-emerald-600">
-                                                        <CheckCircle2 className="w-4 h-4" />
-                                                        <span className="text-sm font-medium">Verified</span>
-                                                    </div>
-                                                )}
+                                            <div className="flex items-center gap-3">
+                                                <div className="flex items-center gap-1 text-emerald-600">
+                                                    <CheckCircle2 size={18} />
+                                                    <span className="text-sm font-medium">Verified</span>
+                                                </div>
                                             </div>
-                                        </CardContent>
-                                    </Card>
-                                </CarouselItem>
+                                        </div>
+
+                                        {/* Date */}
+                                        <p className="text-gray-400 text-sm mt-4">
+                                            {new Date(testimonial.createdAt).toLocaleDateString('en-US', {
+                                                year: 'numeric',
+                                                month: 'long',
+                                                day: 'numeric'
+                                            })}
+                                        </p>
+                                    </div>
+                                </div>
                             ))}
-                        </CarouselContent>
-
-                        {/* Navigation buttons at bottom center */}
-                        <div className="flex items-center justify-center gap-4 mt-8">
-                            <CarouselPrevious className="static translate-y-0" />
-                            <CarouselNext className="static translate-y-0" />
                         </div>
-                    </Carousel>
+                    </div>
+
+                    {/* Navigation Buttons */}
+                    <button
+                        onClick={scrollPrev}
+                        className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-6 z-10 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:text-orange-600 hover:border-orange-300 transition-all duration-200"
+                        aria-label="Previous testimonial"
+                    >
+                        <ChevronLeft size={24} />
+                    </button>
+                    <button
+                        onClick={scrollNext}
+                        className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-6 z-10 w-12 h-12 bg-white rounded-full shadow-lg border border-gray-200 flex items-center justify-center text-gray-600 hover:text-orange-600 hover:border-orange-300 transition-all duration-200"
+                        aria-label="Next testimonial"
+                    >
+                        <ChevronRight size={24} />
+                    </button>
+
+                    {/* Dots Indicator */}
+                    <div className="flex justify-center gap-2 mt-8">
+                        {testimonials.map((_, index) => (
+                            <button
+                                key={index}
+                                onClick={() => emblaApi?.scrollTo(index)}
+                                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                                    index === selectedIndex
+                                        ? 'bg-orange-600 w-8'
+                                        : 'bg-gray-300 hover:bg-gray-400'
+                                }`}
+                                aria-label={`Go to slide ${index + 1}`}
+                            />
+                        ))}
+                    </div>
                 </div>
             </div>
         </section>

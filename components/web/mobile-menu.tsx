@@ -23,6 +23,7 @@ const links = [
         icon: <BoxesIcon className="w-4 h-4 text-red-600 group-hover:text-white" />,
         name: "Services",
         href: "/services",
+        
     },
     {
         icon: <FolderCode className="w-4 h-4 text-red-600 group-hover:text-white" />,

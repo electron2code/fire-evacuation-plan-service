@@ -3,7 +3,7 @@ import Link from "next/link";
 import AuthAction from "./authAction";
 import { currentUser } from "@clerk/nextjs/server";
 import { buttonVariants } from "../ui/button";
-import { MobileMenu } from "./mobile-menu";
+import MobileMenu from "./mobile-menu";
 import DesktopMenu from "./desktop-menu";
 import Image from "next/image";
 

@@ -1,3 +1,5 @@
+"use client";
+
 import { BoxesIcon, FolderCode,  Home, Menu, Phone, Users } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -20,15 +22,15 @@ const links = [
         href: "/",
     },
     {
+        icon: <FolderCode className="w-4 h-4 text-red-600 group-hover:text-white" />,
+        name: "Portfolio",
+        href: "/portfolio",
+    },
+    {
         icon: <BoxesIcon className="w-4 h-4 text-red-600 group-hover:text-white" />,
         name: "Services",
         href: "/services",
 
-    },
-    {
-        icon: <FolderCode className="w-4 h-4 text-red-600 group-hover:text-white" />,
-        name: "Portfolio",
-        href: "/portfolio",
     },
     {
         icon: <Users className="w-4 h-4 text-red-600 group-hover:text-white" />,
@@ -39,11 +41,9 @@ const links = [
 
 export default function MobileMenu() {
     return(
-
-    
     <Drawer direction="right">
             <DrawerTrigger asChild>
-                <Button variant="outline"><Menu className="size-6" /></Button>
+                <Button variant="outline" className="bg-transparent hover:bg-transparent hover:text-gray-800"><Menu className="size-6" /></Button>
             </DrawerTrigger>
             <DrawerContent>
                 <div className="mx-auto w-full max-w-sm">
